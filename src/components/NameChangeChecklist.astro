@@ -1,0 +1,81 @@
+---
+import { states } from '../content/name-change-states';
+---
+<form id="name-change-form" class="ncc" novalidate>
+  <label for="ncc-state" class="ncc__label">Select your state</label>
+  <div class="ncc__row">
+    <select id="ncc-state" name="state" required>
+      <option value="" disabled selected>Choose a state…</option>
+      {states.map((s) => <option value={s.url}>{s.name}</option>)}
+    </select>
+    <button type="submit" class="ncc__submit">Open instructions</button>
+  </div>
+  <p class="ncc__disclaimer">Informational only — not legal advice. Opens in a new tab.</p>
+</form>
+
+<script is:inline>
+  (function () {
+    const form = document.getElementById('name-change-form');
+    if (!(form instanceof HTMLFormElement)) return;
+    form.addEventListener('submit', (e) => {
+      e.preventDefault();
+      const select = form.querySelector('select');
+      if (!(select instanceof HTMLSelectElement) || !select.value) return;
+      window.open(select.value, '_blank', 'noopener,noreferrer');
+    });
+  })();
+</script>
+
+<style>
+  .ncc {
+    max-width: 36rem;
+    border: 1px solid var(--rule);
+    background: color-mix(in oklab, var(--parchment) 92%, var(--brand-olive));
+    padding: var(--s-6);
+  }
+  .ncc__label {
+    display: block;
+    font-family: var(--font-sans);
+    font-size: 0.75rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.18em;
+    color: var(--brand-olive);
+    margin-bottom: var(--s-3);
+  }
+  .ncc__row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--s-3);
+  }
+  .ncc select {
+    flex: 1 1 14rem;
+    font-family: var(--font-serif);
+    font-size: 1rem;
+    padding: var(--s-3) var(--s-4);
+    background: var(--parchment);
+    color: var(--ink-navy);
+    border: 1px solid var(--brand-olive);
+    border-radius: 0;
+  }
+  .ncc__submit {
+    font-family: var(--font-sans);
+    font-size: 0.85rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.14em;
+    background: var(--ink-navy);
+    color: var(--parchment);
+    border: 1px solid var(--ink-navy);
+    padding: var(--s-3) var(--s-5);
+    cursor: pointer;
+  }
+  .ncc__submit:hover { background: var(--brand-orange); border-color: var(--brand-orange); color: var(--ink-navy); }
+  .ncc__disclaimer {
+    margin: var(--s-4) 0 0;
+    font-family: var(--font-sans);
+    font-size: 0.78rem;
+    color: var(--muted);
+    font-style: italic;
+  }
+</style>

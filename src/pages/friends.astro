@@ -1,0 +1,38 @@
+---
+import Base from '../layouts/Base.astro';
+import Masthead from '../components/Masthead.astro';
+import SectionEyebrow from '../components/SectionEyebrow.astro';
+import NameChangeChecklist from '../components/NameChangeChecklist.astro';
+---
+<Base title="Friends" description="Become a Michael — find official name-change instructions for your state.">
+  <Masthead
+    eyebrow="Friends"
+    title="Not already a Michael? Become one."
+    lede="Joining the Institute is a matter of paperwork — the specifics of which vary by state. Below, find the official name-change instructions for the jurisdiction where you reside."
+  />
+
+  <section class="container section">
+    <SectionEyebrow index="I" label="Find Your State" />
+    <NameChangeChecklist />
+  </section>
+
+  <hr class="rule container" />
+
+  <section class="container section">
+    <div class="prose">
+      <SectionEyebrow index="II" label="Why Bother?" />
+      <p>
+        Becoming a Michael is a serious legal and personal decision. The
+        Institute does not provide legal services and cannot complete the
+        process for you. Each state has its own filing requirements, residency
+        and publication rules, and fee schedule. The links above route to the
+        official judiciary or self-help portal for each jurisdiction; please
+        consult an attorney for advice on your individual situation.
+      </p>
+    </div>
+  </section>
+</Base>
+
+<style>
+  .section { padding-block: var(--s-6); }
+</style>
