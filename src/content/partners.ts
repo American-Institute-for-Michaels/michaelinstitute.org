@@ -1,13 +1,19 @@
+import painePals from '../assets/partners/paine-pals.png';
+import ashleyAlliance from '../assets/partners/ashley-alliance.png';
+import leagueOfLauras from '../assets/partners/league-of-lauras.png';
+import type { ImageMetadata } from 'astro';
+
 export interface Partner {
   org: string;
   person: string;
   role: string;
+  logo: ImageMetadata;
 }
 
 export const partners: ReadonlyArray<Partner> = [
-  { org: 'Paine Pals', person: 'Paine Harris', role: 'Founder & CEO' },
-  { org: 'Ashley Alliance', person: 'Ashley Ahrens', role: 'Founder & Managing Partner' },
-  { org: 'League of Lauras', person: 'Laura Power', role: 'Directeur Général' },
+  { org: 'Paine Pals', person: 'Paine Harris', role: 'Founder & CEO', logo: painePals },
+  { org: 'Ashley Alliance', person: 'Ashley Ahrens', role: 'Founder & Managing Partner', logo: ashleyAlliance },
+  { org: 'League of Lauras', person: 'Laura Power', role: 'Directeur Général', logo: leagueOfLauras },
 ];
 
 export const friends: ReadonlyArray<string> = ['Max Drew', 'Eva'];
