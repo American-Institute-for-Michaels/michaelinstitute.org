@@ -1,0 +1,39 @@
+:root {
+  /* Brand palette (matches Wix theme + business cards) */
+  --brand-olive: #696B4B;
+  --brand-orange: #F59927;
+  --parchment: #F3F2DC;
+  --ink-navy: #1F2634;
+  --slate-blue: #39729B;
+  --sage: #C2C2B0;
+  --deep-navy: #062134;
+
+  /* Semantic */
+  --bg: var(--parchment);
+  --fg: var(--ink-navy);
+  --muted: #5A5A5A;
+  --rule: var(--sage);
+  --link: var(--slate-blue);
+  --header-bg: var(--brand-olive);
+  --header-fg: var(--parchment);
+
+  /* Type */
+  --font-serif: 'Source Serif 4', 'Source Serif Pro', Georgia, 'Times New Roman', serif;
+  --font-sans: 'Inter', system-ui, -apple-system, 'Helvetica Neue', Arial, sans-serif;
+  --measure: 65ch;
+
+  /* Spacing scale (rem, ~1.5x) */
+  --s-1: 0.25rem;
+  --s-2: 0.5rem;
+  --s-3: 0.75rem;
+  --s-4: 1rem;
+  --s-5: 1.5rem;
+  --s-6: 2.25rem;
+  --s-7: 3.5rem;
+  --s-8: 5.25rem;
+  --s-9: 8rem;
+
+  /* Layout */
+  --container: 72rem;
+  --gutter: clamp(1rem, 4vw, 2.5rem);
+}
