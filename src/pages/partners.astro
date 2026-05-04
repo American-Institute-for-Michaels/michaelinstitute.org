@@ -1,5 +1,4 @@
 ---
-import { Image } from 'astro:assets';
 import Base from '../layouts/Base.astro';
 import Masthead from '../components/Masthead.astro';
 import SectionEyebrow from '../components/SectionEyebrow.astro';
@@ -18,9 +17,7 @@ import { partners, friends, testimonial } from '../content/partners';
     <ul class="partners">
       {partners.map((p) => (
         <li class="partner">
-          <div class="partner__mark">
-            <Image src={p.logo} alt={`${p.org} logo`} widths={[240, 480]} sizes="240px" />
-          </div>
+          <img class="partner__mark" src={p.logo.src} alt={`${p.org} logo`} />
           <h3 class="partner__org">{p.org}</h3>
           <p class="partner__person">{p.person}</p>
           <p class="partner__role">{p.role}</p>
@@ -67,18 +64,13 @@ import { partners, friends, testimonial } from '../content/partners';
     background: color-mix(in oklab, var(--parchment) 96%, var(--brand-olive));
   }
   .partner__mark {
-    width: 100%;
-    height: 8rem;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    margin-bottom: var(--s-3);
-  }
-  .partner__mark :global(img) {
-    width: auto !important;
-    height: 100% !important;
+    display: block;
+    width: auto;
+    height: 6rem;
     max-width: 100%;
     object-fit: contain;
+    object-position: left center;
+    margin-bottom: var(--s-3);
   }
   .partner__org {
     font-family: var(--font-serif);
