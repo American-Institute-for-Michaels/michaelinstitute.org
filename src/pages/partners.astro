@@ -17,13 +17,13 @@ import { partners, friends, testimonial } from '../content/partners';
     <SectionEyebrow index="I" label="Partner Organizations" />
     <ul class="partners">
       {partners.map((p) => (
-        <li class="partners__row">
-          <div class="partners__logo">
-            <Image src={p.logo} alt={`${p.org} logo`} widths={[160, 320]} sizes="160px" />
+        <li class="partner">
+          <div class="partner__mark">
+            <Image src={p.logo} alt={`${p.org} logo`} widths={[240, 480]} sizes="240px" />
           </div>
-          <span class="partners__org">{p.org}</span>
-          <span class="partners__person">{p.person}</span>
-          <span class="partners__role">{p.role}</span>
+          <h3 class="partner__org">{p.org}</h3>
+          <p class="partner__person">{p.person}</p>
+          <p class="partner__role">{p.role}</p>
         </li>
       ))}
     </ul>
@@ -53,54 +53,54 @@ import { partners, friends, testimonial } from '../content/partners';
     list-style: none;
     margin: 0;
     padding: 0;
-    border-top: 1px solid var(--rule);
-  }
-  .partners__row {
     display: grid;
-    grid-template-columns: 8rem minmax(12rem, 1fr) minmax(10rem, 1fr) minmax(10rem, 1fr);
-    gap: var(--s-5);
-    align-items: center;
-    padding-block: var(--s-5);
-    border-bottom: 1px solid var(--rule);
+    grid-template-columns: repeat(auto-fit, minmax(min(18rem, 100%), 1fr));
+    gap: var(--s-7);
   }
-  .partners__logo {
-    width: 8rem;
-    height: 5rem;
+  .partner {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: var(--s-3);
+    padding: var(--s-6);
+    border: 1px solid var(--rule);
+    background: color-mix(in oklab, var(--parchment) 96%, var(--brand-olive));
+  }
+  .partner__mark {
+    width: 100%;
+    height: 8rem;
     display: flex;
     align-items: center;
-    justify-content: flex-start;
+    justify-content: center;
+    margin-bottom: var(--s-3);
   }
-  .partners__logo :global(img) {
+  .partner__mark :global(img) {
+    width: auto !important;
+    height: 100% !important;
     max-width: 100%;
-    max-height: 100%;
-    width: auto;
-    height: auto;
     object-fit: contain;
   }
-  .partners__org {
+  .partner__org {
     font-family: var(--font-serif);
     font-weight: 600;
-    font-size: 1.125rem;
+    font-size: 1.375rem;
     color: var(--ink-navy);
+    margin: 0;
+    line-height: 1.2;
   }
-  .partners__person {
+  .partner__person {
     font-family: var(--font-serif);
+    font-size: 1.0625rem;
     color: var(--fg);
+    margin: 0;
   }
-  .partners__role {
+  .partner__role {
     font-family: var(--font-sans);
-    font-size: 0.78rem;
+    font-size: 0.75rem;
     text-transform: uppercase;
     letter-spacing: 0.16em;
     color: var(--brand-olive);
-  }
-  @media (max-width: 40rem) {
-    .partners__row {
-      grid-template-columns: 1fr;
-      gap: var(--s-2);
-      padding-block: var(--s-6);
-    }
-    .partners__logo { height: 4rem; }
+    margin: 0;
   }
   .friends {
     font-family: var(--font-serif);
