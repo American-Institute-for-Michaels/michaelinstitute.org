@@ -1,0 +1,47 @@
+---
+interface Props {
+  eyebrow?: string;
+  title: string;
+  lede?: string;
+}
+const { eyebrow, title, lede } = Astro.props;
+---
+<header class="masthead container">
+  {eyebrow && <p class="masthead__eyebrow">{eyebrow}</p>}
+  <h1 class="masthead__title">{title}</h1>
+  {lede && <p class="masthead__lede">{lede}</p>}
+</header>
+
+<style>
+  .masthead {
+    padding-block: var(--s-8) var(--s-6);
+    border-bottom: 1px solid var(--rule);
+  }
+  .masthead__eyebrow {
+    font-family: var(--font-sans);
+    font-size: 0.75rem;
+    font-weight: 600;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--brand-orange);
+    margin: 0 0 var(--s-5);
+  }
+  .masthead__title {
+    font-family: var(--font-serif);
+    font-weight: 600;
+    font-size: clamp(2.5rem, 6vw, 4.5rem);
+    line-height: 1.05;
+    letter-spacing: -0.015em;
+    color: var(--ink-navy);
+    margin: 0;
+    max-width: 22ch;
+  }
+  .masthead__lede {
+    font-family: var(--font-serif);
+    font-size: clamp(1.125rem, 1.5vw, 1.375rem);
+    line-height: 1.5;
+    color: var(--brand-olive);
+    margin: var(--s-5) 0 0;
+    max-width: 50ch;
+  }
+</style>
