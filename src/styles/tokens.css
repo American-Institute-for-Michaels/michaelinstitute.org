@@ -20,7 +20,6 @@
   /* Type */
   --font-serif: 'Source Serif 4', 'Source Serif Pro', Georgia, 'Times New Roman', serif;
   --font-sans: 'Inter', system-ui, -apple-system, 'Helvetica Neue', Arial, sans-serif;
-  --measure: 65ch;
 
   /* Spacing scale (rem, ~1.5x) */
   --s-1: 0.25rem;
