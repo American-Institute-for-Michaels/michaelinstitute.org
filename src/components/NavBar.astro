@@ -1,0 +1,89 @@
+---
+import { nav, site } from '../content/site';
+import logo from '../assets/aim-logo.png';
+import { Image } from 'astro:assets';
+const path = Astro.url.pathname.replace(/\/$/, '') || '/';
+---
+<header class="header">
+  <a href="#main" class="skip-link">Skip to main content</a>
+  <div class="container header__inner">
+    <a class="brand" href="/" aria-label={site.title}>
+      <Image src={logo} alt="" width={48} height={48} class="brand__mark" />
+      <span class="brand__wordmark">AIM</span>
+      <span class="brand__tagline">{site.title}</span>
+    </a>
+    <nav aria-label="Primary">
+      <ul class="nav">
+        {nav.map(({ href, label }) => (
+          <li>
+            <a href={href} aria-current={path === href ? 'page' : undefined}>{label}</a>
+          </li>
+        ))}
+      </ul>
+    </nav>
+  </div>
+</header>
+
+<style>
+  .header {
+    background: var(--header-bg);
+    color: var(--header-fg);
+    border-bottom: 1px solid color-mix(in oklab, var(--header-fg) 25%, transparent);
+  }
+  .header__inner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--s-5);
+    padding-block: var(--s-5);
+    flex-wrap: wrap;
+  }
+  .brand {
+    display: flex;
+    align-items: baseline;
+    gap: var(--s-3);
+    color: var(--header-fg);
+    text-decoration: none;
+  }
+  .brand__mark {
+    width: 2.5rem;
+    height: 2.5rem;
+    align-self: center;
+  }
+  .brand__wordmark {
+    font-family: var(--font-serif);
+    font-size: 1.75rem;
+    font-weight: 600;
+    letter-spacing: 0.04em;
+    line-height: 1;
+  }
+  .brand__tagline {
+    font-family: var(--font-sans);
+    font-size: 0.7rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    opacity: 0.85;
+  }
+  @media (max-width: 40rem) {
+    .brand__tagline { display: none; }
+  }
+  .nav {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    gap: var(--s-6);
+    font-family: var(--font-sans);
+    font-size: 0.85rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+  }
+  .nav a {
+    color: var(--header-fg);
+    text-decoration: none;
+    padding-block: var(--s-2);
+    border-bottom: 1px solid transparent;
+  }
+  .nav a:hover { border-bottom-color: var(--brand-orange); color: var(--header-fg); }
+  .nav a[aria-current='page'] { border-bottom-color: var(--brand-orange); }
+</style>

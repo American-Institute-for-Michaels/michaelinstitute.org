@@ -1,0 +1,45 @@
+---
+import { site } from '../content/site';
+const year = new Date().getFullYear();
+const range = year > site.copyrightStart ? `${site.copyrightStart}–${year}` : `${site.copyrightStart}`;
+---
+<footer class="footer">
+  <div class="container footer__inner">
+    <p class="colophon">
+      Set in Source Serif 4 &amp; Inter. Hand-built with Astro &amp; TypeScript. Hosted on GitHub Pages.
+    </p>
+    <ul class="footer__links">
+      <li><a href={`mailto:${site.contactEmail}`}>{site.contactEmail}</a></li>
+      <li><a href={site.twitter.url} rel="noopener">{site.twitter.handle}</a></li>
+      <li>© {range} {site.short}</li>
+    </ul>
+  </div>
+</footer>
+
+<style>
+  .footer {
+    background: var(--ink-navy);
+    color: color-mix(in oklab, var(--parchment) 88%, transparent);
+    margin-top: var(--s-9);
+    padding-block: var(--s-7);
+    font-family: var(--font-sans);
+    font-size: 0.85rem;
+  }
+  .footer__inner {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    gap: var(--s-5);
+  }
+  .colophon { margin: 0; max-width: 36rem; opacity: 0.78; font-style: italic; }
+  .footer__links {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--s-5);
+  }
+  .footer a { color: var(--parchment); text-decoration: none; border-bottom: 1px solid transparent; }
+  .footer a:hover { border-bottom-color: var(--brand-orange); }
+</style>
