@@ -1,8 +1,79 @@
 ---
 import Base from '../layouts/Base.astro';
+import Masthead from '../components/Masthead.astro';
+import SectionEyebrow from '../components/SectionEyebrow.astro';
+import { site } from '../content/site';
 ---
-<Base title="Home">
-  <div class="container" style="padding-block: var(--s-7);">
-    <p class="prose">Layout smoke test.</p>
-  </div>
+<Base>
+  <Masthead
+    eyebrow={site.motto}
+    title={site.tagline}
+    lede="The American Institute for Michaels is a community dedicated to individuals who share the given name Michael — leveraging the diversity of our backgrounds as a breeding ground for creativity, and our shared name as a unifying factor."
+  />
+
+  <section class="container section">
+    <div class="prose">
+      <SectionEyebrow index="I" label="Mission" />
+      <p class="dropcap">
+        Michaels are not a monolith. We come from every continent, every faith,
+        every political tradition, and every walk of professional life. The
+        Institute exists to connect Michaels across that breadth — to foster
+        honesty, excellence, and compassion within our communities, and to
+        advance society through the unique commonality of our shared given name.
+      </p>
+      <p>
+        Our work is organized around small, durable initiatives: outreach to
+        Michaels entering early adulthood, a research program advancing the
+        social infrastructure of Michael-hood, and a global chapter network
+        spanning more than eighty countries.
+      </p>
+    </div>
+  </section>
+
+  <hr class="rule container" />
+
+  <section class="container section">
+    <div class="grid">
+      <div>
+        <SectionEyebrow index="II" label="About" />
+        <h2>An institute, founded in a freshman dorm room.</h2>
+        <p>
+          Like many great organizations, AIM began as a conversation between
+          two creative polymaths. Today it has grown into the first body solely
+          dedicated to those who share its forename.
+        </p>
+        <p><a href="/about">Read about the Institute &rarr;</a></p>
+      </div>
+      <div>
+        <SectionEyebrow index="III" label="Friends" />
+        <h2>Not already a Michael? Become one.</h2>
+        <p>
+          With the right paperwork — varies by state — anyone can join. We've
+          curated the official name-change instructions for every U.S. state.
+        </p>
+        <p><a href="/friends">Find your state &rarr;</a></p>
+      </div>
+    </div>
+  </section>
 </Base>
+
+<style>
+  .section { padding-block: var(--s-7); }
+  .grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(min(28rem, 100%), 1fr));
+    gap: var(--s-7);
+  }
+  .grid h2 {
+    font-family: var(--font-serif);
+    font-size: clamp(1.5rem, 2.5vw, 2rem);
+    color: var(--ink-navy);
+    margin: 0 0 var(--s-4);
+    line-height: 1.2;
+    max-width: 22ch;
+  }
+  .grid p {
+    max-width: var(--measure);
+    margin: 0 0 var(--s-4);
+  }
+</style>
