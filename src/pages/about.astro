@@ -1,0 +1,57 @@
+---
+import Base from '../layouts/Base.astro';
+import Masthead from '../components/Masthead.astro';
+import SectionEyebrow from '../components/SectionEyebrow.astro';
+import LeaderCard from '../components/LeaderCard.astro';
+import { leaders } from '../content/leaders';
+---
+<Base title="About" description="Mission, origin, and leadership of the American Institute for Michaels.">
+  <Masthead
+    eyebrow="About"
+    title="Dedicated to the general betterment of all Michaels."
+    lede="The Institute exists to connect Michaels across geography, faith, and profession — and to strengthen our communities through honesty, excellence, and compassion."
+  />
+
+  <section class="container section">
+    <div class="prose">
+      <SectionEyebrow index="I" label="Mission" />
+      <p class="dropcap">
+        The American Institute for Michaels is dedicated to the general
+        betterment of all Michaels. We connect and support people who share
+        this given name — encouraging them to strengthen their communities,
+        pursue excellence, and act with honesty and compassion in their work
+        and civic life.
+      </p>
+    </div>
+  </section>
+
+  <hr class="rule container" />
+
+  <section class="container section">
+    <div class="prose">
+      <SectionEyebrow index="II" label="Origin" />
+      <p>
+        It started the way many great organizations have started — in the
+        freshman dorm room of two creative and innovative polymaths. Michael
+        Doyle and Michael Power founded AIM as the first body solely
+        dedicated to those who share its forename, in the conviction that a
+        common name could be a generative axis around which to organize
+        cross-disciplinary community.
+      </p>
+    </div>
+  </section>
+
+  <hr class="rule container" />
+
+  <section class="container section">
+    <SectionEyebrow index="III" label="Leadership" />
+    <div class="leaders">
+      {leaders.map((l) => <LeaderCard {...l} />)}
+    </div>
+  </section>
+</Base>
+
+<style>
+  .section { padding-block: var(--s-6); }
+  .leaders { max-width: 56rem; }
+</style>
