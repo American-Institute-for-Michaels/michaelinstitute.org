@@ -1,0 +1,17 @@
+---
+import Base from '../layouts/Base.astro';
+import Masthead from '../components/Masthead.astro';
+---
+<Base title="Not Found" description="The requested page could not be located.">
+  <Masthead
+    eyebrow="404"
+    title="This Michael could not be located."
+    lede="The page you requested isn't part of the Institute's archive. Perhaps you'd like to return to the front matter."
+  />
+  <section class="container section">
+    <p class="prose"><a href="/">← Back to home</a></p>
+  </section>
+</Base>
+<style>
+  .section { padding-block: var(--s-7); }
+</style>
