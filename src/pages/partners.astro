@@ -1,0 +1,88 @@
+---
+import Base from '../layouts/Base.astro';
+import Masthead from '../components/Masthead.astro';
+import SectionEyebrow from '../components/SectionEyebrow.astro';
+import PullQuote from '../components/PullQuote.astro';
+import { partners, friends, testimonial } from '../content/partners';
+---
+<Base title="Partners" description="Organizations and individuals supporting the American Institute for Michaels.">
+  <Masthead
+    eyebrow="Partners"
+    title="Diversifying society, one given name at a time."
+    lede="AIM collaborates with organizations and individuals who share our mission to broaden the institutional surface area of community by given name."
+  />
+
+  <section class="container section">
+    <SectionEyebrow index="I" label="Partner Organizations" />
+    <ul class="partners">
+      {partners.map((p) => (
+        <li class="partners__row">
+          <span class="partners__org">{p.org}</span>
+          <span class="partners__person">{p.person}</span>
+          <span class="partners__role">{p.role}</span>
+        </li>
+      ))}
+    </ul>
+  </section>
+
+  <hr class="rule container" />
+
+  <section class="container section">
+    <SectionEyebrow index="II" label="Friends of Michaels" />
+    <p class="prose">
+      We are also grateful for the individual supporters whose advocacy makes the Institute's work possible:
+    </p>
+    <p class="friends">{friends.join(' · ')}</p>
+  </section>
+
+  <hr class="rule container" />
+
+  <section class="container section">
+    <SectionEyebrow index="III" label="In Their Words" />
+    <PullQuote quote={testimonial.quote} attribution={testimonial.attribution} role={testimonial.role} />
+  </section>
+</Base>
+
+<style>
+  .section { padding-block: var(--s-6); }
+  .partners {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    border-top: 1px solid var(--rule);
+  }
+  .partners__row {
+    display: grid;
+    grid-template-columns: minmax(12rem, 1fr) minmax(10rem, 1fr) minmax(10rem, 1fr);
+    gap: var(--s-5);
+    align-items: baseline;
+    padding-block: var(--s-4);
+    border-bottom: 1px solid var(--rule);
+  }
+  .partners__org {
+    font-family: var(--font-serif);
+    font-weight: 600;
+    font-size: 1.125rem;
+    color: var(--ink-navy);
+  }
+  .partners__person {
+    font-family: var(--font-serif);
+    color: var(--fg);
+  }
+  .partners__role {
+    font-family: var(--font-sans);
+    font-size: 0.78rem;
+    text-transform: uppercase;
+    letter-spacing: 0.16em;
+    color: var(--brand-olive);
+  }
+  @media (max-width: 40rem) {
+    .partners__row { grid-template-columns: 1fr; gap: var(--s-1); padding-block: var(--s-5); }
+  }
+  .friends {
+    font-family: var(--font-serif);
+    font-style: italic;
+    color: var(--brand-olive);
+    font-size: 1.125rem;
+  }
+</style>
