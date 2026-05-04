@@ -1,0 +1,10 @@
+node_modules/
+dist/
+.astro/
+.DS_Store
+.env
+.env.*
+!.env.example
+
+# Local-only scrape artifacts (raw Wix HTML used to extract content)
+.scrape/
