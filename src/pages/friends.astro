@@ -3,12 +3,20 @@ import Base from '../layouts/Base.astro';
 import Masthead from '../components/Masthead.astro';
 import SectionEyebrow from '../components/SectionEyebrow.astro';
 import NameChangeChecklist from '../components/NameChangeChecklist.astro';
+import EditorialBand from '../components/EditorialBand.astro';
+import courthouse from '../assets/editorial/courthouse.jpg';
 ---
 <Base title="Friends" description="Become a Michael — find official name-change instructions for your state.">
   <Masthead
     eyebrow="Friends"
     title="Not already a Michael? Become one."
     lede="Joining the Institute is a matter of paperwork — the specifics of which vary by state. Below, find the official name-change instructions for the jurisdiction where you reside."
+  />
+
+  <EditorialBand
+    src={courthouse}
+    alt="Columned facade of a state courthouse"
+    caption="Each state's judiciary maintains its own name-change procedure."
   />
 
   <section class="container section">

@@ -3,6 +3,8 @@ import Base from '../layouts/Base.astro';
 import Masthead from '../components/Masthead.astro';
 import SectionEyebrow from '../components/SectionEyebrow.astro';
 import LeaderCard from '../components/LeaderCard.astro';
+import EditorialBand from '../components/EditorialBand.astro';
+import library from '../assets/editorial/library.jpg';
 import { leaders } from '../content/leaders';
 ---
 <Base title="About" description="Mission, origin, and leadership of the American Institute for Michaels.">
@@ -41,7 +43,11 @@ import { leaders } from '../content/leaders';
     </div>
   </section>
 
-  <hr class="rule container" />
+  <EditorialBand
+    src={library}
+    alt="Stacks of bound volumes in an institutional library"
+    caption="The Institute's archives, holding more than four decades of correspondence."
+  />
 
   <section class="container section">
     <SectionEyebrow index="III" label="Leadership" />
