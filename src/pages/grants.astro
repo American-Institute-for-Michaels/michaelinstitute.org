@@ -1,0 +1,194 @@
+---
+import Base from '../layouts/Base.astro';
+import Masthead from '../components/Masthead.astro';
+import SectionEyebrow from '../components/SectionEyebrow.astro';
+
+interface Priority {
+  title: string;
+  description: string;
+  award: string;
+}
+
+const priorities: ReadonlyArray<Priority> = [
+  {
+    title: 'The Onomastic Density of American Counties',
+    description: 'Quantitative geography of Michael-bearing populations at the county level, with attention to the historical interaction between immigration corridors and naming conventions. Field research is encouraged but not required.',
+    award: 'Up to $4,200',
+  },
+  {
+    title: 'The Hypocoristic Tradition',
+    description: 'Sociolinguistic study of the conditions under which a Michael becomes a Mike, a Mikey, a Mick, or — in rarer cases — a Mikael. Cross-generational interview studies are particularly welcome.',
+    award: 'Up to $3,800',
+  },
+  {
+    title: 'Michael in the Civic Imagination, 1954–1998',
+    description: 'A historical accounting of the cultural conditions sustaining Michael\'s forty-four-year tenure as the most popular masculine given name in the United States. Submissions making serious use of the Saturday morning television canon will be reviewed favorably.',
+    award: 'Up to $5,000',
+  },
+  {
+    title: 'The Phonology of Forename Misrecognition',
+    description: 'Acoustic study of the conditions — environmental, conversational, dental — under which "Michael" is heard as "Michelle," "Mitchell," or, on at least one well-documented occasion, "Marcel."',
+    award: 'Up to $2,400',
+  },
+  {
+    title: 'Towards a General Theory of Coincident Naming',
+    description: 'Theoretical inquiry into the experience of working in close, sustained collaboration with another person bearing one\'s own given name. Particular interest in disambiguation strategies (initials, surnames, "the other Michael") and their effect on professional identity.',
+    award: 'Up to $4,500',
+  },
+  {
+    title: 'Saint Michael in the Visual Vernacular',
+    description: 'Iconographic study of the archangel\'s representation in popular religious art of the post-conciliar period. Submissions need not be confined to ecclesiastical institutions; supermarket prayer cards are explicitly within scope.',
+    award: 'Up to $3,000',
+  },
+  {
+    title: 'The Institute\'s Own Holdings',
+    description: 'Archival fellowships for scholars wishing to work with the Institute\'s correspondence files (1980 to present), housed at the Boston seat. Travel and lodging are provided.',
+    award: 'Up to $6,000',
+  },
+];
+---
+<Base title="Grants" description="The Institute's small grants program supports research, fellowship, and inquiry consonant with our purposes.">
+  <Masthead
+    eyebrow="Grants Program"
+    title="Small grants for serious inquiry."
+    lede="The Institute administers a small grants program in support of research, scholarship, and creative inquiry consonant with its purposes. Awards are modest by design; we believe a small grant honestly conferred does more good than a large one ostentatiously announced."
+  />
+
+  <section class="container section">
+    <div class="prose">
+      <SectionEyebrow index="I" label="Eligibility" />
+      <p>
+        Applications are accepted from scholars, independent researchers, and
+        practitioners working in any tradition. Applicants need not be
+        Michaels themselves, though Michaels are obviously welcome. Affiliation
+        with a recognized institution is preferred but not required.
+      </p>
+      <p>
+        Awards are made twice yearly, in March and September, by the
+        Institute's Standing Committee on Notability acting in concert with
+        the Treasurer. The Institute makes no representation as to the
+        likelihood of an award; in the most recent fiscal year, fewer than
+        nine percent of submitted applications were funded.
+      </p>
+    </div>
+  </section>
+
+  <hr class="rule container" />
+
+  <section class="container section">
+    <SectionEyebrow index="II" label="Research Priorities, FY 2026" />
+    <p class="lede">
+      The following priorities are not exclusive; the Committee considers
+      proposals outside these areas, but applicants should expect a higher
+      bar.
+    </p>
+    <ol class="priorities">
+      {priorities.map((p, i) => (
+        <li class="priority">
+          <p class="priority__num">{(i + 1).toString().padStart(2, '0')}</p>
+          <div>
+            <p class="priority__title">{p.title}</p>
+            <p class="priority__desc">{p.description}</p>
+            <p class="priority__award">{p.award}</p>
+          </div>
+        </li>
+      ))}
+    </ol>
+  </section>
+
+  <section class="container section">
+    <div class="prose">
+      <SectionEyebrow index="III" label="Application" />
+      <p>
+        A complete application consists of: a cover letter not exceeding two
+        pages; a statement of work not exceeding eight pages; a budget on the
+        Institute's standard form; and the names and contact details of two
+        professional referees. Applications may be submitted by post or by
+        electronic dispatch to
+        <a href="mailto:hello@michaelinstitute.org">the general office</a>.
+      </p>
+      <p>
+        The Institute does not require copies of academic transcripts, prior
+        publications, or letters of institutional support. We have found
+        these documents to be uncorrelated with the eventual quality of the
+        funded work, and request that applicants not provide them.
+      </p>
+    </div>
+  </section>
+
+  <section class="container section">
+    <div class="prose">
+      <SectionEyebrow index="IV" label="Reporting" />
+      <p>
+        Recipients are expected to submit a brief written report (not
+        exceeding three pages) within ninety days of the conclusion of the
+        funded period, together with a copy of any publication, manuscript,
+        or other artifact arising from the work. The Institute does not
+        require co-authorship, named acknowledgment, or any other form of
+        public credit, but is grateful when these are extended.
+      </p>
+    </div>
+  </section>
+</Base>
+
+<style>
+  .section { padding-block: var(--s-6); }
+  .lede {
+    font-family: var(--font-serif);
+    font-style: italic;
+    font-size: 1.1rem;
+    color: var(--brand-olive);
+    margin: 0 0 var(--s-6);
+  }
+  .priorities {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+  .priority {
+    display: grid;
+    grid-template-columns: 4rem 1fr;
+    gap: var(--s-5);
+    padding: var(--s-5) 0;
+    border-top: 1px solid var(--rule);
+    align-items: start;
+  }
+  .priority:last-child { border-bottom: 1px solid var(--rule); }
+  .priority__num {
+    font-family: var(--font-serif);
+    font-size: 2rem;
+    font-weight: 600;
+    color: var(--brand-orange);
+    margin: 0;
+    line-height: 1;
+    font-variant-numeric: tabular-nums;
+  }
+  .priority__title {
+    font-family: var(--font-serif);
+    font-size: 1.4rem;
+    font-weight: 600;
+    color: var(--ink-navy);
+    margin: 0 0 var(--s-3);
+    line-height: 1.2;
+  }
+  .priority__desc {
+    font-family: var(--font-serif);
+    font-size: 1rem;
+    line-height: 1.55;
+    color: var(--ink-navy);
+    margin: 0 0 var(--s-3);
+  }
+  .priority__award {
+    font-family: var(--font-sans);
+    font-size: 0.78rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--brand-olive);
+    margin: 0;
+    font-weight: 600;
+  }
+  @media (max-width: 40rem) {
+    .priority { grid-template-columns: 3rem 1fr; gap: var(--s-3); }
+    .priority__num { font-size: 1.5rem; }
+  }
+</style>

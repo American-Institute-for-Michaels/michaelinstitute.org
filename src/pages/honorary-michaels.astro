@@ -1,0 +1,157 @@
+---
+import Base from '../layouts/Base.astro';
+import Masthead from '../components/Masthead.astro';
+import SectionEyebrow from '../components/SectionEyebrow.astro';
+
+interface Honoree {
+  name: string;
+  conferred: string;
+  citation: string;
+}
+
+const honorees: ReadonlyArray<Honoree> = [
+  {
+    name: 'Sir Mick Jagger',
+    conferred: '1989',
+    citation: 'For phonological proximity to the canonical hypocoristic, and for fifty years of conduct broadly consistent with the Institute\'s ethos of sustained excellence.',
+  },
+  {
+    name: 'Maya Angelou',
+    conferred: '1995',
+    citation: 'For her lifelong stewardship of the American letter; honorary status conferred posthumously and in perpetuity by unanimous vote of the Board.',
+  },
+  {
+    name: 'Nelson Mandela',
+    conferred: '1996',
+    citation: 'For sustained moral leadership in the public sphere; the only honoree to be granted honorary status by acclamation rather than ballot.',
+  },
+  {
+    name: 'Quincy Jones',
+    conferred: '2003',
+    citation: 'For lifelong collaboration with named members of the Institute and for sustained contribution to the recorded arts.',
+  },
+  {
+    name: 'Sir David Attenborough',
+    conferred: '2008',
+    citation: 'For demonstrating, across seven decades of continuous service to natural history, the conduct expected of a Michael in good standing.',
+  },
+  {
+    name: 'Dolly Parton',
+    conferred: '2014',
+    citation: 'For literacy advocacy and for embodying the kind of unsubtle decency the Institute considers exemplary.',
+  },
+  {
+    name: 'Tom Hanks',
+    conferred: '2017',
+    citation: 'Conferred over the objections of one Board member, who maintained that "an actual Michael was available." The vote was 8–1.',
+  },
+  {
+    name: 'Beyoncé Knowles-Carter',
+    conferred: '2019',
+    citation: 'For organizational rigor in the performing arts; the Institute notes with approval the structural ambition of her recorded work.',
+  },
+  {
+    name: 'The late Anthony Bourdain',
+    conferred: '2018',
+    citation: 'Conferred posthumously by special resolution of the Board, in recognition of sustained contributions to the cosmopolitan tradition.',
+  },
+  {
+    name: 'Levar Burton',
+    conferred: '2021',
+    citation: 'For decades of service to the literacy of the American child; one of three honorees retained on the original 1995 short list.',
+  },
+];
+---
+<Base title="Honorary Michaels" description="A register of persons not bearing the name Michael, granted honorary status by special dispensation of the Board.">
+  <Masthead
+    eyebrow="Honorary Register"
+    title="Honorary Michaels."
+    lede="A small number of persons not bearing the given name Michael have, by special dispensation of the Board, been granted honorary status. The honor is conferred sparingly and only after extended deliberation."
+  />
+
+  <section class="container section">
+    <div class="prose">
+      <SectionEyebrow index="I" label="On the Honor" />
+      <p>
+        Honorary status is conferred under Article VII, §3 of the Institute's
+        bylaws, which permits the Board "by two-thirds majority and after no
+        fewer than two readings in open session" to extend the Institute's
+        recognition to persons whose conduct, contribution, or character so
+        plainly accords with the Institute's standards that the absence of the
+        canonical given name is deemed an immaterial obstacle. Honorary
+        Michaels enjoy all rights of the membership save the privilege of
+        nominating new fellows.
+      </p>
+    </div>
+  </section>
+
+  <section class="container section">
+    <SectionEyebrow index="II" label="Register" />
+    <ol class="honorees">
+      {honorees.map((h) => (
+        <li class="honoree">
+          <div class="honoree__head">
+            <p class="honoree__name">{h.name}</p>
+            <p class="honoree__year">Conferred {h.conferred}</p>
+          </div>
+          <p class="honoree__cite">{h.citation}</p>
+        </li>
+      ))}
+    </ol>
+  </section>
+
+  <hr class="rule container" />
+
+  <section class="container section">
+    <div class="prose">
+      <SectionEyebrow index="III" label="Notes" />
+      <p class="footnote">
+        Honorary status may, in rare cases, be revoked by the Board. The
+        Institute does not publish the names of revoked honorees and declines
+        comment on the matter.
+      </p>
+    </div>
+  </section>
+</Base>
+
+<style>
+  .section { padding-block: var(--s-6); }
+  .honorees { list-style: none; padding: 0; margin: 0; }
+  .honoree {
+    padding: var(--s-5) 0;
+    border-top: 1px solid var(--rule);
+  }
+  .honoree:last-child { border-bottom: 1px solid var(--rule); }
+  .honoree__head {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: var(--s-3);
+    align-items: baseline;
+    margin-bottom: var(--s-3);
+  }
+  .honoree__name {
+    font-family: var(--font-serif);
+    font-size: 1.5rem;
+    font-weight: 600;
+    color: var(--ink-navy);
+    margin: 0;
+  }
+  .honoree__year {
+    font-family: var(--font-sans);
+    font-size: 0.78rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--brand-orange);
+    margin: 0;
+  }
+  .honoree__cite {
+    font-family: var(--font-serif);
+    font-size: 1.05rem;
+    line-height: 1.5;
+    color: var(--ink-navy);
+    margin: 0;
+    font-style: italic;
+  }
+  .footnote { font-size: 0.9rem; color: var(--muted); }
+</style>

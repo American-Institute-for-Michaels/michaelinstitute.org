@@ -1,0 +1,215 @@
+---
+import Base from '../layouts/Base.astro';
+import Masthead from '../components/Masthead.astro';
+import SectionEyebrow from '../components/SectionEyebrow.astro';
+
+interface Featured {
+  month: string;
+  name: string;
+  chapter: string;
+  occupation: string;
+  citation: string;
+}
+
+const current: Featured = {
+  month: 'May 2026',
+  name: 'Michael Costigan',
+  chapter: 'Boston',
+  occupation: 'Reference librarian, Boston Athenæum',
+  citation:
+    'For sustained service to the public reading room and for the cataloguing — undertaken on his own initiative and in his own hours — of the Institute\'s small collection of correspondence relating to the founding generation. Mr. Costigan represents the kind of patient, unsung Michael upon whom the Institute principally depends.',
+};
+
+const archive: ReadonlyArray<Featured> = [
+  {
+    month: 'April 2026',
+    name: 'Michael Hartnell',
+    chapter: 'Seattle',
+    occupation: 'Maritime electrician',
+    citation: 'For thirty-one years of continuous service aboard the M/V <em>Spokane</em>, and for organizing, in 2024, the Institute\'s first chartered convocation aboard a working passenger vessel.',
+  },
+  {
+    month: 'March 2026',
+    name: 'Mícheál Ó Conchúir',
+    chapter: 'Dublin',
+    occupation: 'Schoolmaster, retired',
+    citation: 'For having taught five separate Michaels who would, in due course, themselves go on to charter chapters of the Institute. The Dublin chapter\'s standing is, in no small measure, owed to him.',
+  },
+  {
+    month: 'February 2026',
+    name: 'Michael Park',
+    chapter: 'Los Angeles',
+    occupation: 'Set decorator, motion pictures',
+    citation: 'For the donation of three filing cabinets of period-correct stationery from a film production thereby halted, which the Institute now uses for its more ceremonial correspondence.',
+  },
+  {
+    month: 'January 2026',
+    name: 'Michele Conti',
+    chapter: 'Milan',
+    occupation: 'Pasticciere',
+    citation: 'For the development of a small biscuit, modeled on the Institute\'s seal, served at every Milan chapter convening since 2023. The recipe is, by his insistence, not in the public archive.',
+  },
+  {
+    month: 'December 2025',
+    name: 'Michael Asante',
+    chapter: 'Accra',
+    occupation: 'Civil engineer',
+    citation: 'For locating, securing, and refurbishing the Accra chapter\'s present meeting room — formerly a colonial-era post office — and for doing so without any expectation of reimbursement from the Institute.',
+  },
+  {
+    month: 'November 2025',
+    name: 'Michał Kowalski',
+    chapter: 'Warsaw',
+    occupation: 'Conservator of paper',
+    citation: 'For volunteer conservation work performed on three deteriorating volumes of the Institute\'s standing register, returned to working condition in his own studio.',
+  },
+];
+---
+<Base title="Michael of the Month" description="The Institute's monthly recognition of a Michael in good standing whose work merits particular notice.">
+  <Masthead
+    eyebrow="Monthly Recognition"
+    title="Michael of the Month."
+    lede="On the first of each calendar month, the Institute names a Michael of standing whose recent work or sustained example merits particular notice. The honor is small but the recognition is sincere."
+  />
+
+  <section class="container section">
+    <SectionEyebrow index="I" label={`Currently · ${current.month}`} />
+    <article class="featured">
+      <div class="featured__portrait" aria-hidden="true">
+        <div class="featured__monogram">M</div>
+      </div>
+      <div class="featured__body">
+        <p class="featured__name">{current.name}</p>
+        <p class="featured__meta">
+          {current.occupation} · {current.chapter} chapter
+        </p>
+        <p class="featured__citation">{current.citation}</p>
+      </div>
+    </article>
+  </section>
+
+  <hr class="rule container" />
+
+  <section class="container section">
+    <SectionEyebrow index="II" label="Archive" />
+    <ol class="archive">
+      {archive.map((a) => (
+        <li class="archived">
+          <p class="archived__month">{a.month}</p>
+          <p class="archived__name">{a.name}</p>
+          <p class="archived__meta">{a.occupation} · {a.chapter} chapter</p>
+          <p class="archived__citation" set:html={a.citation}></p>
+        </li>
+      ))}
+    </ol>
+  </section>
+
+  <section class="container section">
+    <div class="prose">
+      <SectionEyebrow index="III" label="Nominations" />
+      <p>
+        Nominations are accepted from chapter coordinators and from any
+        Michael in good standing. They should set out, in not more than five
+        hundred words, the conduct or contribution that recommends the
+        nominee, and should be transmitted in writing to the Recording
+        Secretary at
+        <a href="mailto:hello@michaelinstitute.org">hello@michaelinstitute.org</a>.
+        The Recording Secretary makes the final selection in consultation
+        with the President.
+      </p>
+    </div>
+  </section>
+</Base>
+
+<style>
+  .section { padding-block: var(--s-6); }
+  .featured {
+    display: grid;
+    grid-template-columns: 16rem 1fr;
+    gap: var(--s-7);
+    align-items: start;
+  }
+  .featured__portrait {
+    aspect-ratio: 1;
+    background: var(--brand-olive);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .featured__monogram {
+    font-family: var(--font-serif);
+    font-size: 8rem;
+    color: var(--parchment);
+    font-weight: 600;
+    line-height: 1;
+  }
+  .featured__name {
+    font-family: var(--font-serif);
+    font-size: clamp(2rem, 3.5vw, 2.75rem);
+    font-weight: 600;
+    color: var(--ink-navy);
+    margin: 0 0 var(--s-3);
+    line-height: 1.1;
+  }
+  .featured__meta {
+    font-family: var(--font-sans);
+    font-size: 0.85rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--brand-orange);
+    margin: 0 0 var(--s-5);
+  }
+  .featured__citation {
+    font-family: var(--font-serif);
+    font-size: 1.15rem;
+    line-height: 1.6;
+    color: var(--ink-navy);
+    margin: 0;
+  }
+  .archive {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(min(22rem, 100%), 1fr));
+    gap: var(--s-5);
+  }
+  .archived {
+    padding: var(--s-5);
+    border: 1px solid var(--rule);
+    background: color-mix(in oklab, var(--parchment) 96%, var(--brand-olive));
+  }
+  .archived__month {
+    font-family: var(--font-sans);
+    font-size: 0.75rem;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--brand-orange);
+    margin: 0 0 var(--s-3);
+  }
+  .archived__name {
+    font-family: var(--font-serif);
+    font-size: 1.4rem;
+    font-weight: 600;
+    color: var(--ink-navy);
+    margin: 0 0 var(--s-2);
+  }
+  .archived__meta {
+    font-family: var(--font-sans);
+    font-size: 0.85rem;
+    color: var(--brand-olive);
+    margin: 0 0 var(--s-3);
+  }
+  .archived__citation {
+    font-family: var(--font-serif);
+    font-size: 0.95rem;
+    line-height: 1.55;
+    color: var(--ink-navy);
+    margin: 0;
+    font-style: italic;
+  }
+  @media (max-width: 50rem) {
+    .featured { grid-template-columns: 1fr; }
+    .featured__portrait { max-width: 16rem; }
+  }
+</style>

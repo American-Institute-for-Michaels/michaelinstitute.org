@@ -1,0 +1,95 @@
+---
+import Base from '../layouts/Base.astro';
+import Masthead from '../components/Masthead.astro';
+import SectionEyebrow from '../components/SectionEyebrow.astro';
+import { notableMichaels } from '../content/notable-michaels';
+
+const sorted = [...notableMichaels].sort((a, b) => {
+  const aSurname = a.name.split(' ').slice(-1)[0];
+  const bSurname = b.name.split(' ').slice(-1)[0];
+  return aSurname.localeCompare(bSurname);
+});
+---
+<Base title="Notable Michaels" description="A roster of notable persons sharing the given name Michael, recognized by the Institute for sustained contribution.">
+  <Masthead
+    eyebrow="Fellows Roster"
+    title="Notable Michaels."
+    lede="A standing register of persons sharing the given name Michael whose contributions to public, intellectual, or artistic life have been recognized by the Institute. The list is non-exhaustive and is revised quarterly."
+  />
+
+  <section class="container section">
+    <SectionEyebrow index="I" label="Register" />
+    <p class="meta">
+      <strong>{sorted.length}</strong> entries · sorted by surname · current as of the second quarter of fiscal 2026
+    </p>
+    <ol class="roster">
+      {sorted.map((m) => (
+        <li class="entry">
+          <p class="entry__name">{m.name}</p>
+          <p class="entry__meta"><span class="years">{m.years}</span> · <span class="field">{m.field}</span></p>
+          <p class="entry__contrib">{m.contribution}</p>
+        </li>
+      ))}
+    </ol>
+  </section>
+
+  <hr class="rule container" />
+
+  <section class="container section">
+    <div class="prose">
+      <SectionEyebrow index="II" label="On Inclusion" />
+      <p>
+        Recognition by the Institute follows a deliberative process administered
+        by the Standing Committee on Notability. The Committee meets in March
+        and September; nominations may be forwarded by any member in good
+        standing via the Institute's
+        <a href="mailto:hello@michaelinstitute.org">general office</a>. Inclusion
+        does not constitute endorsement of a fellow's public conduct outside
+        the field of contribution cited.
+      </p>
+      <p>
+        For honorary recognition extended to persons not bearing the name, see
+        the <a href="/honorary-michaels">Honorary Michaels</a> register.
+      </p>
+    </div>
+  </section>
+</Base>
+
+<style>
+  .section { padding-block: var(--s-6); }
+  .meta { font-family: var(--font-sans); font-size: 0.85rem; color: var(--muted); margin: 0 0 var(--s-6); }
+  .roster {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(min(22rem, 100%), 1fr));
+    gap: var(--s-5) var(--s-7);
+  }
+  .entry {
+    padding: var(--s-4) 0;
+    border-top: 1px solid var(--rule);
+  }
+  .entry__name {
+    font-family: var(--font-serif);
+    font-size: 1.15rem;
+    font-weight: 600;
+    color: var(--ink-navy);
+    margin: 0 0 var(--s-1);
+  }
+  .entry__meta {
+    font-family: var(--font-sans);
+    font-size: 0.78rem;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--brand-olive);
+    margin: 0 0 var(--s-2);
+  }
+  .entry__contrib {
+    font-family: var(--font-serif);
+    font-size: 0.95rem;
+    color: var(--ink-navy);
+    margin: 0;
+    font-style: italic;
+  }
+</style>

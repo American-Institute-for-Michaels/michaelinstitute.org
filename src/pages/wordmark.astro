@@ -1,0 +1,178 @@
+---
+import Base from '../layouts/Base.astro';
+import Masthead from '../components/Masthead.astro';
+import SectionEyebrow from '../components/SectionEyebrow.astro';
+import logo from '../assets/aim-logo.png';
+import { Image } from 'astro:assets';
+---
+<Base title="Wordmark Guidelines" description="Standards for the application of the Institute's wordmark, seal, and visual identity.">
+  <Masthead
+    eyebrow="Brand Standards"
+    title="On the application of the Institute's mark."
+    lede="The wordmark of the American Institute for Michaels is the property of the Institute and may be applied only in accordance with the following standards. Members and chapters are reminded that mark misuse is grounds for written reprimand."
+  />
+
+  <section class="container section">
+    <div class="prose">
+      <SectionEyebrow index="I" label="The Mark" />
+      <p>
+        The Institute's mark consists of the abbreviated wordmark <em>AIM</em>
+        rendered in Source Serif 4 Semibold at a tracking of +40 units, set
+        adjacent to the Institute's seal. The seal and wordmark are designed
+        to be presented together; either element may, in exceptional
+        circumstances, be presented alone, but the seal shall not appear
+        without the wordmark in any public-facing application.
+      </p>
+    </div>
+  </section>
+
+  <section class="container section">
+    <SectionEyebrow index="II" label="Approved Applications" />
+    <div class="grid">
+      <div class="sample sample--olive">
+        <Image src={logo} alt="" width={120} height={120} class="sample__mark" />
+        <p class="sample__label">Olive on parchment</p>
+        <p class="sample__note">The principal application. Used for stationery, signage, and the home page header.</p>
+      </div>
+      <div class="sample sample--parchment">
+        <Image src={logo} alt="" width={120} height={120} class="sample__mark" />
+        <p class="sample__label">Parchment on olive</p>
+        <p class="sample__note">Reversed treatment. Approved for institutional banners and printed brochures.</p>
+      </div>
+      <div class="sample sample--navy">
+        <Image src={logo} alt="" width={120} height={120} class="sample__mark sample__mark--white" />
+        <p class="sample__label">Parchment on navy</p>
+        <p class="sample__note">Restricted application. Approved for the colophon and footer only.</p>
+      </div>
+      <div class="sample sample--mono">
+        <Image src={logo} alt="" width={120} height={120} class="sample__mark sample__mark--mono" />
+        <p class="sample__label">Single-color reproduction</p>
+        <p class="sample__note">For circumstances in which polychrome reproduction is unavailable, including newsprint and embossing.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="container section">
+    <SectionEyebrow index="III" label="Unacceptable Applications" />
+    <p class="caveat">The following applications of the mark are prohibited under all circumstances. Any chapter or member observing such application is requested to report it in writing to the President's office.</p>
+    <ul class="forbidden">
+      <li>
+        <span class="x">✕</span>
+        The mark applied to perishable consumables, including but not limited
+        to: cured meats, frosted pastries, and any beverage marketed for its
+        recreational properties.
+      </li>
+      <li>
+        <span class="x">✕</span>
+        The mark rendered in a typeface other than Source Serif 4, or in a
+        weight lighter than Semibold.
+      </li>
+      <li>
+        <span class="x">✕</span>
+        The mark animated, rotated, distorted along any axis, or rendered in
+        the so-called "isometric" perspective.
+      </li>
+      <li>
+        <span class="x">✕</span>
+        The mark applied to articles of clothing intended for athletic or
+        recreational use, save those expressly authorized by the Board.
+      </li>
+      <li>
+        <span class="x">✕</span>
+        The mark juxtaposed with, or superimposed upon, the marks of other
+        organizations, except as part of an officially co-sponsored event
+        with prior written approval.
+      </li>
+      <li>
+        <span class="x">✕</span>
+        The mark accompanied by the use of an exclamation point.
+      </li>
+    </ul>
+  </section>
+
+  <section class="container section">
+    <div class="prose">
+      <SectionEyebrow index="IV" label="Inquiries" />
+      <p>
+        Questions regarding the proper application of the Institute's mark may
+        be directed to the President's office at
+        <a href="mailto:hello@michaelinstitute.org">hello@michaelinstitute.org</a>.
+        The President is the sole authority on questions of mark application
+        not expressly addressed in these standards, and her or his
+        determinations are final.
+      </p>
+    </div>
+  </section>
+</Base>
+
+<style>
+  .section { padding-block: var(--s-6); }
+  .grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(min(18rem, 100%), 1fr));
+    gap: var(--s-5);
+  }
+  .sample {
+    padding: var(--s-6);
+    border: 1px solid var(--rule);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    gap: var(--s-3);
+  }
+  .sample--olive { background: var(--brand-olive); }
+  .sample--olive .sample__label, .sample--olive .sample__note { color: var(--parchment); }
+  .sample--parchment { background: var(--parchment); }
+  .sample--navy { background: var(--ink-navy); }
+  .sample--navy .sample__label, .sample--navy .sample__note { color: var(--parchment); }
+  .sample--mono { background: var(--parchment); }
+  .sample__mark { width: 6rem; height: 6rem; }
+  .sample__mark--white { filter: brightness(0) invert(1); }
+  .sample__mark--mono { filter: grayscale(1) contrast(1.1); }
+  .sample__label {
+    font-family: var(--font-sans);
+    font-size: 0.78rem;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    margin: var(--s-3) 0 0;
+    font-weight: 600;
+  }
+  .sample__note {
+    font-family: var(--font-serif);
+    font-size: 0.9rem;
+    font-style: italic;
+    margin: 0;
+  }
+  .caveat {
+    font-family: var(--font-serif);
+    font-style: italic;
+    color: var(--brand-olive);
+    margin-bottom: var(--s-5);
+  }
+  .forbidden {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(min(24rem, 100%), 1fr));
+    gap: var(--s-4);
+  }
+  .forbidden li {
+    display: grid;
+    grid-template-columns: 1.5rem 1fr;
+    gap: var(--s-3);
+    padding: var(--s-4);
+    border-left: 3px solid var(--brand-orange);
+    background: color-mix(in oklab, var(--parchment) 96%, var(--brand-olive));
+    font-family: var(--font-serif);
+    line-height: 1.55;
+  }
+  .x {
+    font-family: var(--font-sans);
+    font-weight: 600;
+    color: var(--brand-orange);
+    font-size: 1.1rem;
+    line-height: 1;
+  }
+</style>

@@ -1,0 +1,213 @@
+---
+import Base from '../layouts/Base.astro';
+import Masthead from '../components/Masthead.astro';
+import SectionEyebrow from '../components/SectionEyebrow.astro';
+import PullQuote from '../components/PullQuote.astro';
+
+interface YearStat {
+  year: number;
+  reach: number;
+  chapters: number;
+  fellows: number;
+}
+
+const stats: ReadonlyArray<YearStat> = [
+  { year: 2020, reach: 142_311, chapters: 14, fellows: 6 },
+  { year: 2021, reach: 318_904, chapters: 27, fellows: 11 },
+  { year: 2022, reach: 521_447, chapters: 44, fellows: 18 },
+  { year: 2023, reach: 814_002, chapters: 61, fellows: 24 },
+  { year: 2024, reach: 1_106_551, chapters: 78, fellows: 31 },
+  { year: 2025, reach: 1_247_318, chapters: 84, fellows: 37 },
+];
+
+const max = Math.max(...stats.map((s) => s.reach));
+
+interface Tier {
+  name: string;
+  range: string;
+  count: number;
+}
+
+const tiers: ReadonlyArray<Tier> = [
+  { name: 'Friends of the Forename', range: '$25 – $99', count: 1422 },
+  { name: 'Sustaining Michaels', range: '$100 – $499', count: 318 },
+  { name: 'Patrons of the Institute', range: '$500 – $2,499', count: 84 },
+  { name: 'Eponymous Patrons', range: '$2,500 – $9,999', count: 19 },
+  { name: 'Founders\' Circle', range: '$10,000 +', count: 4 },
+];
+
+const fmt = (n: number) => n.toLocaleString('en-US');
+---
+<Base title="Annual Report" description="The Institute's report for fiscal year 2025: reach, chapter expansion, and donor activity.">
+  <Masthead
+    eyebrow="Annual Report · FY 2025"
+    title="A year of patient expansion."
+    lede="The Institute is pleased to submit its sixth annual report. The fiscal year ending December 31, 2025 saw measured growth across all programs and the chartering of six new chapters in three time zones."
+  />
+
+  <section class="container section">
+    <div class="prose">
+      <SectionEyebrow index="I" label="From the President" />
+      <p class="dropcap">
+        The work of the Institute is, by design, slow. We measure our progress
+        in chapters chartered rather than in headlines won, and in fellows
+        nominated rather than in followers gained. It is therefore with a
+        becoming modesty that we report another year of patient, deliberate
+        expansion — one in which the Institute touched the lives of more than
+        one and one-quarter million Michaels worldwide, and added six new
+        chapters to its global network without compromising the standards by
+        which all chapters are convened.
+      </p>
+      <p class="signoff">— M. Doyle, President</p>
+    </div>
+  </section>
+
+  <hr class="rule container" />
+
+  <section class="container section">
+    <SectionEyebrow index="II" label="Reach (Michaels touched, by fiscal year)" />
+    <div class="chart">
+      {stats.map((s) => (
+        <div class="bar">
+          <div class="bar__label">{s.year}</div>
+          <div class="bar__track">
+            <div class="bar__fill" style={`width: ${(s.reach / max * 100).toFixed(1)}%`}></div>
+          </div>
+          <div class="bar__value">{fmt(s.reach)}</div>
+        </div>
+      ))}
+    </div>
+    <p class="footnote">
+      Methodology: a Michael is "touched" if any officer, fellow, member, or
+      chapter representative of the Institute has, during the fiscal year,
+      passed within twenty meters of said Michael, whether or not the contact
+      was acknowledged.
+    </p>
+  </section>
+
+  <section class="container section">
+    <SectionEyebrow index="III" label="Vital Statistics, FY 2025" />
+    <dl class="stats">
+      <div><dt>Michaels reached</dt><dd>1,247,318</dd></div>
+      <div><dt>Active chapters</dt><dd>84</dd></div>
+      <div><dt>Countries with chartered presence</dt><dd>83</dd></div>
+      <div><dt>Fellows on the standing register</dt><dd>37</dd></div>
+      <div><dt>Honorary Michaels in good standing</dt><dd>10</dd></div>
+      <div><dt>Letters of correspondence answered</dt><dd>2,914</dd></div>
+      <div><dt>Letters of correspondence ignored</dt><dd>0</dd></div>
+      <div><dt>Board meetings convened</dt><dd>4</dd></div>
+      <div><dt>Board meetings adjourned without quorum</dt><dd>1</dd></div>
+    </dl>
+  </section>
+
+  <PullQuote
+    quote="The Institute does not believe in growth for its own sake; it believes in growth that does not embarrass the slow patient work of the years that preceded it."
+    attribution="M. Doyle"
+    role="From the President's Letter, 2025"
+  />
+
+  <section class="container section">
+    <SectionEyebrow index="IV" label="Donor Tiers" />
+    <table class="tiers">
+      <thead>
+        <tr>
+          <th>Tier</th>
+          <th>Range</th>
+          <th class="num">Patrons, FY 2025</th>
+        </tr>
+      </thead>
+      <tbody>
+        {tiers.map((t) => (
+          <tr>
+            <td>{t.name}</td>
+            <td class="range">{t.range}</td>
+            <td class="num">{fmt(t.count)}</td>
+          </tr>
+        ))}
+      </tbody>
+    </table>
+    <p class="footnote">
+      Lifetime cumulative giving is recorded in the Institute's
+      <a href="/bylaws">supplementary register</a>. Patrons may, in writing,
+      decline public acknowledgment.
+    </p>
+  </section>
+
+  <section class="container section">
+    <div class="prose">
+      <SectionEyebrow index="V" label="Independent Review" />
+      <p>
+        The Institute's accounts have been reviewed by Wexler &amp; Hand, an
+        independent accounting practice retained on continuous engagement
+        since the second quarter of 2020. The reviewer's letter, included in
+        full in the printed edition, finds the Institute's records to be
+        complete, internally consistent, and adequately catalogued.
+      </p>
+    </div>
+  </section>
+</Base>
+
+<style>
+  .section { padding-block: var(--s-6); }
+  .signoff { font-style: italic; color: var(--brand-olive); }
+  .chart {
+    display: flex;
+    flex-direction: column;
+    gap: var(--s-3);
+    margin-bottom: var(--s-5);
+  }
+  .bar { display: grid; grid-template-columns: 4rem 1fr 8rem; align-items: center; gap: var(--s-4); }
+  .bar__label { font-family: var(--font-sans); font-size: 0.85rem; color: var(--brand-olive); }
+  .bar__track {
+    height: 1.75rem;
+    background: color-mix(in oklab, var(--sage) 40%, transparent);
+    position: relative;
+  }
+  .bar__fill {
+    height: 100%;
+    background: var(--brand-orange);
+  }
+  .bar__value { font-family: var(--font-sans); font-size: 0.85rem; color: var(--ink-navy); font-variant-numeric: tabular-nums; }
+  .stats {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(min(20rem, 100%), 1fr));
+    gap: 0;
+    margin: 0;
+  }
+  .stats > div {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    padding: var(--s-4) 0;
+    border-top: 1px solid var(--rule);
+    gap: var(--s-4);
+  }
+  .stats > div:last-child { border-bottom: 1px solid var(--rule); }
+  .stats dt { font-family: var(--font-serif); color: var(--ink-navy); margin: 0; }
+  .stats dd { font-family: var(--font-sans); font-variant-numeric: tabular-nums; font-weight: 600; color: var(--brand-orange); margin: 0; }
+  .tiers {
+    width: 100%;
+    border-collapse: collapse;
+    font-family: var(--font-serif);
+  }
+  .tiers th, .tiers td {
+    padding: var(--s-3) var(--s-4);
+    border-bottom: 1px solid var(--rule);
+    text-align: left;
+  }
+  .tiers th {
+    font-family: var(--font-sans);
+    font-size: 0.75rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--brand-olive);
+    border-bottom: 2px solid var(--rule);
+  }
+  .tiers .num { text-align: right; font-variant-numeric: tabular-nums; }
+  .tiers .range { font-family: var(--font-sans); font-size: 0.9rem; color: var(--muted); }
+  .footnote { font-size: 0.85rem; color: var(--muted); font-style: italic; margin-top: var(--s-4); }
+  @media (max-width: 40rem) {
+    .bar { grid-template-columns: 3rem 1fr 5rem; gap: var(--s-2); }
+    .bar__value { font-size: 0.75rem; }
+  }
+</style>

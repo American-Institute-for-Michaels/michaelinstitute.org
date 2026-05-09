@@ -1,0 +1,128 @@
+---
+import Base from '../layouts/Base.astro';
+import Masthead from '../components/Masthead.astro';
+import SectionEyebrow from '../components/SectionEyebrow.astro';
+
+interface Mention {
+  outlet: string;
+  date: string;
+  quote: string;
+  byline?: string;
+}
+
+const mentions: ReadonlyArray<Mention> = [
+  {
+    outlet: 'The Quarterly Review of Civic Onomastics',
+    date: 'Spring 2025',
+    quote: 'A vital institution. The Institute\'s sustained attention to a single given name has produced a body of practice no comparable body can claim.',
+    byline: 'L. Hartmann',
+  },
+  {
+    outlet: 'The Atlantic Monthly Letter',
+    date: 'November 2024',
+    quote: 'Less an organization than a long, patient argument about what a community can be made of.',
+    byline: 'Editorial Board',
+  },
+  {
+    outlet: 'The Journal of Anthroponymic Studies',
+    date: 'Vol. XLI, No. 2',
+    quote: 'The Institute\'s record of fellow nomination and chapter cultivation now constitutes the most extensive longitudinal dataset on a single given name in the English-speaking world.',
+  },
+  {
+    outlet: 'The Mid-Atlantic Review',
+    date: 'June 2024',
+    quote: 'Ridiculous on its face, serious in its execution, and — crucially — entirely earnest in its convictions.',
+    byline: 'M. Aldridge',
+  },
+  {
+    outlet: 'Bulletin of the Society for Civic Letters',
+    date: 'Issue 217',
+    quote: 'Whatever one thinks of the premise, the Institute\'s archives are unimpeachable.',
+  },
+  {
+    outlet: 'The New Cambridge Forum',
+    date: 'Autumn 2023',
+    quote: 'A standing rebuke to the cynic\'s view that civic life requires either a problem or a profit motive.',
+    byline: 'P. Connaught',
+  },
+  {
+    outlet: 'The Hartford Crier',
+    date: 'September 14, 2022',
+    quote: 'Easily the most peculiar thing happening on the third floor of the Old Phoenix Building.',
+  },
+  {
+    outlet: 'Onomastica Americana',
+    date: 'Vol. XII',
+    quote: 'The standard against which other single-name societies will, in time, come to be measured.',
+    byline: 'Editorial Note',
+  },
+];
+---
+<Base title="Press" description="Selected press mentions and notices regarding the American Institute for Michaels.">
+  <Masthead
+    eyebrow="Press"
+    title="In the press."
+    lede="A small selection of mentions, reviews, and notices the Institute has been pleased to receive. We do not maintain a press office; inquiries should be directed to the general line."
+  />
+
+  <section class="container section">
+    <ul class="mentions">
+      {mentions.map((m) => (
+        <li class="mention">
+          <p class="mention__quote">&ldquo;{m.quote}&rdquo;</p>
+          <p class="mention__cite">
+            <span class="mention__outlet">{m.outlet}</span>
+            <span class="mention__sep">·</span>
+            <span class="mention__date">{m.date}</span>
+            {m.byline && (<><span class="mention__sep">·</span><span class="mention__by">{m.byline}</span></>)}
+          </p>
+        </li>
+      ))}
+    </ul>
+  </section>
+
+  <hr class="rule container" />
+
+  <section class="container section">
+    <div class="prose">
+      <SectionEyebrow index="I" label="Inquiries" />
+      <p>
+        The Institute does not maintain a dedicated press office. Members of
+        the press are invited to direct queries to
+        <a href="mailto:hello@michaelinstitute.org">the general line</a>; we
+        endeavor to respond within ten business days.
+      </p>
+    </div>
+  </section>
+</Base>
+
+<style>
+  .section { padding-block: var(--s-6); }
+  .mentions { list-style: none; padding: 0; margin: 0; }
+  .mention {
+    padding: var(--s-6) 0;
+    border-top: 1px solid var(--rule);
+  }
+  .mention:last-child { border-bottom: 1px solid var(--rule); }
+  .mention__quote {
+    font-family: var(--font-serif);
+    font-size: clamp(1.25rem, 2vw, 1.75rem);
+    line-height: 1.35;
+    color: var(--ink-navy);
+    margin: 0 0 var(--s-4);
+    font-style: italic;
+  }
+  .mention__cite {
+    font-family: var(--font-sans);
+    font-size: 0.78rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--brand-olive);
+    margin: 0;
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--s-2);
+  }
+  .mention__outlet { color: var(--ink-navy); font-weight: 600; }
+  .mention__sep { opacity: 0.5; }
+</style>

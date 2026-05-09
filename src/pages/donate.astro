@@ -1,0 +1,209 @@
+---
+import Base from '../layouts/Base.astro';
+import Masthead from '../components/Masthead.astro';
+import SectionEyebrow from '../components/SectionEyebrow.astro';
+
+interface Tier {
+  name: string;
+  range: string;
+  description: string;
+  benefits: ReadonlyArray<string>;
+}
+
+const tiers: ReadonlyArray<Tier> = [
+  {
+    name: 'Friend of the Forename',
+    range: '$25 – $99',
+    description: 'A becoming entry-level association. Recommended for first-time supporters and for those of modest means but firm conviction.',
+    benefits: [
+      'A printed acknowledgment by post',
+      'Inclusion in the annual donor roll',
+      'A subscription to the Institute\'s quarterly bulletin',
+    ],
+  },
+  {
+    name: 'Sustaining Michael',
+    range: '$100 – $499',
+    description: 'For Michaels (and their cousins) prepared to make a more sustained commitment. The Institute regards this tier as the operational backbone of its work.',
+    benefits: [
+      'All preceding benefits',
+      'A copy of the Institute\'s annual report, by post',
+      'Standing invitation to chapter convenings within travel distance',
+      'A small printed certificate suitable for framing',
+    ],
+  },
+  {
+    name: 'Patron of the Institute',
+    range: '$500 – $2,499',
+    description: 'A meaningful patronage. Patrons are remembered by name in the annual report and are invited to the Institute\'s yearly convocation, where they may sit at any table that is not specifically reserved.',
+    benefits: [
+      'All preceding benefits',
+      'Recognition by name in the annual report',
+      'Standing invitation to the annual convocation',
+      'Personal correspondence with the Recording Secretary upon request',
+    ],
+  },
+  {
+    name: 'Eponymous Patron',
+    range: '$2,500 – $9,999',
+    description: 'A patronage of consequence. Eponymous Patrons may, by special arrangement with the Treasurer, designate a small program element to bear their name in perpetuity, subject to the Board\'s prior consent.',
+    benefits: [
+      'All preceding benefits',
+      'Naming rights on a designated program element (subject to Board approval)',
+      'Reserved seating at the annual convocation',
+      'A handwritten letter of thanks from the President',
+    ],
+  },
+  {
+    name: 'Founders\' Circle',
+    range: '$10,000 and above',
+    description: 'The highest standing tier. Founders\' Circle members are received personally by the Board at a small dinner held biennially. The Institute prefers to discuss this tier in correspondence rather than over the website.',
+    benefits: [
+      'All preceding benefits',
+      'Biennial dinner with the Board (at the Institute\'s expense)',
+      'The privilege of nominating one Honorary Michael in any given fiscal year',
+      'A bound, leather-spine copy of the Institute\'s bylaws',
+    ],
+  },
+];
+---
+<Base title="Support the Institute" description="The Institute is sustained by the patronage of those who share its purposes. Donor tiers and giving instructions follow below.">
+  <Masthead
+    eyebrow="Patronage"
+    title="Support the Institute."
+    lede="The Institute is sustained, principally, by the patronage of Michaels and friends of Michaels who share its purposes. Contributions are received with gratitude and applied with care; the Institute publishes a complete accounting of its giving each year in the annual report."
+  />
+
+  <section class="container section">
+    <div class="tiers">
+      {tiers.map((t) => (
+        <article class="tier">
+          <p class="tier__range">{t.range}</p>
+          <h2 class="tier__name">{t.name}</h2>
+          <p class="tier__desc">{t.description}</p>
+          <ul class="tier__benefits">
+            {t.benefits.map((b) => <li>{b}</li>)}
+          </ul>
+          <a class="tier__cta" href={`mailto:hello@michaelinstitute.org?subject=Patronage%20%2D%20${encodeURIComponent(t.name)}`}>Inquire by post →</a>
+        </article>
+      ))}
+    </div>
+  </section>
+
+  <hr class="rule container" />
+
+  <section class="container section">
+    <div class="prose">
+      <SectionEyebrow index="I" label="Methods of Giving" />
+      <p>
+        The Institute accepts contributions by personal check, by bank
+        transfer, and — for those who must — by credit card via the
+        Institute's electronic giving portal. Larger gifts are typically
+        arranged in correspondence with the Treasurer.
+      </p>
+      <p>
+        The Institute does not, as a matter of standing policy, accept
+        anonymous gifts in excess of one hundred dollars in any single fiscal
+        year. Gifts of property, securities, or interest in real estate are
+        considered on a case-by-case basis.
+      </p>
+    </div>
+  </section>
+
+  <section class="container section">
+    <div class="prose">
+      <SectionEyebrow index="II" label="On Tax Deductibility" />
+      <p>
+        The Institute is a recognized 501(c)(3) organization within the
+        meaning of the United States Internal Revenue Code. Contributions
+        from U.S. taxpayers are tax-deductible to the fullest extent
+        permitted by law. Donors residing outside the United States should
+        consult a qualified adviser regarding the treatment of gifts under
+        their applicable jurisdiction.
+      </p>
+    </div>
+  </section>
+
+  <section class="container section">
+    <div class="prose">
+      <SectionEyebrow index="III" label="Recurring Patronage" />
+      <p>
+        Recurring contributions are arranged on a quarterly schedule, payable
+        on the first business day of January, April, July, and October. The
+        Institute regards quarterly recurring giving as the most administratively
+        graceful method of sustained support, and we are pleased to extend a
+        small token of recognition — typically a letterpress card —
+        to any patron entering into such an arrangement.
+      </p>
+    </div>
+  </section>
+</Base>
+
+<style>
+  .section { padding-block: var(--s-6); }
+  .tiers {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(min(20rem, 100%), 1fr));
+    gap: var(--s-5);
+  }
+  .tier {
+    padding: var(--s-6);
+    border: 1px solid var(--rule);
+    background: color-mix(in oklab, var(--parchment) 96%, var(--brand-olive));
+    display: flex;
+    flex-direction: column;
+    gap: var(--s-4);
+  }
+  .tier__range {
+    font-family: var(--font-sans);
+    font-size: 0.78rem;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--brand-orange);
+    margin: 0;
+    font-weight: 600;
+  }
+  .tier__name {
+    font-family: var(--font-serif);
+    font-size: clamp(1.5rem, 2vw, 1.875rem);
+    font-weight: 600;
+    color: var(--ink-navy);
+    margin: 0;
+    line-height: 1.15;
+  }
+  .tier__desc {
+    font-family: var(--font-serif);
+    font-size: 1rem;
+    line-height: 1.55;
+    color: var(--ink-navy);
+    margin: 0;
+  }
+  .tier__benefits {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    border-top: 1px solid var(--rule);
+    padding-top: var(--s-3);
+  }
+  .tier__benefits li {
+    font-family: var(--font-serif);
+    font-size: 0.95rem;
+    padding: var(--s-2) 0;
+    color: var(--ink-navy);
+    border-bottom: 1px dotted color-mix(in oklab, var(--rule) 70%, transparent);
+  }
+  .tier__benefits li:last-child { border-bottom: none; }
+  .tier__cta {
+    margin-top: auto;
+    font-family: var(--font-sans);
+    font-size: 0.85rem;
+    letter-spacing: 0.08em;
+    color: var(--brand-orange);
+    text-decoration: none;
+    font-weight: 600;
+    border-bottom: 1px solid transparent;
+    align-self: flex-start;
+    padding-block: var(--s-2);
+  }
+  .tier__cta:hover { border-bottom-color: var(--brand-orange); }
+</style>

@@ -1,0 +1,151 @@
+---
+import Base from '../../layouts/Base.astro';
+import Masthead from '../../components/Masthead.astro';
+import SectionEyebrow from '../../components/SectionEyebrow.astro';
+---
+<Base title="Public API" description="The Institute's public API: a small JSON service for the programmatic determination of Michael status.">
+  <Masthead
+    eyebrow="Developer Reference"
+    title="The Institute API."
+    lede="The Institute maintains a small public JSON service for the programmatic determination of Michael status. The endpoint is offered free of charge and without registration, in keeping with the Institute's view that nomenclature ought not to be paywalled."
+  />
+
+  <section class="container section">
+    <div class="prose">
+      <SectionEyebrow index="I" label="Endpoint" />
+      <p>The endpoint is exposed at the following stable URL:</p>
+      <pre class="code">GET https://michaelinstitute.org/api/is-michael.json</pre>
+      <p>
+        The endpoint accepts no parameters; the full Institute roster of
+        accepted variants is returned in a single response. Clients are
+        expected to perform their own case-insensitive comparison after
+        Unicode normalization.
+      </p>
+    </div>
+  </section>
+
+  <section class="container section">
+    <div class="prose">
+      <SectionEyebrow index="II" label="Example Request" />
+      <pre class="code">$ curl -s https://michaelinstitute.org/api/is-michael.json | jq .</pre>
+      <SectionEyebrow index="III" label="Example Response" />
+      <pre class="code">{`{
+  "$schema": "https://michaelinstitute.org/api/is-michael.schema.json",
+  "version": "1.0.0",
+  "institute": "The American Institute for Michaels",
+  "jurisdiction": "global",
+  "authoritative": true,
+  "revised": "2026-05-09",
+  "accepted": [
+    "Michael",
+    "Mike",
+    "Mikhail",
+    "Michał",
+    "Mihály",
+    "Mikael",
+    "Mícheál",
+    "Miguel",
+    "Michele",
+    "Michel",
+    ...
+  ],
+  "honorary": ["Mick", "Maya", ...],
+  "notes": { ... }
+}`}</pre>
+    </div>
+  </section>
+
+  <section class="container section">
+    <div class="prose">
+      <SectionEyebrow index="IV" label="Sample Implementations" />
+      <p><strong>JavaScript</strong></p>
+      <pre class="code">{`const isMichael = async (name) => {
+  const r = await fetch('https://michaelinstitute.org/api/is-michael.json');
+  const { accepted } = await r.json();
+  const norm = (s) => s.normalize('NFC').toLowerCase();
+  return accepted.some((v) => norm(v) === norm(name));
+};
+
+await isMichael('Mihály'); // → true
+await isMichael('Brad');    // → false`}</pre>
+      <p><strong>Python</strong></p>
+      <pre class="code">{`import requests, unicodedata
+
+def is_michael(name: str) -> bool:
+    data = requests.get("https://michaelinstitute.org/api/is-michael.json").json()
+    norm = lambda s: unicodedata.normalize("NFC", s).casefold()
+    return any(norm(v) == norm(name) for v in data["accepted"])
+
+is_michael("Mikhail")   # → True
+is_michael("Geoffrey")  # → False`}</pre>
+      <p><strong>Shell</strong></p>
+      <pre class="code">{`curl -s https://michaelinstitute.org/api/is-michael.json \\
+  | jq -r '.accepted[]' \\
+  | grep -i -x "$1" >/dev/null && echo "Michael." || echo "Not a Michael."`}</pre>
+    </div>
+  </section>
+
+  <section class="container section">
+    <div class="prose">
+      <SectionEyebrow index="V" label="Service-Level Statement" />
+      <p>
+        The endpoint is statically generated and served from the Institute's
+        primary infrastructure. It is intended to be cacheable and is served
+        with a one-hour cache header. The Institute does not log requests
+        to this endpoint and does not impose a rate limit; however, clients
+        making more than one hundred thousand requests per day are
+        respectfully asked to maintain a local cache, in keeping with
+        good engineering practice.
+      </p>
+      <p>
+        The endpoint's response shape is versioned. Breaking changes will be
+        announced at least ninety days in advance via the quarterly
+        bulletin. The current version is <code>1.0.0</code>.
+      </p>
+    </div>
+  </section>
+
+  <section class="container section">
+    <div class="prose">
+      <SectionEyebrow index="VI" label="Disclaimer" />
+      <p>
+        The endpoint is provided for reference only. The Institute reserves
+        the sole right to grant, withhold, or revoke membership status, and
+        the Standing Committee on Notability shall in all cases supersede
+        any automated determination. Bearing the canonical given name is
+        necessary but not sufficient for fellowship; see the
+        <a href="/fellowship">fellowship application</a> for further detail.
+      </p>
+    </div>
+  </section>
+</Base>
+
+<style>
+  .section { padding-block: var(--s-6); }
+  .code {
+    font-family: ui-monospace, 'SF Mono', 'Menlo', 'Consolas', monospace;
+    font-size: 0.85rem;
+    line-height: 1.5;
+    background: var(--ink-navy);
+    color: var(--parchment);
+    padding: var(--s-4);
+    overflow-x: auto;
+    margin: 0 0 var(--s-5);
+    white-space: pre;
+  }
+  .prose code {
+    font-family: ui-monospace, 'SF Mono', 'Menlo', 'Consolas', monospace;
+    font-size: 0.9em;
+    background: color-mix(in oklab, var(--sage) 35%, transparent);
+    padding: 0.1em 0.35em;
+  }
+  .prose strong {
+    font-family: var(--font-sans);
+    font-size: 0.85rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--brand-olive);
+    display: block;
+    margin: var(--s-5) 0 var(--s-3);
+  }
+</style>

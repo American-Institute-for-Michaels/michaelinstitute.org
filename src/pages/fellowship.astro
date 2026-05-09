@@ -1,0 +1,314 @@
+---
+import Base from '../layouts/Base.astro';
+import Masthead from '../components/Masthead.astro';
+import SectionEyebrow from '../components/SectionEyebrow.astro';
+---
+<Base title="Fellowship Application" description="Apply for fellowship in the American Institute for Michaels.">
+  <Masthead
+    eyebrow="Fellowship"
+    title="Application for fellowship."
+    lede="Fellowship in the Institute is a privilege not lightly conferred. The application below is administered by the Standing Committee on Notability and is reviewed twice yearly. Please answer all questions in full; incomplete applications are returned without comment."
+  />
+
+  <section class="container section">
+    <form class="application" id="fellowship-form">
+      <fieldset class="fs">
+        <legend><SectionEyebrow index="I" label="The Applicant" /></legend>
+        <div class="row">
+          <label>
+            <span>Given name</span>
+            <input type="text" name="given" placeholder="Michael" required />
+          </label>
+          <label>
+            <span>Surname</span>
+            <input type="text" name="surname" required />
+          </label>
+        </div>
+        <div class="row">
+          <label>
+            <span>Variant of the canonical given name (if applicable)</span>
+            <select name="variant">
+              <option value="">— Standard form —</option>
+              <option>Michael</option>
+              <option>Mikhail</option>
+              <option>Michał</option>
+              <option>Mihail</option>
+              <option>Mihály</option>
+              <option>Mikael</option>
+              <option>Mícheál</option>
+              <option>Miguel</option>
+              <option>Michele</option>
+              <option>Michel</option>
+              <option>Mikhael</option>
+              <option>Other (please specify in §V)</option>
+            </select>
+          </label>
+          <label>
+            <span>Date upon which the name was conferred</span>
+            <input type="date" name="conferred" />
+          </label>
+        </div>
+        <label>
+          <span>Postal address (for the dispatch of correspondence)</span>
+          <textarea name="address" rows="3"></textarea>
+        </label>
+      </fieldset>
+
+      <fieldset class="fs">
+        <legend><SectionEyebrow index="II" label="Standing and Affiliation" /></legend>
+        <label>
+          <span>Are you presently a member in good standing of an Institute chapter?</span>
+          <select name="member" required>
+            <option value="">— Select —</option>
+            <option>Yes; specify chapter in next field</option>
+            <option>No; not at present</option>
+            <option>Formerly; lapsed for cause</option>
+            <option>Formerly; lapsed for reasons not of my making</option>
+          </select>
+        </label>
+        <label>
+          <span>Chapter (if any)</span>
+          <input type="text" name="chapter" />
+        </label>
+        <label>
+          <span>Sponsoring fellow (must be a current fellow in good standing)</span>
+          <input type="text" name="sponsor" />
+        </label>
+      </fieldset>
+
+      <fieldset class="fs">
+        <legend><SectionEyebrow index="III" label="Field of Contribution" /></legend>
+        <label>
+          <span>Principal field</span>
+          <select name="field">
+            <option value="">— Select —</option>
+            <option>The arts and letters</option>
+            <option>The natural and applied sciences</option>
+            <option>Civic life and public administration</option>
+            <option>The professions (medicine, law, engineering)</option>
+            <option>Sport, athletics, and physical culture</option>
+            <option>Pedagogy and the diffusion of knowledge</option>
+            <option>The trades and the practical arts</option>
+            <option>Other (please specify)</option>
+          </select>
+        </label>
+        <label>
+          <span>Statement of contribution (not exceeding 500 words)</span>
+          <textarea name="contribution" rows="8" placeholder="Describe the work or sustained example for which you wish to be considered."></textarea>
+        </label>
+      </fieldset>
+
+      <fieldset class="fs">
+        <legend><SectionEyebrow index="IV" label="Demonstrated Commitment" /></legend>
+        <p class="prompt">Please indicate the extent to which the following statements obtain. The Committee favors candor over flattery.</p>
+        <div class="lickert">
+          <p class="prompt-line">I have, on at least one occasion, attended a chapter convening at meaningful personal inconvenience.</p>
+          <div class="scale">
+            <label><input type="radio" name="commitment_a" value="1"> Strongly disagree</label>
+            <label><input type="radio" name="commitment_a" value="2"> Disagree</label>
+            <label><input type="radio" name="commitment_a" value="3"> Neutral</label>
+            <label><input type="radio" name="commitment_a" value="4"> Agree</label>
+            <label><input type="radio" name="commitment_a" value="5"> Strongly agree</label>
+          </div>
+        </div>
+        <div class="lickert">
+          <p class="prompt-line">I conduct myself, in my public and professional life, in a manner I would be willing to defend before the Board of the Institute.</p>
+          <div class="scale">
+            <label><input type="radio" name="commitment_b" value="1"> Strongly disagree</label>
+            <label><input type="radio" name="commitment_b" value="2"> Disagree</label>
+            <label><input type="radio" name="commitment_b" value="3"> Neutral</label>
+            <label><input type="radio" name="commitment_b" value="4"> Agree</label>
+            <label><input type="radio" name="commitment_b" value="5"> Strongly agree</label>
+          </div>
+        </div>
+        <div class="lickert">
+          <p class="prompt-line">I have, in the preceding twelve months, performed at least one act of demonstrable benefit to a fellow Michael, with no expectation of reciprocation.</p>
+          <div class="scale">
+            <label><input type="radio" name="commitment_c" value="1"> Strongly disagree</label>
+            <label><input type="radio" name="commitment_c" value="2"> Disagree</label>
+            <label><input type="radio" name="commitment_c" value="3"> Neutral</label>
+            <label><input type="radio" name="commitment_c" value="4"> Agree</label>
+            <label><input type="radio" name="commitment_c" value="5"> Strongly agree</label>
+          </div>
+        </div>
+      </fieldset>
+
+      <fieldset class="fs">
+        <legend><SectionEyebrow index="V" label="Personal Statement" /></legend>
+        <label>
+          <span>Why, in your own words, do you wish to be considered for fellowship?</span>
+          <textarea name="why" rows="6"></textarea>
+        </label>
+        <label>
+          <span>Is there anything further the Committee should know?</span>
+          <textarea name="further" rows="4"></textarea>
+        </label>
+      </fieldset>
+
+      <fieldset class="fs">
+        <legend><SectionEyebrow index="VI" label="Attestation" /></legend>
+        <label class="attest">
+          <input type="checkbox" name="attest_truthful" required />
+          <span>I attest that the foregoing statements are, to the best of my knowledge, accurate.</span>
+        </label>
+        <label class="attest">
+          <input type="checkbox" name="attest_bylaws" required />
+          <span>I have read, and agree to be bound by, the Institute's <a href="/bylaws">bylaws</a>.</span>
+        </label>
+        <label class="attest">
+          <input type="checkbox" name="attest_review" required />
+          <span>I understand that the Committee meets only twice yearly, and that I shall not receive an acknowledgment until the next regularly scheduled meeting.</span>
+        </label>
+      </fieldset>
+
+      <button type="submit" class="submit">Submit Application</button>
+    </form>
+
+    <div id="received" class="received" hidden>
+      <p class="received__head">Application received.</p>
+      <p class="received__body">
+        Thank you. Your application is under review. The Standing Committee on
+        Notability convenes in March and September; you may expect an
+        acknowledgment within ninety days of the next regularly scheduled
+        meeting. The Institute does not, as a matter of course, discuss
+        applications under review with applicants, sponsors, or the press.
+      </p>
+    </div>
+  </section>
+</Base>
+
+<script is:inline>
+  const form = document.getElementById('fellowship-form');
+  const received = document.getElementById('received');
+  if (form && received) {
+    form.addEventListener('submit', (e) => {
+      e.preventDefault();
+      form.hidden = true;
+      received.hidden = false;
+      received.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    });
+  }
+</script>
+
+<style>
+  .section { padding-block: var(--s-6); }
+  .application {
+    display: flex;
+    flex-direction: column;
+    gap: var(--s-7);
+    max-width: 56rem;
+  }
+  .fs {
+    border: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: var(--s-4);
+  }
+  .fs legend { padding: 0; margin-bottom: var(--s-4); width: 100%; }
+  .row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: var(--s-4);
+  }
+  label {
+    display: flex;
+    flex-direction: column;
+    gap: var(--s-2);
+    font-family: var(--font-serif);
+  }
+  label > span {
+    font-family: var(--font-sans);
+    font-size: 0.85rem;
+    color: var(--brand-olive);
+  }
+  input[type="text"], input[type="date"], select, textarea {
+    font-family: var(--font-serif);
+    font-size: 1rem;
+    padding: var(--s-3);
+    background: var(--parchment);
+    border: 1px solid var(--rule);
+    color: var(--ink-navy);
+    border-radius: 0;
+  }
+  input:focus, select:focus, textarea:focus {
+    outline: 2px solid var(--brand-orange);
+    outline-offset: 2px;
+  }
+  textarea { resize: vertical; }
+  .prompt {
+    font-family: var(--font-serif);
+    font-style: italic;
+    color: var(--brand-olive);
+    margin: 0 0 var(--s-3);
+  }
+  .lickert {
+    padding: var(--s-4) 0;
+    border-top: 1px solid var(--rule);
+  }
+  .prompt-line {
+    font-family: var(--font-serif);
+    font-size: 1rem;
+    color: var(--ink-navy);
+    margin: 0 0 var(--s-3);
+  }
+  .scale {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--s-4);
+  }
+  .scale label {
+    flex-direction: row;
+    align-items: center;
+    gap: var(--s-2);
+    font-family: var(--font-sans);
+    font-size: 0.85rem;
+    color: var(--ink-navy);
+  }
+  .attest {
+    flex-direction: row;
+    align-items: flex-start;
+    gap: var(--s-3);
+    font-family: var(--font-serif);
+    font-size: 0.95rem;
+    color: var(--ink-navy);
+  }
+  .attest input { margin-top: 0.3rem; }
+  .submit {
+    align-self: flex-start;
+    background: var(--brand-orange);
+    color: var(--ink-navy);
+    border: none;
+    padding: var(--s-3) var(--s-6);
+    font-family: var(--font-sans);
+    font-size: 0.85rem;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    font-weight: 600;
+    cursor: pointer;
+  }
+  .submit:hover { background: color-mix(in oklab, var(--brand-orange) 88%, var(--ink-navy)); }
+  .received {
+    padding: var(--s-7);
+    border: 1px solid var(--rule);
+    background: color-mix(in oklab, var(--parchment) 94%, var(--brand-olive));
+    max-width: 56rem;
+  }
+  .received__head {
+    font-family: var(--font-serif);
+    font-size: clamp(1.5rem, 2.5vw, 2rem);
+    color: var(--ink-navy);
+    margin: 0 0 var(--s-4);
+  }
+  .received__body {
+    font-family: var(--font-serif);
+    font-size: 1.05rem;
+    line-height: 1.6;
+    color: var(--ink-navy);
+    margin: 0;
+  }
+  @media (max-width: 40rem) {
+    .row { grid-template-columns: 1fr; }
+  }
+</style>

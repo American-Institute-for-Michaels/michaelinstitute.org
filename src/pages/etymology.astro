@@ -1,0 +1,130 @@
+---
+import Base from '../layouts/Base.astro';
+import Masthead from '../components/Masthead.astro';
+import SectionEyebrow from '../components/SectionEyebrow.astro';
+import PullQuote from '../components/PullQuote.astro';
+---
+<Base title="Etymology" description="A scholarly account of the given name Michael — its origin, transmission, and global variants.">
+  <Masthead
+    eyebrow="Etymology"
+    title="On the name itself."
+    lede="A brief account of the name Michael — its Semitic origin, its transmission through the canonical languages, and its global recurrence across more than a hundred standardized variants."
+  />
+
+  <section class="container section">
+    <div class="prose">
+      <SectionEyebrow index="I" label="Origin" />
+      <p class="dropcap">
+        The name <em>Michael</em> derives from the Hebrew מִיכָאֵל
+        (<em>mîḵāʾēl</em>), conventionally rendered as the rhetorical
+        question <em>"Who is like God?"</em><sup>1</sup> The construction is
+        formed from three elements: the interrogative <em>mî</em> ("who"), the
+        comparative particle <em>ḵə-</em> ("like"), and the divine name
+        <em>ʾēl</em>. It is generally understood as an emphatic declaration
+        cast in the form of a question — a rhetorical figure for which there
+        is, by design, no permissible answer.
+      </p>
+      <p>
+        The name first appears in the Hebrew Bible as that of an angelic being
+        in the Book of Daniel, where Michael is described as "one of the chief
+        princes" and the heavenly advocate of Israel.<sup>2</sup> From this
+        canonical origin the name was carried into Greek as
+        <em>Μιχαήλ</em>, into Latin as <em>Michael</em> or
+        <em>Michaël</em>, and thence into the vernaculars of medieval Europe.
+      </p>
+    </div>
+  </section>
+
+  <hr class="rule container" />
+
+  <section class="container section">
+    <div class="prose">
+      <SectionEyebrow index="II" label="Variants" />
+      <p>
+        The name's transmission across linguistic and confessional boundaries
+        has produced a remarkable diversity of forms. The Institute's archive
+        recognizes one hundred and seventeen standardized variants, of which
+        the following are most common:
+      </p>
+      <ul class="variants">
+        <li><strong>Mikhail</strong> — Russian, Bulgarian (Михаил)</li>
+        <li><strong>Michał</strong> — Polish</li>
+        <li><strong>Mihail</strong> — Romanian, Serbian (Михаил)</li>
+        <li><strong>Mihály</strong> — Hungarian</li>
+        <li><strong>Mikael</strong> — Swedish, Finnish, Norwegian</li>
+        <li><strong>Mícheál</strong> — Irish</li>
+        <li><strong>Mihangel</strong> — Welsh (lit. "Michael the Angel")</li>
+        <li><strong>Miquel</strong> — Catalan</li>
+        <li><strong>Miguel</strong> — Spanish, Portuguese</li>
+        <li><strong>Michele</strong> — Italian</li>
+        <li><strong>Michel</strong> — French</li>
+        <li><strong>Mikhael</strong> — Arabic (ميخائيل)</li>
+        <li><strong>Mikha'el</strong> — Amharic (ሚካኤል)</li>
+        <li><strong>Mikha</strong> — Aramaic, Coptic</li>
+        <li><strong>Maikeru</strong> — Japanese rendering (マイケル)</li>
+      </ul>
+      <p class="footnote">
+        Hypocoristic and diminutive forms — <em>Mike</em>, <em>Mikey</em>,
+        <em>Misha</em>, <em>Miko</em>, <em>Michalek</em>, <em>Miguelito</em> —
+        are catalogued separately in the Institute's
+        <a href="/bylaws">supplemental nomenclature register</a>.
+      </p>
+    </div>
+  </section>
+
+  <PullQuote
+    quote="No name has been so widely adopted, in so many languages, with so little semantic drift."
+    attribution="The Institute Reader"
+    role="Vol. III, Foreword"
+  />
+
+  <section class="container section">
+    <div class="prose">
+      <SectionEyebrow index="III" label="Frequency" />
+      <p>
+        In the United States, <em>Michael</em> was the single most popular
+        name given to male infants in every year between 1954 and 1998 — a
+        forty-four-year reign of unmatched continuity.<sup>3</sup> It has
+        ranked within the top fifty for ninety-five consecutive years, longer
+        than any other masculine given name on record.
+      </p>
+      <p>
+        Globally, the Institute estimates the contemporary population of
+        Michaels (in all variants) at approximately
+        <strong>122 million</strong>, or roughly 1.5% of all living humans.
+      </p>
+    </div>
+  </section>
+
+  <section class="container section">
+    <div class="prose footnotes">
+      <SectionEyebrow index="IV" label="Notes" />
+      <ol>
+        <li>
+          On the rhetorical structure of the theophoric question, see
+          Cassuto, <em>The Documentary Hypothesis</em>, 2nd ed. (Jerusalem,
+          1961), §17. Cf. also <em>The Institute Reader</em>, Vol. I, pp.
+          204–211.
+        </li>
+        <li>Daniel 10:13, 12:1; cf. Jude 1:9, Revelation 12:7.</li>
+        <li>
+          U.S. Social Security Administration, Annual Frequency of Names,
+          retabulated by the Institute's Office of Statistical Onomastics
+          (2024).
+        </li>
+      </ol>
+    </div>
+  </section>
+</Base>
+
+<style>
+  .section { padding-block: var(--s-6); }
+  .variants { list-style: none; padding: 0; columns: 2; column-gap: var(--s-7); }
+  .variants li { margin-bottom: var(--s-3); break-inside: avoid; }
+  .footnote { font-size: 0.9rem; color: var(--muted); font-style: italic; }
+  .footnotes ol { padding-left: var(--s-5); }
+  .footnotes li { margin-bottom: var(--s-3); font-size: 0.9rem; color: var(--muted); }
+  @media (max-width: 40rem) {
+    .variants { columns: 1; }
+  }
+</style>
