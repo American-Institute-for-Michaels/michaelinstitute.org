@@ -170,21 +170,22 @@ const fmt = (n: number) => n.toLocaleString('en-US');
   .bar__value { font-family: var(--font-sans); font-size: 0.85rem; color: var(--ink-navy); font-variant-numeric: tabular-nums; }
   .stats {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(min(20rem, 100%), 1fr));
-    gap: 0;
+    grid-template-columns: repeat(auto-fit, minmax(min(28rem, 100%), 1fr));
+    column-gap: var(--s-7);
+    row-gap: 0;
     margin: 0;
+    border-top: 1px solid var(--rule);
   }
   .stats > div {
     display: flex;
     justify-content: space-between;
     align-items: baseline;
     padding: var(--s-4) 0;
-    border-top: 1px solid var(--rule);
-    gap: var(--s-4);
+    border-bottom: 1px solid var(--rule);
+    gap: var(--s-5);
   }
-  .stats > div:last-child { border-bottom: 1px solid var(--rule); }
   .stats dt { font-family: var(--font-serif); color: var(--ink-navy); margin: 0; }
-  .stats dd { font-family: var(--font-sans); font-variant-numeric: tabular-nums; font-weight: 600; color: var(--brand-orange); margin: 0; }
+  .stats dd { font-family: var(--font-sans); font-variant-numeric: tabular-nums; font-weight: 600; color: var(--brand-orange); margin: 0; flex-shrink: 0; }
   .tiers {
     width: 100%;
     border-collapse: collapse;
