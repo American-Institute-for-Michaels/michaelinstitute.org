@@ -1,0 +1,210 @@
+---
+import Base from '../layouts/Base.astro';
+import Masthead from '../components/Masthead.astro';
+import SectionEyebrow from '../components/SectionEyebrow.astro';
+
+interface Dispatch {
+  vol: string;
+  issue: string;
+  date: string;
+  headline: string;
+  subhead: string;
+  stories: ReadonlyArray<{ heading: string; body: string }>;
+}
+
+const dispatches: ReadonlyArray<Dispatch> = [
+  {
+    vol: 'IV',
+    issue: '2',
+    date: 'April 2026',
+    headline: 'Boston Chapter Convenes Without Incident',
+    subhead: 'Twenty-third consecutive monthly convening reportedly proceeded as scheduled; refreshments were extended; minutes are being prepared.',
+    stories: [
+      { heading: 'Recording Secretary\'s Note', body: 'The Recording Secretary records, with characteristic understatement, that the spring slate of fellowship applications has now been received in full. The Standing Committee on Notability will convene on the third Tuesday of May to consider them.' },
+      { heading: 'From Lyon', body: 'The Lyon chapter, lately revived from abeyance under Resolution 2025-07, has held its first regular convening in nineteen months. The chapter coordinator reports a turnout of eight Michaels, two of whom were not previously known to the Institute.' },
+      { heading: 'Treasurer\'s Brief', body: 'First-quarter receipts are reported as conformable to expectation. The Treasurer notes that two anonymous gifts above the standing threshold of one hundred dollars have been returned, in keeping with Article VIII §1.' },
+    ],
+  },
+  {
+    vol: 'IV',
+    issue: '1',
+    date: 'January 2026',
+    headline: 'Annual Convocation Concludes Without Material Disturbance',
+    subhead: 'Power Lecture delivered by M. Kovács; an amendment to Article VI §2 was deferred to a subsequent reading; the Institute\'s biscuit was, by general consent, "respectable."',
+    stories: [
+      { heading: 'On the Power Lecture', body: 'Mr. Kovács spoke for fifty-two minutes on the persistence of the Hungarian variant. The lecture was, by the chair\'s standard, of an appropriate length. A working transcription will appear in the annual report.' },
+      { heading: 'Amendment Deferred', body: 'A proposed amendment to Article VI §2, narrowing the definition of dormancy from four to three consecutive quarters, was set down for further reading following the registration of seven written objections from chapter coordinators.' },
+      { heading: 'Membership Notes', body: 'Three new fellows were seated at the convocation: Mihály Kovács, Michael Park, and Michele Conti. The standing register accordingly stands at thirty-seven.' },
+    ],
+  },
+  {
+    vol: 'III',
+    issue: '4',
+    date: 'October 2025',
+    headline: 'The Institute Records Its Sixth Year',
+    subhead: 'Reach for fiscal 2025 is provisionally calculated at 1,247,318. The annual report is in preparation. The Recording Secretary continues to answer all correspondence within ten business days.',
+    stories: [
+      { heading: 'On the Approaching Convocation', body: 'The annual convocation is set for the eleventh of October, the second Saturday of the month. Standing invitations have been extended to all fellows, chapter coordinators, and patrons of the Institute and Founders\' Circle tiers.' },
+      { heading: 'From Accra', body: 'The Accra chapter has secured, refurbished, and occupied a new meeting room — formerly a colonial-era post office. The work was carried out by Mr. Asante at no charge to the Institute, for which he is hereby thanked in print.' },
+      { heading: 'Press Notice', body: 'The Institute has been mentioned in three publications during the third quarter, all favorably. Citations are reproduced on the press page of the website. No retractions have been required.' },
+    ],
+  },
+  {
+    vol: 'III',
+    issue: '3',
+    date: 'July 2025',
+    headline: 'Mid-Year Review: Patient Expansion Continues',
+    subhead: 'Six new chapters chartered in the first half; three more applications under review. The Treasurer reports first-half receipts at $204,118, slightly ahead of the corresponding period in 2024.',
+    stories: [
+      { heading: 'On New Chapters', body: 'Chapters chartered in the first half of fiscal 2025: Lima, Bogotá, Casablanca, Helsinki, Athens, and Bangalore. Three further applications — from Buenos Aires, Manila, and Auckland — are under review.' },
+      { heading: 'From the Recording Secretary', body: 'A reminder, on the occasion of the mid-year review, that variant spellings are preserved as the bearer renders them. The Institute does not, in its publications, anglicize Mihály to Michael, or vice versa.' },
+      { heading: 'Library Notes', body: 'Three additions have been made to the Institute\'s recommended reading list: Hanks & Hodges (third edition), Snyder, and the new Putnam companion volume. See the library page for full citations.' },
+    ],
+  },
+];
+---
+<Base title="Quarterly Dispatches" description="The Institute's quarterly bulletin of news, notes, and chapter activity.">
+  <Masthead
+    eyebrow="Quarterly Bulletin"
+    title="Dispatches from the Institute."
+    lede="The Institute publishes, at the close of each fiscal quarter, a brief bulletin of news, notes, and chapter activity. Dispatches are produced for the membership; back numbers are available online for the convenience of researchers."
+  />
+
+  {dispatches.map((d) => (
+    <article class="container section">
+      <SectionEyebrow label={`Vol. ${d.vol}, Issue ${d.issue} · ${d.date}`} />
+      <div class="bulletin">
+        <header class="bulletin__head">
+          <p class="bulletin__masthead">The Institute Dispatch</p>
+          <p class="bulletin__sub">
+            <span>Vol. {d.vol}, No. {d.issue}</span>
+            <span>·</span>
+            <span>{d.date}</span>
+            <span>·</span>
+            <span>Boston</span>
+          </p>
+        </header>
+        <h2 class="bulletin__headline">{d.headline}</h2>
+        <p class="bulletin__subhead">{d.subhead}</p>
+        <div class="bulletin__cols">
+          {d.stories.map((s) => (
+            <div class="story">
+              <h3 class="story__heading">{s.heading}</h3>
+              <p class="story__body">{s.body}</p>
+            </div>
+          ))}
+        </div>
+      </div>
+    </article>
+  ))}
+
+  <hr class="rule container" />
+
+  <section class="container section">
+    <div class="prose">
+      <SectionEyebrow label="Subscription" />
+      <p>
+        The dispatch is, by tradition, set in the same typefaces as the
+        Institute's other publications and is distributed to members by post.
+        An electronic edition, of which the present page is the public face,
+        is generated for the convenience of the membership and the
+        researchers who occasionally consult our archives. The Institute
+        does not, at present, offer a feed-based subscription; readers are
+        invited to consult this page at the close of each quarter.
+      </p>
+    </div>
+  </section>
+</Base>
+
+<style>
+  .section { padding-block: var(--s-6); }
+  .bulletin {
+    background: #FAF8E8;
+    border: 1px solid var(--rule);
+    padding: var(--s-7);
+    box-shadow: 0 1px 3px rgba(0,0,0,0.04);
+  }
+  .bulletin__head {
+    text-align: center;
+    border-bottom: 3px double var(--ink-navy);
+    padding-bottom: var(--s-4);
+    margin-bottom: var(--s-5);
+  }
+  .bulletin__masthead {
+    font-family: var(--font-serif);
+    font-size: clamp(1.75rem, 3vw, 2.5rem);
+    font-weight: 600;
+    color: var(--ink-navy);
+    margin: 0 0 var(--s-2);
+    letter-spacing: 0.04em;
+    font-variant: small-caps;
+  }
+  .bulletin__sub {
+    font-family: var(--font-sans);
+    font-size: 0.78rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--brand-olive);
+    margin: 0;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: var(--s-3);
+  }
+  .bulletin__headline {
+    font-family: var(--font-serif);
+    font-size: clamp(1.5rem, 3vw, 2.25rem);
+    font-weight: 600;
+    color: var(--ink-navy);
+    margin: 0 0 var(--s-3);
+    line-height: 1.15;
+    text-align: center;
+  }
+  .bulletin__subhead {
+    font-family: var(--font-serif);
+    font-style: italic;
+    font-size: 1rem;
+    color: var(--brand-olive);
+    margin: 0 0 var(--s-6);
+    text-align: center;
+    max-width: 50rem;
+    margin-inline: auto;
+    line-height: 1.45;
+  }
+  .bulletin__cols {
+    column-count: 3;
+    column-gap: var(--s-6);
+    column-rule: 1px solid var(--rule);
+    border-top: 3px double var(--ink-navy);
+    padding-top: var(--s-5);
+  }
+  .story {
+    break-inside: avoid;
+    margin-bottom: var(--s-5);
+  }
+  .story__heading {
+    font-family: var(--font-sans);
+    font-size: 0.78rem;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--brand-orange);
+    font-weight: 600;
+    margin: 0 0 var(--s-2);
+  }
+  .story__body {
+    font-family: var(--font-serif);
+    font-size: 0.95rem;
+    line-height: 1.55;
+    color: var(--ink-navy);
+    margin: 0;
+    text-align: justify;
+    hyphens: auto;
+  }
+  @media (max-width: 60rem) {
+    .bulletin__cols { column-count: 2; }
+  }
+  @media (max-width: 40rem) {
+    .bulletin__cols { column-count: 1; }
+    .bulletin { padding: var(--s-5); }
+  }
+</style>

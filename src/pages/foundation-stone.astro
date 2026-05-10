@@ -1,0 +1,141 @@
+---
+import Base from '../layouts/Base.astro';
+import Masthead from '../components/Masthead.astro';
+import SectionEyebrow from '../components/SectionEyebrow.astro';
+import PullQuote from '../components/PullQuote.astro';
+---
+<Base title="The Foundation Stone" description="An account of the founding of the American Institute for Michaels in the autumn of 2020.">
+  <Masthead
+    eyebrow="The Founding"
+    title="The foundation stone."
+    lede="The Institute does not, as a rule, dwell upon its own origin. Yet the founding generation's account, transcribed below from the recollections of M. Doyle and M. Power and corroborated by the surviving correspondence of the period, is the kind of thing one ought to be able to find in the public archive."
+  />
+
+  <section class="container section">
+    <div class="prose">
+      <SectionEyebrow index="I" label="The Dorm Room" />
+      <p class="dropcap">
+        It is recorded that the Institute was conceived in a freshman dormitory
+        room on a Tuesday evening in the late autumn of 2020. The room — a
+        north-facing single on the third floor of a residence hall whose name
+        the Board has agreed not to publish — measured approximately twelve
+        feet by fourteen, contained a bed, a desk, a small bookshelf, and a
+        framed reproduction of an Edward Hopper that one of the founders had
+        brought from home. The conversation that produced the Institute is
+        said to have lasted four hours and to have been conducted, in its
+        decisive phase, over instant ramen.
+      </p>
+      <p>
+        The two parties to the conversation were Michael Doyle and Michael
+        Power, classmates not yet acquainted with one another's families and
+        professional backgrounds, but sharing — they had remarked upon it
+        more than once — a given name. It was a coincidence neither of them
+        had until that evening invested with any great significance.
+      </p>
+    </div>
+  </section>
+
+  <PullQuote
+    quote="What if it were not a coincidence? What if it were the structure?"
+    attribution="M. Power"
+    role="Founder, recollecting the founding conversation"
+  />
+
+  <hr class="rule container" />
+
+  <section class="container section">
+    <div class="prose">
+      <SectionEyebrow index="II" label="The First Letterhead" />
+      <p>
+        By the morning, a draft letterhead had been produced. It was set in
+        a typeface neither founder could afterward identify, and it bore at
+        its head a small woodcut of an arch — the same device that, in
+        considerably refined form, would become the seal of the Institute.
+        The letterhead carried the words <em>The American Institute for
+        Michaels</em>, the working address of M. Doyle's dormitory mailbox,
+        and an early form of the motto, since revised. A photocopy of this
+        document is preserved in the correspondence files and may be
+        consulted by appointment with the Recording Secretary.
+      </p>
+    </div>
+  </section>
+
+  <section class="container section">
+    <div class="prose">
+      <SectionEyebrow index="III" label="The Constitution" />
+      <p>
+        The first constitution — eleven hand-written articles on three sheets
+        of college-rule notebook paper — was drafted by M. Doyle on the
+        Wednesday following the founding conversation and ratified by M.
+        Power that same afternoon. The document is, by any reasonable
+        standard, eccentric: Article III, in its original form, required
+        that all members hold "a kindly disposition toward at least one
+        Joseph and at least one David," a provision struck from the bylaws
+        in the second amendment cycle of fiscal 2021.
+      </p>
+      <p>
+        The original constitution survives in good condition and is, with
+        the original letterhead, the principal artifact of the founding.
+        Visitors to the seat are sometimes shown facsimile copies; the
+        original is rarely brought from the archive.
+      </p>
+    </div>
+  </section>
+
+  <section class="container section">
+    <div class="prose">
+      <SectionEyebrow index="IV" label="The First Convocation" />
+      <p>
+        The first convocation of the Institute — to use the term anachronistically,
+        for the body had not yet adopted the formal language of its present
+        bylaws — took place on October 12, 2020, in a small conference room
+        of the Old Phoenix Building, a five-story brick structure of late
+        Federalist character on the eastern edge of Boston Common. The room
+        had been reserved for the founders by a sympathetic uncle of M.
+        Doyle's, then a junior partner at a firm whose name no longer
+        operates from those premises. Twelve persons attended, of whom seven
+        were Michaels. The minutes of that convocation, drafted in M.
+        Power's hand on hotel stationery, are the first document in the
+        standing archive.
+      </p>
+      <p>
+        It is from this date that the Institute reckons its founding, and it
+        is in commemoration of this date that the annual convocation is
+        held — to the degree calendar permits — on the second Saturday of
+        October each year.
+      </p>
+    </div>
+  </section>
+
+  <PullQuote
+    quote="It looked, on that first evening, like a kind of joke we were telling ourselves. It has, with patience, become something else."
+    attribution="M. Doyle"
+    role="From the President's Letter, 2024"
+  />
+
+  <section class="container section">
+    <div class="prose">
+      <SectionEyebrow index="V" label="The Stone" />
+      <p>
+        There is no foundation stone, in the literal sense. The phrase
+        appears in the Institute's correspondence as a metaphor — borrowed,
+        the founders have admitted, from the language of older and more
+        consequential bodies — to describe the moment of decision in the
+        dormitory room on that Tuesday evening. The Institute has, however,
+        kept the term, partly because it is fond of the figure and partly
+        because no better single word has presented itself.
+      </p>
+      <p>
+        Should the Institute one day acquire a permanent seat of its own,
+        the Board has resolved (Resolution 2023-09) that a small stone, of
+        Massachusetts granite, shall be set into the threshold and inscribed
+        with the date October 12, 2020, and the motto in its present form.
+        The matter is, for now, deferred.
+      </p>
+    </div>
+  </section>
+</Base>
+
+<style>
+  .section { padding-block: var(--s-6); }
+</style>

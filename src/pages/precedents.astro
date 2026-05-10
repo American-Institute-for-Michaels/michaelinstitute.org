@@ -1,0 +1,213 @@
+---
+import Base from '../layouts/Base.astro';
+import Masthead from '../components/Masthead.astro';
+import SectionEyebrow from '../components/SectionEyebrow.astro';
+
+interface Resolution {
+  number: string;
+  date: string;
+  caption: string;
+  vote: string;
+  text: string;
+  cites: ReadonlyArray<string>;
+}
+
+const resolutions: ReadonlyArray<Resolution> = [
+  {
+    number: '2025-11',
+    date: 'September 14, 2025',
+    caption: 'On the inclusion of <em>Mychael</em> as a permissible variant',
+    vote: '6 in favor, 3 against',
+    text: 'That the spelling <em>Mychael</em>, attested in some American jurisdictions and arising principally as a respelling of the canonical form, shall be considered a permissible variant for purposes of fellowship eligibility under Article III &sect;1, the Committee having found in favor of the applicant.',
+    cites: ['Article III §1', 'Resolution 2022-04'],
+  },
+  {
+    number: '2025-07',
+    date: 'June 9, 2025',
+    caption: 'Upon the petition for revival of the Lyon chapter',
+    vote: '8 in favor, 0 against, 1 abstention',
+    text: 'That the Lyon chapter, having submitted to the Recording Secretary a written assurance that the conditions giving rise to its dormancy have been resolved, shall be revived from abeyance with effect from this date, and shall be recorded as in good standing in the standing register of chapters.',
+    cites: ['Article VI §2'],
+  },
+  {
+    number: '2025-04',
+    date: 'March 11, 2025',
+    caption: 'On the gift of the Phoenix Building stationery',
+    vote: 'Adopted by acclamation',
+    text: 'That the Institute accepts, with thanks, the donation by M. Park of three filing cabinets of period-correct stationery formerly held by a halted motion-picture production; and that the Treasurer is directed to enter the gift on the books at a nominal valuation of one dollar for purposes of administrative record.',
+    cites: ['Article VIII §1'],
+  },
+  {
+    number: '2024-22',
+    date: 'December 10, 2024',
+    caption: 'On the application of the mark to consumable goods',
+    vote: '9 in favor, 0 against',
+    text: 'That the Institute reaffirms the standing prohibition under Article IX &sect;1, as elaborated in the wordmark guidelines, on the application of the mark to perishable consumables, including frosted pastries; and that this prohibition shall not be construed to extend to the unmarked Milan-chapter biscuit, which by long custom is presented at chapter convenings without the application of the seal.',
+    cites: ['Article IX §1', 'Resolution 2022-09'],
+  },
+  {
+    number: '2024-15',
+    date: 'September 17, 2024',
+    caption: 'In the matter of an honorary conferral, contested',
+    vote: '8 in favor, 1 against',
+    text: 'That honorary status be conferred upon Mr. Tom Hanks, the dissenting member having recorded the objection that "an actual Michael was available." The objection is duly noted in the minutes; the conferral is nonetheless adopted by the requisite two-thirds majority and shall take effect upon the second reading.',
+    cites: ['Article VII §3'],
+  },
+  {
+    number: '2024-08',
+    date: 'June 4, 2024',
+    caption: 'On the propriety of the form <em>Mick</em> in formal contexts',
+    vote: '7 in favor, 1 against, 1 abstention',
+    text: 'That the diminutive form <em>Mick</em>, while wholly proper in correspondence and in the conduct of personal life, shall not be employed in the Institute\'s formal publications &mdash; including but not limited to the standing register, the annual report, and citations of fellowship &mdash; except in those cases in which the bearer has expressly indicated a preference for the diminutive form.',
+    cites: ['Article III', 'Style Guide §V'],
+  },
+  {
+    number: '2023-09',
+    date: 'July 25, 2023',
+    caption: 'On the prospective foundation stone',
+    vote: '7 in favor, 0 against, 2 abstentions',
+    text: 'That should the Institute one day acquire a permanent seat of its own, a small stone of Massachusetts granite shall be set into the threshold and inscribed with the date of the founding convocation and the motto in its present form. The matter of execution is deferred until such time as a permanent seat is acquired.',
+    cites: ['Article I §2'],
+  },
+  {
+    number: '2023-03',
+    date: 'March 14, 2023',
+    caption: 'On the use of the institutional <em>we</em>',
+    vote: '5 in favor, 4 against',
+    text: 'That the institutional first-person plural shall, in the President\'s correspondence, be permitted; and shall, in all other publications of the Institute, be employed only with the prior written consent of the Recording Secretary.',
+    cites: ['Style Guide §VI'],
+  },
+  {
+    number: '2022-09',
+    date: 'October 18, 2022',
+    caption: 'On the Milan-chapter biscuit, in the first instance',
+    vote: 'Adopted by acclamation',
+    text: 'That the small biscuit developed by Mr. Conti, of the Milan chapter, modelled upon the Institute\'s seal but presented unmarked, is hereby acknowledged with the gratitude of the Board, and may be served at any chapter convening as a matter of standing privilege; and that the recipe shall remain, by his insistence, outside the public archive.',
+    cites: ['Article VI'],
+  },
+  {
+    number: '2022-04',
+    date: 'May 17, 2022',
+    caption: 'On the inclusion of variants in the standardized register',
+    vote: '8 in favor, 1 against',
+    text: 'That the standardized register of permissible variants of the canonical given name, as compiled and maintained by the Recording Secretary, shall be the authoritative reference for matters of eligibility under Article III &sect;1; and that the register shall be revised, in consultation with chapter coordinators, not less frequently than once per fiscal year.',
+    cites: ['Article III §1'],
+  },
+];
+---
+<Base title="Resolutions and Precedents" description="A registry of formal Board resolutions of the American Institute for Michaels.">
+  <Masthead
+    eyebrow="Registry of Resolutions"
+    title="Resolutions and precedents."
+    lede="The registry below records, in reverse chronological order, the formal resolutions adopted by the Board of the Institute. Resolutions are numbered sequentially within each fiscal year. Vote tallies and citations of bylaw articles are included as a matter of standing practice."
+  />
+
+  <section class="container section">
+    <ol class="resolutions">
+      {resolutions.map((r) => (
+        <li class="resolution">
+          <header class="resolution__head">
+            <p class="resolution__num">Resolution {r.number}</p>
+            <p class="resolution__date">{r.date}</p>
+          </header>
+          <h2 class="resolution__caption" set:html={r.caption}></h2>
+          <p class="resolution__vote">Vote: {r.vote}</p>
+          <p class="resolution__text" set:html={r.text}></p>
+          <p class="resolution__cites">
+            <span class="cites__label">Citing:</span>
+            {r.cites.map((c, i) => (
+              <>{i > 0 ? '; ' : ''}<span class="cite">{c}</span></>
+            ))}
+          </p>
+        </li>
+      ))}
+    </ol>
+  </section>
+
+  <hr class="rule container" />
+
+  <section class="container section">
+    <div class="prose">
+      <SectionEyebrow label="On the Registry" />
+      <p>
+        The registry is maintained by the Recording Secretary and is updated
+        following each regular convening of the Board. Resolutions of a
+        confidential character &mdash; principally those concerning
+        individual personnel matters or the conduct of the Treasurer's
+        office &mdash; are not reproduced here, but are catalogued in the
+        sealed register held at the seat. The published registry is
+        believed to be complete with respect to all resolutions of public
+        consequence.
+      </p>
+      <p>
+        Members wishing to consult the full archive of resolutions, including
+        those redacted for personal privacy, may apply to the Recording
+        Secretary in writing.
+      </p>
+    </div>
+  </section>
+</Base>
+
+<style>
+  .section { padding-block: var(--s-6); }
+  .resolutions { list-style: none; padding: 0; margin: 0; }
+  .resolution {
+    padding: var(--s-6) 0;
+    border-top: 1px solid var(--rule);
+  }
+  .resolution:last-child { border-bottom: 1px solid var(--rule); }
+  .resolution__head {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: var(--s-3);
+    margin-bottom: var(--s-3);
+  }
+  .resolution__num {
+    font-family: var(--font-sans);
+    font-size: 0.78rem;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--brand-orange);
+    font-weight: 600;
+    margin: 0;
+  }
+  .resolution__date {
+    font-family: var(--font-sans);
+    font-size: 0.78rem;
+    color: var(--muted);
+    margin: 0;
+    font-variant-numeric: tabular-nums;
+  }
+  .resolution__caption {
+    font-family: var(--font-serif);
+    font-size: clamp(1.25rem, 2vw, 1.6rem);
+    font-weight: 600;
+    color: var(--ink-navy);
+    margin: 0 0 var(--s-3);
+    line-height: 1.25;
+  }
+  .resolution__vote {
+    font-family: var(--font-sans);
+    font-size: 0.85rem;
+    color: var(--brand-olive);
+    margin: 0 0 var(--s-4);
+  }
+  .resolution__text {
+    font-family: var(--font-serif);
+    font-size: 1rem;
+    line-height: 1.65;
+    color: var(--ink-navy);
+    margin: 0 0 var(--s-4);
+    padding-left: var(--s-5);
+    border-left: 2px solid var(--rule);
+  }
+  .resolution__cites {
+    font-family: var(--font-sans);
+    font-size: 0.78rem;
+    color: var(--muted);
+    margin: 0;
+  }
+  .cites__label { color: var(--brand-olive); margin-right: var(--s-2); letter-spacing: 0.08em; text-transform: uppercase; }
+  .cite { font-family: ui-monospace, 'SF Mono', monospace; color: var(--ink-navy); }
+</style>

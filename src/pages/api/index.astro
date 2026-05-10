@@ -12,14 +12,34 @@ import SectionEyebrow from '../../components/SectionEyebrow.astro';
 
   <section class="container section">
     <div class="prose">
-      <SectionEyebrow index="I" label="Endpoint" />
-      <p>The endpoint is exposed at the following stable URL:</p>
-      <pre class="code">GET https://michaelinstitute.org/api/is-michael.json</pre>
+      <SectionEyebrow index="I" label="Endpoints" />
+      <p>The Institute presently exposes three stable JSON endpoints:</p>
+      <pre class="code">GET https://michaelinstitute.org/api/is-michael.json
+GET https://michaelinstitute.org/api/chapters.json
+GET https://michaelinstitute.org/api/leaders.json</pre>
       <p>
-        The endpoint accepts no parameters; the full Institute roster of
-        accepted variants is returned in a single response. Clients are
-        expected to perform their own case-insensitive comparison after
-        Unicode normalization.
+        Each endpoint accepts no parameters; the full corresponding roster
+        is returned in a single response. Clients are expected to perform
+        their own case-insensitive comparisons after Unicode normalization
+        where the matter calls for it.
+      </p>
+      <h3>is-michael.json</h3>
+      <p>
+        The principal endpoint. Returns the standardized list of accepted
+        variants of the canonical given name and the register of honorary
+        forms.
+      </p>
+      <h3>chapters.json</h3>
+      <p>
+        The directory of chartered chapters, with coordinator, region, and
+        cadence. Useful for building local listings, calendars, or
+        chapter-finder utilities.
+      </p>
+      <h3>leaders.json</h3>
+      <p>
+        The current officers of the Institute, with role and biography.
+        Portrait imagery is not exposed via the API; printed materials may
+        request originals from the Recording Secretary.
       </p>
     </div>
   </section>

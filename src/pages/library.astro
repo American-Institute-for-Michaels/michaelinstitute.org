@@ -1,0 +1,148 @@
+---
+import Base from '../layouts/Base.astro';
+import Masthead from '../components/Masthead.astro';
+import SectionEyebrow from '../components/SectionEyebrow.astro';
+
+interface Book {
+  title: string;
+  author: string;
+  date: string;
+  blurb: string;
+}
+
+interface Section {
+  heading: string;
+  preface: string;
+  books: ReadonlyArray<Book>;
+}
+
+const sections: ReadonlyArray<Section> = [
+  {
+    heading: 'On the Name',
+    preface: 'Foundational reading on the etymology, transmission, and cultural history of the canonical given name and its variants.',
+    books: [
+      { title: 'A Dictionary of First Names', author: 'Patrick Hanks &amp; Flavia Hodges', date: 'Oxford, 1990', blurb: 'The standard one-volume reference. Indispensable for any serious work on the Institute\'s subject. The Boston seat holds the second edition; the third edition is consulted at the Edinburgh chapter\'s discretion.' },
+      { title: 'The Theophoric Name in the Hebrew Bible', author: 'M. Noth', date: 'Stuttgart, 1928', blurb: 'In the original German. A close reading of the rhetorical structure of names of the form <em>X-ʾēl</em>, of which Michael is the most enduring instance.' },
+      { title: 'Names of the Catholic Saints', author: 'Theodore Maynard', date: 'New York, 1948', blurb: 'A discursive treatment in the popular vein. Useful chiefly for the chapter on Michael the Archangel and for the late-Victorian iconographic plates.' },
+      { title: 'The Frequency of American Given Names, 1880–2000', author: 'U.S. Social Security Administration', date: 'Washington, retabulated 2024', blurb: 'The primary documentary source for the Institute\'s reach calculations. The Office of Statistical Onomastics maintains a working copy.' },
+    ],
+  },
+  {
+    heading: 'On Naming and Identity',
+    preface: 'Works in the philosophical, sociological, and psychological traditions bearing upon the question of how names shape — or fail to shape — the persons who carry them.',
+    books: [
+      { title: 'Naming and Necessity', author: 'Saul Kripke', date: 'Cambridge MA, 1980', blurb: 'The Institute does not endorse Kripke\'s broader metaphysical commitments but recommends the lectures as the most rigorous available defense of the proper name as a rigid designator. Worth reading slowly.' },
+      { title: 'On the Sociology of the First Name', author: 'Jürgen Gerhards', date: 'Wiesbaden, 2003', blurb: 'In the original German, with a partial English translation maintained at the Berlin chapter. Quantitative data on first-name selection across European populations, with implications the founding generation found suggestive.' },
+      { title: 'The Name on the Door', author: 'Stephen Wilson', date: 'London, 1998', blurb: 'A general history of European naming practice from the late medieval period to the present. Chapter VII, on the religious origins of the modern given name, repays close attention.' },
+    ],
+  },
+  {
+    heading: 'On Civic Life',
+    preface: 'Works on the cultivation of community, association, and the small civic bodies that, in the Institute\'s view, constitute the most durable infrastructure of public life.',
+    books: [
+      { title: 'Bowling Alone', author: 'Robert D. Putnam', date: 'New York, 2000', blurb: 'The decline of American associational life, in patient documentation. The Institute regards itself as the kind of body Putnam\'s argument would seem to call for, though it does not claim he had it specifically in mind.' },
+      { title: 'Democracy in America', author: 'Alexis de Tocqueville', date: '1835 / 1840', blurb: 'Volume II, Book II, Chapter V — "On the Use Which Americans Make of Association in Civil Life" — should be read by every chapter coordinator. The translation by Goldhammer (Library of America, 2004) is preferred.' },
+      { title: 'The Lonely Crowd', author: 'David Riesman', date: 'New Haven, 1950', blurb: 'A mid-century classic that sets out the conditions to which the Institute proposes itself as a partial corrective. Read alongside Putnam.' },
+    ],
+  },
+  {
+    heading: 'On the Long Patience',
+    preface: 'Works recommended for their bearing upon the Institute\'s preferred temperament: the cultivation of patience, the slow work of years, the avoidance of fashionable urgency.',
+    books: [
+      { title: 'The Care of the Self', author: 'Michel Foucault', date: 'Paris, 1984', blurb: 'A French Michel; a question of the longue durée. The Institute is not unaware of the irony of recommending a Foucault on a list of works to be read slowly.' },
+      { title: 'Letters to a Young Poet', author: 'Rainer Maria Rilke', date: 'Leipzig, 1929', blurb: '"Be patient toward all that is unsolved in your heart." A short volume; reread annually.' },
+      { title: 'The Practice of the Wild', author: 'Gary Snyder', date: 'San Francisco, 1990', blurb: 'On the cultivation of attention to a place over a sustained period. The Institute reads it as a manual for chapter work in a town to which one has only just arrived.' },
+    ],
+  },
+  {
+    heading: 'On the Institute',
+    preface: 'Works produced by, or about, the Institute itself. Held in the Institute\'s correspondence files at the Boston seat; researchers may consult them by appointment with the Recording Secretary.',
+    books: [
+      { title: 'The Institute Reader, Vol. I–III', author: 'M. Doyle and M. Power, eds.', date: 'Boston, 2022–2024', blurb: 'Annual collected essays, lectures, and minutes. Volume I includes the founding constitution in facsimile.' },
+      { title: 'The Old Phoenix Building: A Brief History', author: 'M. O\'Halloran', date: 'Boston chapter, 2023', blurb: 'A pamphlet, sixty-four pages, on the building in which the founding convocation was held. Held at the Boston seat; out of print.' },
+      { title: 'Bylaws of the American Institute for Michaels', author: 'as adopted October 12, 2020 and amended through Q3 2025', date: 'Boston, 2025', blurb: 'The constitutional text. Available without charge at <a href="/bylaws">/bylaws</a>; bound copies are extended to Founders\' Circle patrons.' },
+    ],
+  },
+];
+---
+<Base title="The Library" description="The Institute's recommended bibliography on naming, identity, and civic life.">
+  <Masthead
+    eyebrow="Required Reading"
+    title="The Institute's library."
+    lede="A small bibliography, curated by the Recording Secretary in consultation with the Standing Committee on Notability. The list is non-exhaustive and is revised annually. Inclusion does not constitute endorsement of an author's broader commitments; we have, in nearly every case, disagreements."
+  />
+
+  {sections.map((s) => (
+    <section class="container section">
+      <SectionEyebrow label={s.heading} />
+      <p class="preface">{s.preface}</p>
+      <ol class="books">
+        {s.books.map((b) => (
+          <li class="book">
+            <p class="book__title" set:html={b.title}></p>
+            <p class="book__cite"><span set:html={b.author}></span> · <em>{b.date}</em></p>
+            <p class="book__blurb" set:html={b.blurb}></p>
+          </li>
+        ))}
+      </ol>
+    </section>
+  ))}
+
+  <hr class="rule container" />
+
+  <section class="container section">
+    <div class="prose">
+      <SectionEyebrow label="On Suggested Additions" />
+      <p>
+        The Institute welcomes suggestions for the library. The list is
+        revised annually by the Recording Secretary in consultation with
+        chapter coordinators; suggestions should be sent to
+        <a href="mailto:hello@michaelinstitute.org">the general office</a>
+        with the subject line "Library Suggestion" and should include the
+        proposing fellow's reasons in not more than three hundred words.
+      </p>
+    </div>
+  </section>
+</Base>
+
+<style>
+  .section { padding-block: var(--s-6); }
+  .preface {
+    font-family: var(--font-serif);
+    font-style: italic;
+    color: var(--brand-olive);
+    font-size: 1.05rem;
+    margin: 0 0 var(--s-5);
+    max-width: 60rem;
+  }
+  .books { list-style: none; padding: 0; margin: 0; display: grid; grid-template-columns: repeat(auto-fit, minmax(min(26rem, 100%), 1fr)); gap: var(--s-5); }
+  .book {
+    padding: var(--s-5);
+    border: 1px solid var(--rule);
+    background: color-mix(in oklab, var(--parchment) 96%, var(--brand-olive));
+  }
+  .book__title {
+    font-family: var(--font-serif);
+    font-size: 1.2rem;
+    font-style: italic;
+    font-weight: 600;
+    color: var(--ink-navy);
+    margin: 0 0 var(--s-2);
+    line-height: 1.3;
+  }
+  .book__cite {
+    font-family: var(--font-sans);
+    font-size: 0.78rem;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--brand-orange);
+    margin: 0 0 var(--s-3);
+  }
+  .book__blurb {
+    font-family: var(--font-serif);
+    font-size: 0.95rem;
+    line-height: 1.55;
+    color: var(--ink-navy);
+    margin: 0;
+  }
+</style>

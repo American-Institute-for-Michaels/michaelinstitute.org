@@ -1,0 +1,142 @@
+---
+import Base from '../layouts/Base.astro';
+import Masthead from '../components/Masthead.astro';
+import SectionEyebrow from '../components/SectionEyebrow.astro';
+
+interface Award {
+  name: string;
+  description: string;
+  recipients: ReadonlyArray<{ year: number; name: string; chapter?: string; citation: string }>;
+}
+
+const awards: ReadonlyArray<Award> = [
+  {
+    name: 'The Doyle Medal',
+    description: 'Conferred annually upon a fellow whose sustained service to the Institute over a period of not less than three years has materially advanced its founding purposes. The medal — silver, struck in Boston, mounted on a parchment ribbon — is presented at the annual convocation.',
+    recipients: [
+      { year: 2025, name: 'Michael O\'Halloran', chapter: 'Boston', citation: 'For three years\' continuous service as Boston chapter coordinator and for the cataloguing of the Institute\'s correspondence files.' },
+      { year: 2024, name: 'Michael Stein', chapter: 'New York', citation: 'For sustained advocacy of the chapter system and for hosting, at his own expense, the 2023 inter-chapter conference.' },
+      { year: 2023, name: 'Michael Power', chapter: 'Boston', citation: 'For services as founding Vice-President during the Institute\'s formative years; the second medal struck.' },
+      { year: 2022, name: 'Michael Doyle', chapter: 'Boston', citation: 'For services as founding President; the first medal struck. (Conferred by acclamation of the Board, the President recusing himself from the vote.)' },
+    ],
+  },
+  {
+    name: 'The Power Lecture',
+    description: 'An annual lecture, delivered at the Institute\'s annual convocation by an invited speaker. The lectureship was endowed by the founding Board in honor of M. Power and carries an honorarium of one thousand dollars together with the privilege of having the lecture printed in the Institute\'s annual report.',
+    recipients: [
+      { year: 2025, name: 'Mihály Kovács', chapter: 'Budapest', citation: '"On the Persistence of the Variant: Hungarian Mihály and the Question of Untranslatable Forms."' },
+      { year: 2024, name: 'Michael Cunningham', citation: '"Naming, Repetition, and the Late Style." A reading from the lecturer\'s recent fiction.' },
+      { year: 2023, name: 'Mícheál Ó Conchúir', chapter: 'Dublin', citation: '"The Schoolmaster\'s Register: Towards a Pedagogy of the Given Name."' },
+      { year: 2022, name: 'Michael Faraday', citation: 'In memoriam. The lecture was, by special resolution, posted as a reading from the lecturer\'s nineteenth-century notebooks.' },
+      { year: 2021, name: 'Michael Bloomberg', citation: 'Declined with thanks. The honorarium was redirected to the Institute\'s general fund.' },
+    ],
+  },
+  {
+    name: 'The Founders\' Plaque',
+    description: 'Conferred not annually but upon the recommendation of the Board, in recognition of patronage at the Founders\' Circle level sustained over five or more fiscal years. The plaque — bronze, with the Institute\'s seal in relief — is mounted upon a hardwood backing of the recipient\'s choosing.',
+    recipients: [
+      { year: 2025, name: 'Michael Costa', chapter: 'San Francisco', citation: 'For five years of continuous patronage at the Founders\' Circle level and for material support of the Institute\'s small grants program.' },
+      { year: 2024, name: 'Michael Tang', chapter: 'Vancouver', citation: 'For sustained patronage and for the gift of the Institute\'s present letterhead stock.' },
+    ],
+  },
+  {
+    name: 'The Recording Secretary\'s Citation',
+    description: 'A small printed citation, signed by the Recording Secretary, conferred upon members whose unsung work has materially advanced the administrative business of the Institute. There is no fixed number; in some years none have been awarded; in others, several. The citation is, by custom, presented in correspondence rather than at convocation.',
+    recipients: [
+      { year: 2025, name: 'Michał Kowalski', chapter: 'Warsaw', citation: 'For the conservation, in his private studio, of three deteriorating volumes of the standing register.' },
+      { year: 2025, name: 'Michael Hartnell', chapter: 'Seattle', citation: 'For organizing the 2024 maritime convocation and for the pro bono dispatch of conference materials.' },
+      { year: 2024, name: 'Michael Costigan', chapter: 'Boston', citation: 'For volunteer cataloguing of the founding-era correspondence files.' },
+      { year: 2023, name: 'Michael Brunner', chapter: 'Munich', citation: 'For the translation, into German and at his own expense, of the Institute\'s foundational documents.' },
+      { year: 2022, name: 'Michele Conti', chapter: 'Milan', citation: 'For the development of a Milan-chapter biscuit conformable to the Institute\'s seal.' },
+    ],
+  },
+];
+---
+<Base title="Awards" description="The standing awards of the American Institute for Michaels, with recipients of record.">
+  <Masthead
+    eyebrow="Honors and Distinctions"
+    title="The Institute's standing awards."
+    lede="The Institute confers a small number of honors upon fellows, members, and patrons whose work has materially advanced its purposes. The honors are conferred sparingly and only after deliberation. Recipients are recorded below."
+  />
+
+  {awards.map((a) => (
+    <section class="container section">
+      <SectionEyebrow label={a.name} />
+      <p class="award__desc">{a.description}</p>
+      <ol class="recipients">
+        {a.recipients.map((r) => (
+          <li class="rec">
+            <p class="rec__year">{r.year}</p>
+            <div class="rec__body">
+              <p class="rec__name">{r.name}{r.chapter && <span class="rec__chap"> · {r.chapter} chapter</span>}</p>
+              <p class="rec__cite">{r.citation}</p>
+            </div>
+          </li>
+        ))}
+      </ol>
+    </section>
+  ))}
+
+  <hr class="rule container" />
+
+  <section class="container section">
+    <div class="prose">
+      <SectionEyebrow label="Nominations" />
+      <p>
+        Awards are conferred by the Board upon the recommendation of the
+        Standing Committee on Notability. Nominations may be forwarded by
+        any fellow in good standing to the Recording Secretary at
+        <a href="mailto:hello@michaelinstitute.org">the general office</a>;
+        nominations should specify the award sought, the candidate's name
+        and chapter, and a citation in not more than two hundred words.
+      </p>
+    </div>
+  </section>
+</Base>
+
+<style>
+  .section { padding-block: var(--s-6); }
+  .award__desc {
+    font-family: var(--font-serif);
+    font-size: 1.1rem;
+    line-height: 1.6;
+    color: var(--ink-navy);
+    margin: 0 0 var(--s-5);
+    font-style: italic;
+    max-width: 60rem;
+  }
+  .recipients { list-style: none; padding: 0; margin: 0; }
+  .rec {
+    display: grid;
+    grid-template-columns: 5rem 1fr;
+    gap: var(--s-5);
+    padding: var(--s-4) 0;
+    border-top: 1px solid var(--rule);
+    align-items: baseline;
+  }
+  .rec:last-child { border-bottom: 1px solid var(--rule); }
+  .rec__year {
+    font-family: var(--font-serif);
+    font-size: 1.5rem;
+    font-weight: 600;
+    color: var(--brand-orange);
+    margin: 0;
+    font-variant-numeric: tabular-nums;
+  }
+  .rec__name {
+    font-family: var(--font-serif);
+    font-size: 1.15rem;
+    font-weight: 600;
+    color: var(--ink-navy);
+    margin: 0 0 var(--s-2);
+  }
+  .rec__chap { font-weight: 400; color: var(--brand-olive); font-size: 0.9em; }
+  .rec__cite {
+    font-family: var(--font-serif);
+    font-size: 0.95rem;
+    line-height: 1.55;
+    color: var(--ink-navy);
+    margin: 0;
+    font-style: italic;
+  }
+</style>

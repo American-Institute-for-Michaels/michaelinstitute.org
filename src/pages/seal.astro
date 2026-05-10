@@ -1,0 +1,152 @@
+---
+import Base from '../layouts/Base.astro';
+import Masthead from '../components/Masthead.astro';
+import SectionEyebrow from '../components/SectionEyebrow.astro';
+import logo from '../assets/aim-logo.png';
+import { Image } from 'astro:assets';
+---
+<Base title="The Institute's Seal" description="A heraldic and historical account of the seal of the American Institute for Michaels.">
+  <Masthead
+    eyebrow="Heraldry"
+    title="On the Institute's Seal."
+    lede="The Institute's seal is, by the founding generation's design, a small but considered piece of work. The following account is offered for those who have wondered."
+  />
+
+  <section class="container section">
+    <div class="display">
+      <div class="display__plate">
+        <Image src={logo} alt="The seal of the American Institute for Michaels" width={400} height={400} class="display__seal" />
+      </div>
+    </div>
+  </section>
+
+  <section class="container section">
+    <div class="prose">
+      <SectionEyebrow index="I" label="Heraldic Description" />
+      <p class="blazon">
+        <em>Or, an arch quadripartite gules, surmounted by an escutcheon
+        argent bearing the letter M sable; the whole encircled by the
+        motto in capitals of the first.</em>
+      </p>
+      <p>
+        Rendered in the modern manner, the seal consists of a four-fold
+        archway in the Institute's standing orange, set against a parchment
+        field, supporting a small white shield charged with the canonical
+        letter <em>M</em>. The arch is the principal device; the shield is
+        the differencing element by which the Institute's seal is
+        distinguished from the older university and civic arches it formally
+        resembles.
+      </p>
+    </div>
+  </section>
+
+  <hr class="rule container" />
+
+  <section class="container section">
+    <div class="prose">
+      <SectionEyebrow index="II" label="Symbolism" />
+      <h3>The Arch</h3>
+      <p>
+        The arch — quadripartite, that is, divided into four equal
+        compartments — represents the four cardinal continents on which the
+        Institute maintains chartered presence: the Americas, Europe,
+        Africa, and Asia (with Oceania subsumed under the latter for
+        heraldic economy). The form is borrowed from the entablature of the
+        Old Phoenix Building in Boston, where the founding convocation was
+        held in October of 2020.
+      </p>
+      <h3>The Shield</h3>
+      <p>
+        The shield, charged with the canonical letter, recalls a tradition
+        in fraternal heraldry whereby the body's distinguishing initial is
+        borne in the position of greatest visual authority. The white
+        ground is intended to suggest the parchment of the founding
+        constitution.
+      </p>
+      <h3>The Motto</h3>
+      <p>
+        The motto — <strong><em>Per nomen, communitas</em></strong> —
+        translates loosely as "Through the name, community." The phrase was
+        proposed by M. Power at the third meeting of the founding Board and
+        adopted, after some deliberation as to the case of the substantive,
+        by acclamation. It expresses, in compact form, the Institute's
+        founding conviction: that a shared given name, rightly attended to,
+        can serve as a generative axis for civic life.
+      </p>
+    </div>
+  </section>
+
+  <section class="container section">
+    <div class="prose">
+      <SectionEyebrow index="III" label="Authorized Use" />
+      <p>
+        The seal, in conjunction with the wordmark, is governed by the
+        standards published on the <a href="/wordmark">wordmark page</a>.
+        The seal may not appear without the wordmark in any public-facing
+        application except as expressly authorized by the President.
+      </p>
+      <p>
+        The seal as displayed on this page is the principal authorized
+        rendering. Subsidiary renderings — embossed, single-color, reversed
+        — are reproduced in the wordmark guide.
+      </p>
+    </div>
+  </section>
+
+  <section class="container section">
+    <div class="prose">
+      <SectionEyebrow index="IV" label="Provenance" />
+      <p>
+        The seal was designed in the autumn of 2020 by a small ad-hoc
+        committee chaired by M. Doyle and including, as advisors, two
+        designers of the founding generation. The original artwork is held
+        in the correspondence files at the seat of the Institute, where it
+        may be consulted by appointment. Subsequent revisions have been
+        confined to the optical refinement of the letterform; the
+        compositional structure has not been altered.
+      </p>
+    </div>
+  </section>
+</Base>
+
+<style>
+  .section { padding-block: var(--s-6); }
+  .display {
+    padding: var(--s-8) 0;
+    background: color-mix(in oklab, var(--parchment) 94%, var(--brand-olive));
+    border-top: 1px solid var(--rule);
+    border-bottom: 1px solid var(--rule);
+  }
+  .display__plate {
+    max-width: 28rem;
+    margin: 0 auto;
+    padding: var(--s-7);
+    background: var(--parchment);
+    border: 1px solid var(--rule);
+    text-align: center;
+  }
+  .display__seal {
+    width: 100%;
+    height: auto;
+    display: block;
+  }
+  .blazon {
+    padding: var(--s-5);
+    border-left: 3px solid var(--brand-orange);
+    background: color-mix(in oklab, var(--parchment) 96%, var(--brand-olive));
+    font-family: var(--font-serif);
+    font-style: italic;
+    font-size: 1.15rem;
+    line-height: 1.55;
+    margin: 0 0 var(--s-5);
+  }
+  .prose h3 {
+    font-family: var(--font-sans);
+    font-size: 0.85rem;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--brand-orange);
+    margin: var(--s-6) 0 var(--s-3);
+  }
+  .prose strong em { font-weight: 600; color: var(--brand-olive); font-style: italic; }
+</style>

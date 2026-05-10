@@ -1,0 +1,137 @@
+---
+import Base from '../layouts/Base.astro';
+import Masthead from '../components/Masthead.astro';
+import SectionEyebrow from '../components/SectionEyebrow.astro';
+
+interface Term {
+  term: string;
+  definition: string;
+}
+
+const terms: ReadonlyArray<Term> = [
+  { term: 'Abeyance', definition: 'The condition of a chapter that has failed to convene for four consecutive quarters. A chapter in abeyance retains its charter but may not transact business in the Institute\'s name.' },
+  { term: 'Acclamation', definition: 'A method by which the Board may, in lieu of formal balloting, register unanimous support for a measure. Used sparingly. Recorded in the minutes by the formula <em>"adopted by acclamation"</em>.' },
+  { term: 'Annual report', definition: 'The Institute\'s yearly statement of activities, finances, and observed reach. Published not later than the first Saturday of June following the close of each fiscal year.' },
+  { term: 'Bond, the', definition: 'A non-technical term used in correspondence to denote the affinity that obtains among Michaels by virtue of their shared given name. Not to be confused with formal membership.' },
+  { term: 'Canonical given name, the', definition: 'The name <em>Michael</em> in any of the standardized variants catalogued in the Institute\'s <a href="/etymology">etymological register</a>.' },
+  { term: 'Chartered', definition: 'Said of a chapter that has received the Institute\'s formal recognition under Article VI of the bylaws. To be distinguished from <em>convened</em>, which describes a particular meeting of an already-chartered chapter.' },
+  { term: 'Committee, the', definition: 'When used without qualification, refers to the Standing Committee on Notability. Other committees are referred to by their full names.' },
+  { term: 'Convening', definition: 'A formal meeting of a chartered chapter, the Board, or the membership at large. Plural <em>convenings</em>. The Institute does not use the words <em>session</em>, <em>gathering</em>, or <em>meet-up</em>.' },
+  { term: 'Convocation, the annual', definition: 'The yearly assembly of the Institute, traditionally held on the second Saturday of October. Patrons, fellows, and chapter coordinators are invited as a matter of standing privilege.' },
+  { term: 'Correspondence files', definition: 'The Institute\'s collected letters, reports, and other documents of record, maintained by the Recording Secretary at the Institute\'s seat.' },
+  { term: 'Dispensation', definition: 'A formal permission granted by the Board to depart from a standing rule. Honorary status (Article VII §3) is conferred by dispensation.' },
+  { term: 'Eponymous Patron', definition: 'A donor at the $2,500–$9,999 tier, entitled, by special arrangement, to designate a small program element to bear his or her name in perpetuity.' },
+  { term: 'Fellow', definition: 'A person whose contribution has been recognized by the Standing Committee on Notability and whose name appears on the standing register. To be distinguished from a <em>member</em>, which any qualifying Michael may become.' },
+  { term: 'Fiscal year', definition: 'The calendar year, January 1 through December 31. The Institute\'s fiscal year coincides with its calendar year. Fiscal-year designations follow the year of conclusion (i.e., FY 2025 ends December 31, 2025).' },
+  { term: 'Forename', definition: 'A synonym for <em>given name</em>. The Institute prefers <em>forename</em> in formal contexts and <em>given name</em> elsewhere.' },
+  { term: 'Founders\' Circle', definition: 'The highest standing donor tier ($10,000+). Members of the Founders\' Circle are received by the Board at a small dinner held biennially.' },
+  { term: 'Founding generation', definition: 'The Michaels associated with the Institute\'s establishment in 2020 and the years immediately following. The term is used reverently and is not to be applied retrospectively to later cohorts.' },
+  { term: 'Good standing', definition: 'The condition of a member who is current in his or her obligations to the Institute and is not the subject of a pending disciplinary inquiry. Standing is presumed unless the Recording Secretary has noted otherwise.' },
+  { term: 'Honorary Michael', definition: 'A person not bearing the canonical given name to whom the Board has, by dispensation under Article VII §3, extended the Institute\'s recognition.' },
+  { term: 'Hypocoristic', definition: 'A diminutive or affectionate form of a given name (e.g., <em>Mike</em>, <em>Mikey</em>, <em>Misha</em>). The Institute maintains a supplementary register of hypocoristic forms.' },
+  { term: 'Institute, the', definition: 'The American Institute for Michaels. Always capitalized when referring to this body. Takes a singular verb (<em>"The Institute is..."</em>, never <em>"The Institute are..."</em>).' },
+  { term: 'Letterpress card', definition: 'A small printed acknowledgment, set in moveable type and printed on heavy stock, typically extended to recurring patrons. The Institute does not use the term <em>postcard</em>.' },
+  { term: 'Mark, the', definition: 'The Institute\'s seal and wordmark, considered as a single visual identity. Use is governed by the standards published on the <a href="/wordmark">wordmark page</a>.' },
+  { term: 'Member', definition: 'Any natural person bearing the canonical given name (or having lawfully adopted it) who has been admitted to the Institute. Distinct from <em>fellow</em>.' },
+  { term: 'Notability', definition: 'The Standing Committee on Notability; also, in lower case, the quality of public, intellectual, or artistic contribution by which fellows are evaluated.' },
+  { term: 'On the boards', definition: 'Of an actor: in active stage performance. The Institute uses this expression in fellow citations of theatrical Michaels.' },
+  { term: 'Patron', definition: 'A donor at any standing tier. <em>Patron of the Institute</em> is reserved for the $500–$2,499 tier.' },
+  { term: 'Quorum', definition: 'A simple majority of seated Board members. In the absence of a quorum, the senior Michael present may declare the convening adjourned but may not transact business.' },
+  { term: 'Reading, in open session', definition: 'The formal recital, before the Board in regular convening, of a proposed measure. Honorary status requires no fewer than two readings in open session before the vote is taken.' },
+  { term: 'Recording Secretary, the', definition: 'The officer responsible for the minutes of the Board, the standing register of fellows, and the correspondence files. The Recording Secretary is, by tradition, a Michael of fastidious habits.' },
+  { term: 'Reach', definition: 'The Institute\'s annual measure of Michaels touched. See the methodological note in the <a href="/annual-report">annual report</a>.' },
+  { term: 'Register, standing', definition: 'The book of fellows, maintained by the Recording Secretary. To <em>appear on the standing register</em> is to be a fellow in good standing.' },
+  { term: 'Resolution', definition: 'A formal motion adopted by the Board. Resolutions are numbered sequentially within each fiscal year (e.g., Resolution 2025-04).' },
+  { term: 'Roll, the donor', definition: 'The annual list of donors, published in the annual report. Donors may, in writing, decline inclusion.' },
+  { term: 'Seat, the', definition: 'The Institute\'s administrative headquarters. The seat is fixed by Board resolution.' },
+  { term: 'Standing', definition: 'The aggregate of qualifications by which a member is in good condition with the Institute. To be <em>in good standing</em> is to enjoy all rights of the membership.' },
+  { term: 'Variants, standardized', definition: 'The list of forms of the canonical given name accepted as conferring eligibility for membership. Catalogued in the etymological register and exposed via the <a href="/api">public API</a>.' },
+  { term: 'Withdraw, to', definition: 'A formal mode of departure from the Institute, distinct from disciplinary removal. A withdrawn member may petition for reinstatement after a period of not less than one fiscal year.' },
+];
+
+const grouped = terms.reduce((acc, t) => {
+  const letter = t.term[0].toUpperCase();
+  if (!acc[letter]) acc[letter] = [];
+  acc[letter].push(t);
+  return acc;
+}, {} as Record<string, Term[]>);
+
+const letters = Object.keys(grouped).sort();
+---
+<Base title="Glossary" description="A glossary of terms employed by the American Institute for Michaels in its correspondence, bylaws, and standing publications.">
+  <Masthead
+    eyebrow="Reference"
+    title="Glossary of Institutional Terminology."
+    lede="The Institute's correspondence, bylaws, and publications make use of a small vocabulary of terms with specific meanings. The glossary below is offered as a reference for members, correspondents, and the press."
+  />
+
+  <section class="container section">
+    <nav class="alpha" aria-label="Jump to letter">
+      {letters.map((l) => <a href={`#L-${l}`}>{l}</a>)}
+    </nav>
+  </section>
+
+  {letters.map((l) => (
+    <section class="container section">
+      <SectionEyebrow label={l} />
+      <dl id={`L-${l}`} class="terms">
+        {grouped[l].map((t) => (
+          <>
+            <dt class="term">{t.term}</dt>
+            <dd class="def" set:html={t.definition}></dd>
+          </>
+        ))}
+      </dl>
+    </section>
+  ))}
+</Base>
+
+<style>
+  .section { padding-block: var(--s-5); }
+  .alpha {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--s-3);
+    padding: var(--s-4);
+    border-top: 1px solid var(--rule);
+    border-bottom: 1px solid var(--rule);
+  }
+  .alpha a {
+    font-family: var(--font-sans);
+    font-size: 0.85rem;
+    letter-spacing: 0.08em;
+    color: var(--brand-orange);
+    text-decoration: none;
+    font-weight: 600;
+    padding: 0 var(--s-2);
+  }
+  .alpha a:hover { color: var(--ink-navy); }
+  .terms {
+    display: grid;
+    grid-template-columns: minmax(min-content, 16rem) 1fr;
+    column-gap: var(--s-6);
+    row-gap: 0;
+    margin: 0;
+  }
+  .term {
+    font-family: var(--font-serif);
+    font-size: 1.05rem;
+    font-weight: 600;
+    color: var(--ink-navy);
+    padding: var(--s-4) 0;
+    border-top: 1px solid var(--rule);
+  }
+  .def {
+    font-family: var(--font-serif);
+    font-size: 1rem;
+    line-height: 1.55;
+    color: var(--ink-navy);
+    margin: 0;
+    padding: var(--s-4) 0;
+    border-top: 1px solid var(--rule);
+  }
+  @media (max-width: 40rem) {
+    .terms { grid-template-columns: 1fr; }
+    .def { padding-top: 0; border-top: none; }
+  }
+</style>

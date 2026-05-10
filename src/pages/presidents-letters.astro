@@ -1,0 +1,133 @@
+---
+import Base from '../layouts/Base.astro';
+import Masthead from '../components/Masthead.astro';
+import SectionEyebrow from '../components/SectionEyebrow.astro';
+
+interface Letter {
+  quarter: string;
+  date: string;
+  subject: string;
+  body: string;
+}
+
+const letters: ReadonlyArray<Letter> = [
+  {
+    quarter: 'Q1 2026',
+    date: 'March 31, 2026',
+    subject: 'On the merit of the small commitment',
+    body: `<p>To the membership, &mdash;</p>
+    <p>The first quarter of fiscal 2026 has come and gone with the unhurried regularity to which the Institute has, by long habit, become accustomed. The Board met, in regular session, on the second Tuesday of February. The Standing Committee on Notability convened, on the third, to consider the spring slate of fellowship applications. The Treasurer rendered her quarterly report. The chapters convened on their accustomed cadences. None of this, taken individually, is news.</p>
+    <p>It is the cumulative effect that I should like to draw the membership's attention to. We are, as an Institute, in the unusual position of being able to point to a five-year record of patient quarterly business conducted without significant interruption. I have been struck, in reviewing the minutes for this letter, by the absence in our archive of crisis convenings, emergency resolutions, or any of the other administrative emergencies that mark the histories of comparable bodies. We have not, so far, had a crisis. We have had, instead, an accumulating record of small commitments honored.</p>
+    <p>This is not nothing. It is, in fact, the principal product of the Institute's first half-decade, and it is upon its continued production that the next half-decade depends.</p>
+    <p>Yours, in the long patience,</p>
+    <p class="sig">M. Doyle, President</p>`,
+  },
+  {
+    quarter: 'Q4 2025',
+    date: 'December 28, 2025',
+    subject: 'On the close of the fiscal year',
+    body: `<p>To the membership, &mdash;</p>
+    <p>The fiscal year ending December 31, 2025 closes with the Institute in good health and good standing. The Treasurer's preliminary numbers, which the annual report will set out in full, show a sixth consecutive year of measured growth in our reach, our chapter network, and our patronage. The Standing Committee on Notability has elected three new fellows to the standing register. The Office of the Recording Secretary has answered, by the latest count, two thousand nine hundred and fourteen letters of correspondence; for completeness I record that the corresponding figure for letters ignored is, as it has been since our chartering, zero.</p>
+    <p>I should like, in closing the year, to thank the chapter coordinators by name &mdash; though I shall not, owing to space, list them here &mdash; for the often-thankless work of convening, hosting, and writing-down which is the principal infrastructure of the Institute's life. The Institute is, materially, the chapters; the seat is administrative.</p>
+    <p>The annual report will appear, as is customary, before the first Saturday of June. The Board will meet, in its first regular session of the new year, on the second Tuesday of February. Until then, may your Decembers be quiet.</p>
+    <p>Yours, in gratitude,</p>
+    <p class="sig">M. Doyle, President</p>`,
+  },
+  {
+    quarter: 'Q3 2025',
+    date: 'September 30, 2025',
+    subject: 'On the annual convocation, forthcoming',
+    body: `<p>To the membership, &mdash;</p>
+    <p>The annual convocation will be held, as is customary, on the second Saturday of October &mdash; this year, the eleventh &mdash; at the Old Phoenix Building. Standing invitations have been extended to all fellows, chapter coordinators, and patrons of the Institute and Founders' Circle tiers. Other members in good standing are welcome and may register their attendance with the Recording Secretary at any time before the seventh of the month.</p>
+    <p>This year's Power Lecture will be delivered by Mihály Kovács, of the Budapest chapter, on the persistence of the Hungarian variant. Mr. Kovács has, in his preliminary correspondence with the lecture committee, indicated that he will speak in English; those of the membership for whom this presents a difficulty are encouraged to consult, in advance, the working translation maintained by the Berlin chapter.</p>
+    <p>Two matters will be set before the convocation as a whole: the proposed amendment to Article VI &sect;2 (concerning the definition of dormancy), and the formal acceptance of the Recording Secretary's report on the founding-era correspondence cataloguing project. Members wishing to speak to either matter should signal their intention in writing in advance, by way of permitting the chair to manage time.</p>
+    <p>Yours, with anticipation,</p>
+    <p class="sig">M. Doyle, President</p>`,
+  },
+  {
+    quarter: 'Q2 2025',
+    date: 'June 30, 2025',
+    subject: 'On the press, in passing',
+    body: `<p>To the membership, &mdash;</p>
+    <p>It has been brought to my attention, by way of the Recording Secretary, that the Institute has been mentioned in print on three separate occasions during the second quarter of fiscal 2025. I record the fact here for the membership's information; the citations themselves are reproduced in full on the press page of our website, where members may judge them for themselves.</p>
+    <p>The Institute does not, as a matter of standing policy, court press attention; nor, however, do we shrink from it when it arrives unbidden. Press inquiries received during the quarter were answered, in each case, within ten business days, by the Recording Secretary in his capacity as a delegate of the General Office. No retractions have been required.</p>
+    <p>I take this opportunity to remind the membership of two related conventions: first, that statements to the press in the Institute's name may be made only by the President or the President's deputy, and only in writing; and second, that members are at all times free to identify themselves to the press, in their personal capacity, as members of the Institute, provided that they take care to indicate that they are not speaking on its behalf. The distinction is small but, in the conduct of public correspondence, material.</p>
+    <p>Yours, in good order,</p>
+    <p class="sig">M. Doyle, President</p>`,
+  },
+];
+---
+<Base title="The President's Letters" description="Quarterly addresses from the President of the American Institute for Michaels.">
+  <Masthead
+    eyebrow="From the President's Office"
+    title="The President's letters."
+    lede="At the close of each quarter, the President addresses the membership in writing. The letters are reproduced below in reverse chronological order. They are intended for members but are made available, in the spirit of open governance, to any reader who finds them of interest."
+  />
+
+  {letters.map((l) => (
+    <article class="container section">
+      <SectionEyebrow label={l.quarter} />
+      <header class="lh">
+        <p class="lh__date">{l.date}</p>
+        <h2 class="lh__subject">{l.subject}</h2>
+      </header>
+      <div class="letter" set:html={l.body}></div>
+    </article>
+  ))}
+
+  <hr class="rule container" />
+
+  <section class="container section">
+    <div class="prose">
+      <SectionEyebrow label="Subscription" />
+      <p>
+        The Institute does not, at present, maintain a subscription list for
+        the President's letters. Members of the Founders' Circle and Patrons
+        of the Institute receive the letters by post on the day of issue;
+        other readers are invited to consult this page at the close of each
+        quarter. The current letter is posted no later than the last
+        business day of the quarter to which it pertains.
+      </p>
+    </div>
+  </section>
+</Base>
+
+<style>
+  .section { padding-block: var(--s-6); }
+  .lh { margin-bottom: var(--s-5); }
+  .lh__date {
+    font-family: var(--font-sans);
+    font-size: 0.78rem;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--brand-orange);
+    margin: 0 0 var(--s-3);
+  }
+  .lh__subject {
+    font-family: var(--font-serif);
+    font-size: clamp(1.75rem, 3vw, 2.25rem);
+    font-weight: 600;
+    color: var(--ink-navy);
+    margin: 0;
+    font-style: italic;
+    line-height: 1.2;
+  }
+  .letter {
+    font-family: var(--font-serif);
+    font-size: 1.05rem;
+    line-height: 1.7;
+    color: var(--ink-navy);
+    max-width: 50rem;
+    padding: var(--s-6);
+    background: color-mix(in oklab, var(--parchment) 96%, var(--brand-olive));
+    border-left: 3px solid var(--brand-orange);
+  }
+  .letter :global(p) { margin: 0 0 var(--s-4); }
+  .letter :global(p:last-child) { margin-bottom: 0; }
+  .letter :global(.sig) {
+    font-family: var(--font-serif);
+    font-style: italic;
+    color: var(--brand-olive);
+    margin-top: var(--s-5);
+  }
+</style>

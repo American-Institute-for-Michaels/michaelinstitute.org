@@ -1,0 +1,146 @@
+---
+import Base from '../layouts/Base.astro';
+import Masthead from '../components/Masthead.astro';
+
+interface Departed {
+  name: string;
+  span: string;
+  chapter?: string;
+  remembrance: string;
+}
+
+const departed: ReadonlyArray<Departed> = [
+  {
+    name: 'Michael Faraday',
+    span: '1791 — 1867',
+    remembrance: 'Honorary fellow of the Institute, conferred in retrospect by special resolution. We mark the anniversary of his passing each August by reading aloud, at the Boston seat, a brief passage from the eleventh series of the <em>Experimental Researches</em>.',
+  },
+  {
+    name: 'Michael Crichton',
+    span: '1942 — 2008',
+    remembrance: 'Fellow in the second class of recognized Notable Michaels. The Institute regrets that the recognition was conferred posthumously and does not, on the whole, regard posthumous recognition as a satisfactory practice.',
+  },
+  {
+    name: 'Michael Halloran',
+    span: '1928 — 2018',
+    chapter: 'Boston',
+    remembrance: 'Father of the present Boston chapter coordinator. Mr. Halloran was not himself a member of the Institute but was, by the testimony of those who knew him, the kind of patient civic figure the Institute was, in its founding years, attempting to describe.',
+  },
+  {
+    name: 'Michael Tippett',
+    span: '1905 — 1998',
+    remembrance: 'Fellow, conferred posthumously upon the unanimous recommendation of the Standing Committee on Notability. The Institute observes the anniversary of his birth by playing, at the Boston seat, a recording of <em>The Mask of Time</em> in its entirety.',
+  },
+  {
+    name: 'Mihály Kádár',
+    span: '1934 — 2024',
+    chapter: 'Budapest',
+    remembrance: 'Founding coordinator of the Budapest chapter. A retired schoolmaster of the small-town variety, Mr. Kádár brought to the chartering of the chapter a degree of patient seriousness the Institute will not soon see equalled. We extend our condolences to his family and to the chapter he leaves behind.',
+  },
+  {
+    name: 'Michael Glass',
+    span: '1962 — 2025',
+    chapter: 'Chicago',
+    remembrance: 'Member in good standing of the Chicago chapter from its chartering in 2021 until his sudden passing in the spring of 2025. The Institute remembers Mr. Glass for the small kindnesses by which he made the chapter\'s convenings the warmer for his presence.',
+  },
+  {
+    name: 'Michael Aoki',
+    span: '1947 — 2023',
+    chapter: 'Tokyo',
+    remembrance: 'Founding contact of what would, in 2022, become the Tokyo chapter. Mr. Aoki was, at the time of the chapter\'s formal chartering, too unwell to assume the coordinator\'s role, but was present in correspondence throughout the application process.',
+  },
+  {
+    name: 'Mick Halloran',
+    span: '1955 — 2024',
+    chapter: 'Dublin',
+    remembrance: 'Honorary Michael, conferred in 2017, in recognition of his support for the chartering of the Dublin chapter in the years preceding his lapse into ill-health. He was, by his own insistence, a Mick rather than a Michael.',
+  },
+];
+---
+<Base title="In Memoriam" description="The Institute records, in this place, the names of departed members and friends.">
+  <Masthead
+    eyebrow="In Memoriam"
+    title="In remembrance."
+    lede="It is with sorrow, and in the conviction that the small civic body owes the dead a quiet attention, that the Institute records below the names of departed members and friends. The list is incomplete; corrections and additions may be addressed to the Recording Secretary."
+  />
+
+  <section class="container section">
+    <ol class="memorial">
+      {departed.map((d) => (
+        <li class="dep">
+          <p class="dep__name">{d.name}</p>
+          <p class="dep__span">{d.span}</p>
+          {d.chapter && <p class="dep__chapter">{d.chapter} chapter</p>}
+          <p class="dep__remembrance" set:html={d.remembrance}></p>
+        </li>
+      ))}
+    </ol>
+  </section>
+
+  <section class="container section">
+    <div class="prose closing">
+      <p><em>Requiescant.</em></p>
+    </div>
+  </section>
+</Base>
+
+<style>
+  .section { padding-block: var(--s-6); }
+  .memorial {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    border-top: 2px solid var(--ink-navy);
+  }
+  .dep {
+    padding: var(--s-7) 0;
+    border-bottom: 1px solid var(--rule);
+    text-align: center;
+    max-width: 50rem;
+    margin: 0 auto;
+  }
+  .dep__name {
+    font-family: var(--font-serif);
+    font-size: clamp(1.5rem, 3vw, 2.25rem);
+    font-style: italic;
+    font-weight: 600;
+    color: var(--ink-navy);
+    margin: 0 0 var(--s-3);
+    line-height: 1.2;
+  }
+  .dep__span {
+    font-family: var(--font-serif);
+    font-size: 1.05rem;
+    color: var(--brand-olive);
+    margin: 0 0 var(--s-2);
+    font-variant-numeric: tabular-nums;
+  }
+  .dep__chapter {
+    font-family: var(--font-sans);
+    font-size: 0.78rem;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--brand-orange);
+    margin: 0 0 var(--s-4);
+  }
+  .dep__remembrance {
+    font-family: var(--font-serif);
+    font-size: 1rem;
+    line-height: 1.65;
+    color: var(--ink-navy);
+    margin: 0;
+    font-style: italic;
+    max-width: 36rem;
+    margin-inline: auto;
+  }
+  .closing {
+    text-align: center;
+    margin-top: var(--s-7);
+  }
+  .closing em {
+    font-family: var(--font-serif);
+    font-size: 1.5rem;
+    color: var(--brand-olive);
+    letter-spacing: 0.04em;
+  }
+</style>

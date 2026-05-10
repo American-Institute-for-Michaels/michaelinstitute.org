@@ -1,0 +1,318 @@
+---
+import Base from '../layouts/Base.astro';
+import Masthead from '../components/Masthead.astro';
+---
+<Base title="The Mike Test" description="An interactive self-assessment for those who wonder whether they ought to be considered a Michael.">
+  <Masthead
+    eyebrow="Self-Assessment"
+    title="The Mike Test."
+    lede="A short and informal instrument administered, in the spirit of self-knowledge, by the Standing Committee on Notability. Ten questions; no time limit. Your answers are evaluated locally on your device and are not transmitted to the Institute. The Committee declines, in any case, to be bound by the result."
+  />
+
+  <section class="container section">
+    <form id="mike" class="quiz">
+      <ol class="questions">
+        <li class="q" data-q="1">
+          <p class="q__num">Question I</p>
+          <p class="q__prompt">Are you, in fact, named Michael (or any standardized variant)?</p>
+          <div class="q__opts">
+            <label><input type="radio" name="q1" value="20"> Yes, in the canonical form</label>
+            <label><input type="radio" name="q1" value="18"> Yes, in a standardized variant</label>
+            <label><input type="radio" name="q1" value="14"> Yes, but in the diminutive only (Mike, Mickey, Mick)</label>
+            <label><input type="radio" name="q1" value="6"> No, but the matter is open to remedy</label>
+            <label><input type="radio" name="q1" value="0"> No, and I do not propose to do anything about it</label>
+          </div>
+        </li>
+
+        <li class="q" data-q="2">
+          <p class="q__num">Question II</p>
+          <p class="q__prompt">When asked your name in a noisy room, you find yourself most often heard as:</p>
+          <div class="q__opts">
+            <label><input type="radio" name="q2" value="10"> Michael (correctly)</label>
+            <label><input type="radio" name="q2" value="8"> Mitchell</label>
+            <label><input type="radio" name="q2" value="7"> Michelle</label>
+            <label><input type="radio" name="q2" value="5"> Marcel</label>
+            <label><input type="radio" name="q2" value="3"> A name I do not recognize at all</label>
+            <label><input type="radio" name="q2" value="0"> The question does not arise</label>
+          </div>
+        </li>
+
+        <li class="q" data-q="3">
+          <p class="q__num">Question III</p>
+          <p class="q__prompt">In a professional setting where another Michael is present, you most often:</p>
+          <div class="q__opts">
+            <label><input type="radio" name="q3" value="10"> Add a clarifying initial or surname without complaint</label>
+            <label><input type="radio" name="q3" value="9"> Defer to whichever Michael arrived first</label>
+            <label><input type="radio" name="q3" value="7"> Quietly become "the other Michael" for the duration</label>
+            <label><input type="radio" name="q3" value="3"> Consider it an imposition</label>
+            <label><input type="radio" name="q3" value="0"> Have not encountered this</label>
+          </div>
+        </li>
+
+        <li class="q" data-q="4">
+          <p class="q__num">Question IV</p>
+          <p class="q__prompt">When introduced to a Michael for the first time, your customary response is:</p>
+          <div class="q__opts">
+            <label><input type="radio" name="q4" value="10"> A small acknowledgment of the shared name, by way of pleasantry</label>
+            <label><input type="radio" name="q4" value="7"> No acknowledgment; it is, after all, a common name</label>
+            <label><input type="radio" name="q4" value="5"> A more elaborate acknowledgment than the situation strictly requires</label>
+            <label><input type="radio" name="q4" value="2"> A query as to whether the new Michael is "a real Michael"</label>
+          </div>
+        </li>
+
+        <li class="q" data-q="5">
+          <p class="q__num">Question V</p>
+          <p class="q__prompt">You are most likely to read a long article on a topic about which you know nothing if it is written by a Michael.</p>
+          <div class="q__opts">
+            <label><input type="radio" name="q5" value="10"> Strongly agree</label>
+            <label><input type="radio" name="q5" value="7"> Agree</label>
+            <label><input type="radio" name="q5" value="5"> Neutral</label>
+            <label><input type="radio" name="q5" value="2"> Disagree</label>
+            <label><input type="radio" name="q5" value="0"> Strongly disagree</label>
+          </div>
+        </li>
+
+        <li class="q" data-q="6">
+          <p class="q__num">Question VI</p>
+          <p class="q__prompt">In the conduct of your public and professional life, you would, if pressed, describe yourself as:</p>
+          <div class="q__opts">
+            <label><input type="radio" name="q6" value="10"> Patient and slow to anger</label>
+            <label><input type="radio" name="q6" value="8"> Patient under most circumstances</label>
+            <label><input type="radio" name="q6" value="5"> Patient when the situation warrants</label>
+            <label><input type="radio" name="q6" value="2"> Quick and decisive, more than patient</label>
+            <label><input type="radio" name="q6" value="1"> The question does not apply</label>
+          </div>
+        </li>
+
+        <li class="q" data-q="7">
+          <p class="q__num">Question VII</p>
+          <p class="q__prompt">You have, in the preceding twelve months, performed at least one act of demonstrable benefit to a fellow Michael with no expectation of reciprocation.</p>
+          <div class="q__opts">
+            <label><input type="radio" name="q7" value="10"> Yes, demonstrably</label>
+            <label><input type="radio" name="q7" value="7"> Yes, in spirit if not in deed</label>
+            <label><input type="radio" name="q7" value="5"> No, but the opportunity has not arisen</label>
+            <label><input type="radio" name="q7" value="0"> No, and I do not see why I should</label>
+          </div>
+        </li>
+
+        <li class="q" data-q="8">
+          <p class="q__num">Question VIII</p>
+          <p class="q__prompt">When a clerk misspells your name on a document, you most often:</p>
+          <div class="q__opts">
+            <label><input type="radio" name="q8" value="10"> Politely correct the spelling for the record</label>
+            <label><input type="radio" name="q8" value="7"> Allow the misspelling to stand if it is unlikely to recur</label>
+            <label><input type="radio" name="q8" value="4"> Adopt the misspelling for the duration of the engagement</label>
+            <label><input type="radio" name="q8" value="2"> Find the matter inexplicably distressing for some hours afterward</label>
+          </div>
+        </li>
+
+        <li class="q" data-q="9">
+          <p class="q__num">Question IX</p>
+          <p class="q__prompt">The Institute's motto is <em>Per nomen, communitas</em>. You read this, in the principal sense, as:</p>
+          <div class="q__opts">
+            <label><input type="radio" name="q9" value="10"> "Through the name, community"</label>
+            <label><input type="radio" name="q9" value="6"> "By way of the name, society"</label>
+            <label><input type="radio" name="q9" value="3"> A motto of the kind one expects to find on a small civic body's letterhead</label>
+            <label><input type="radio" name="q9" value="0"> Latin which I have not, on the whole, attempted to translate</label>
+          </div>
+        </li>
+
+        <li class="q" data-q="10">
+          <p class="q__num">Question X</p>
+          <p class="q__prompt">Are you, on reflection, prepared to be bound by the Institute's bylaws, including in particular Article III?</p>
+          <div class="q__opts">
+            <label><input type="radio" name="q10" value="10"> Yes, having read them</label>
+            <label><input type="radio" name="q10" value="7"> Yes, conditional upon a sympathetic reading</label>
+            <label><input type="radio" name="q10" value="3"> Open to discussion</label>
+            <label><input type="radio" name="q10" value="0"> No</label>
+          </div>
+        </li>
+      </ol>
+
+      <button type="submit" class="submit">Compute Result</button>
+    </form>
+
+    <div id="result" class="result" hidden>
+      <p class="result__eyebrow">Result of Self-Assessment</p>
+      <h2 class="result__head" id="result-head"></h2>
+      <p class="result__score">Composite score: <strong id="result-score"></strong> / 100</p>
+      <p class="result__body" id="result-body"></p>
+      <p class="result__disclaimer">
+        The Standing Committee on Notability declines, in any case, to be
+        bound by this result, and reserves the sole authority to grant,
+        withhold, or revoke fellowship status. See the
+        <a href="/fellowship">fellowship application</a> for the proper
+        procedure.
+      </p>
+      <button type="button" id="retake" class="retake">Take the test again</button>
+    </div>
+  </section>
+</Base>
+
+<script is:inline>
+(function() {
+  const form = document.getElementById('mike');
+  const result = document.getElementById('result');
+  const head = document.getElementById('result-head');
+  const score = document.getElementById('result-score');
+  const body = document.getElementById('result-body');
+  const retake = document.getElementById('retake');
+  if (!form || !result) return;
+
+  function classify(s) {
+    if (s >= 90) return {
+      head: 'A Michael of the First Rank.',
+      body: 'The Committee, on the strength of this result, is pleased to extend its informal recognition. You comport yourself in a manner conformable to the Institute\'s standing expectations. Submit the formal application at your convenience.'
+    };
+    if (s >= 75) return {
+      head: 'A Michael in Good Standing.',
+      body: 'The Committee, on the strength of this result, would receive a formal application with sympathy. Some refinement of disposition may be advisable in the period preceding the next sitting.'
+    };
+    if (s >= 60) return {
+      head: 'Provisional Michael.',
+      body: 'The Committee declines, on this evidence alone, to issue a final determination. The result is suggestive but inconclusive; further observation, or a sponsoring fellow of standing, would be welcomed.'
+    };
+    if (s >= 40) return {
+      head: 'A Michael in Aspiration.',
+      body: 'The Committee, in the kindest possible reading, finds that the qualities of standing Michael-hood are present in part but not in the requisite measure. Continued exposure to the Institute\'s proceedings, by attendance at chapter convenings, may be of use.'
+    };
+    if (s >= 20) return {
+      head: 'Honorary Michael, Plausibly.',
+      body: 'The Committee, on the strength of this result, would entertain a petition for honorary status under Article VII §3. Direct fellowship is not, on this evidence, recommended.'
+    };
+    return {
+      head: 'Not, on Reflection, a Michael.',
+      body: 'The Committee finds, on the available evidence, that the canonical disposition is not present. The Institute is not the appropriate body for your civic affiliations; we wish you well in your other endeavors.'
+    };
+  }
+
+  form.addEventListener('submit', function(e) {
+    e.preventDefault();
+    var total = 0;
+    var answered = 0;
+    for (var i = 1; i <= 10; i++) {
+      var sel = form.querySelector('input[name="q' + i + '"]:checked');
+      if (sel) { total += parseInt(sel.value, 10); answered++; }
+    }
+    if (answered < 10) {
+      alert('Please answer all ten questions.');
+      return;
+    }
+    var c = classify(total);
+    head.textContent = c.head;
+    score.textContent = total;
+    body.textContent = c.body;
+    form.hidden = true;
+    result.hidden = false;
+    result.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  });
+
+  retake.addEventListener('click', function() {
+    form.reset();
+    form.hidden = false;
+    result.hidden = true;
+    form.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  });
+})();
+</script>
+
+<style>
+  .section { padding-block: var(--s-6); }
+  .quiz { max-width: 50rem; }
+  .questions { list-style: none; padding: 0; margin: 0; }
+  .q {
+    padding: var(--s-6) 0;
+    border-top: 1px solid var(--rule);
+  }
+  .q__num {
+    font-family: var(--font-sans);
+    font-size: 0.78rem;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--brand-orange);
+    font-weight: 600;
+    margin: 0 0 var(--s-3);
+  }
+  .q__prompt {
+    font-family: var(--font-serif);
+    font-size: 1.2rem;
+    line-height: 1.4;
+    color: var(--ink-navy);
+    margin: 0 0 var(--s-4);
+  }
+  .q__opts {
+    display: flex;
+    flex-direction: column;
+    gap: var(--s-3);
+  }
+  .q__opts label {
+    display: flex;
+    align-items: flex-start;
+    gap: var(--s-3);
+    font-family: var(--font-serif);
+    font-size: 1rem;
+    color: var(--ink-navy);
+    cursor: pointer;
+    padding: var(--s-2) 0;
+  }
+  .q__opts input { margin-top: 0.4em; }
+  .submit, .retake {
+    background: var(--brand-orange);
+    color: var(--ink-navy);
+    border: none;
+    padding: var(--s-3) var(--s-6);
+    font-family: var(--font-sans);
+    font-size: 0.85rem;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    font-weight: 600;
+    cursor: pointer;
+    margin-top: var(--s-5);
+  }
+  .submit:hover, .retake:hover { background: color-mix(in oklab, var(--brand-orange) 88%, var(--ink-navy)); }
+  .result {
+    padding: var(--s-7);
+    border: 1px solid var(--rule);
+    background: color-mix(in oklab, var(--parchment) 94%, var(--brand-olive));
+    max-width: 50rem;
+  }
+  .result__eyebrow {
+    font-family: var(--font-sans);
+    font-size: 0.78rem;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--brand-orange);
+    margin: 0 0 var(--s-3);
+  }
+  .result__head {
+    font-family: var(--font-serif);
+    font-size: clamp(1.75rem, 3vw, 2.5rem);
+    font-weight: 600;
+    color: var(--ink-navy);
+    margin: 0 0 var(--s-3);
+    line-height: 1.15;
+  }
+  .result__score {
+    font-family: var(--font-sans);
+    font-size: 0.95rem;
+    color: var(--brand-olive);
+    margin: 0 0 var(--s-4);
+  }
+  .result__score strong { color: var(--brand-orange); font-size: 1.5rem; font-variant-numeric: tabular-nums; }
+  .result__body {
+    font-family: var(--font-serif);
+    font-size: 1.1rem;
+    line-height: 1.6;
+    color: var(--ink-navy);
+    margin: 0 0 var(--s-5);
+  }
+  .result__disclaimer {
+    font-family: var(--font-serif);
+    font-size: 0.9rem;
+    font-style: italic;
+    color: var(--muted);
+    margin: 0 0 var(--s-5);
+    padding-top: var(--s-4);
+    border-top: 1px solid var(--rule);
+  }
+</style>

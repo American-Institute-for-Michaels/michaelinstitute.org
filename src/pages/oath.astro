@@ -1,0 +1,306 @@
+---
+import Base from '../layouts/Base.astro';
+import Masthead from '../components/Masthead.astro';
+import SectionEyebrow from '../components/SectionEyebrow.astro';
+---
+<Base title="The Oath of the Michael" description="The full text of the Oath of the Michael, with provision for recital and certification.">
+  <Masthead
+    eyebrow="Rite of Affirmation"
+    title="The Oath of the Michael."
+    lede="The Oath is the Institute's principal rite of affirmation. It is, by long tradition, recited aloud at the chartering of every chapter and at the seating of every fellow. Members in good standing may, on this page, read it for themselves. A small printed certificate is offered to those who do."
+  />
+
+  <section class="container section">
+    <SectionEyebrow index="I" label="The Text" />
+    <article class="oath" id="oath-text">
+      <p>I, <em class="placeholder" id="name-display">[a Michael]</em>, do solemnly affirm:</p>
+      <p>That I shall conduct myself, in my public and professional life, in a manner which I would be willing to defend before the Board of the Institute;</p>
+      <p>That I shall, where the occasion permits, extend to my fellow Michaels the small kindnesses by which a community is made;</p>
+      <p>That I shall favor patience over urgency, and the slow patient work of the years over the quick gesture of the moment;</p>
+      <p>That I shall not bring the Institute, by my conduct, into disrepute;</p>
+      <p>That I shall, where I find myself unable to honor the foregoing, withdraw with the dignity proper to the matter, rather than persist in standing without merit;</p>
+      <p>And that I shall hold these undertakings in good faith, for so long as I am, by accident or by election, a Michael.</p>
+      <p class="oath__close">So affirmed, this <em id="date-display">[date]</em>.</p>
+    </article>
+  </section>
+
+  <hr class="rule container" />
+
+  <section class="container section">
+    <SectionEyebrow index="II" label="Recital" />
+    <div class="recital">
+      <label class="name-input">
+        <span>Your name (for the affirmation)</span>
+        <input type="text" id="name-field" placeholder="Michael ___" />
+      </label>
+      <div class="actions">
+        <button type="button" id="speak" class="btn">Read aloud</button>
+        <button type="button" id="stop" class="btn btn--ghost" hidden>Stop</button>
+        <button type="button" id="certify" class="btn">Issue certificate</button>
+      </div>
+      <p class="recital__note">
+        The "Read aloud" function uses your device's speech synthesis. The
+        Institute makes no representation as to the dignity with which any
+        particular synthesizer will render the text.
+      </p>
+    </div>
+  </section>
+
+  <section class="container section" id="cert-section" hidden>
+    <SectionEyebrow index="III" label="Certificate" />
+    <div class="cert-wrap">
+      <article class="cert" id="cert">
+        <div class="cert__seal">M</div>
+        <p class="cert__institute">The American Institute for Michaels</p>
+        <p class="cert__rule">— ✦ —</p>
+        <p class="cert__heading">Certificate of the Oath</p>
+        <p class="cert__body">This is to certify that</p>
+        <p class="cert__name" id="cert-name"></p>
+        <p class="cert__body">has, on the date set out below, recited the Oath of the Michael in due and proper form, and is hereby acknowledged a Michael of the affirming kind.</p>
+        <div class="cert__feet">
+          <div class="cert__signature">
+            <p class="cert__sigline">M. Doyle</p>
+            <p class="cert__sigrole">President</p>
+          </div>
+          <div class="cert__date">
+            <p class="cert__sigline" id="cert-date"></p>
+            <p class="cert__sigrole">Date of Affirmation</p>
+          </div>
+        </div>
+      </article>
+      <div class="cert__actions">
+        <button type="button" id="print" class="btn">Print certificate</button>
+      </div>
+    </div>
+  </section>
+
+  <section class="container section">
+    <div class="prose">
+      <SectionEyebrow index="IV" label="Notes" />
+      <p>
+        The Oath, in its present form, was adopted by the Board on the
+        twelfth of October, 2020 &mdash; the date of the founding convocation
+        &mdash; and has not since been amended. The text is the property of
+        the Institute and may be reproduced for personal, ceremonial, or
+        academic purposes; commercial reproduction requires the written
+        consent of the President.
+      </p>
+      <p>
+        The certificate generated on this page is informal. Members in good
+        standing who wish to receive a formal certificate, struck on the
+        Institute's heavy stock and embossed at the seat, should write to
+        the Recording Secretary in due course.
+      </p>
+    </div>
+  </section>
+</Base>
+
+<script is:inline>
+(function() {
+  const nameField = document.getElementById('name-field');
+  const nameDisplay = document.getElementById('name-display');
+  const dateDisplay = document.getElementById('date-display');
+  const oathText = document.getElementById('oath-text');
+  const speakBtn = document.getElementById('speak');
+  const stopBtn = document.getElementById('stop');
+  const certifyBtn = document.getElementById('certify');
+  const certSection = document.getElementById('cert-section');
+  const certName = document.getElementById('cert-name');
+  const certDate = document.getElementById('cert-date');
+  const printBtn = document.getElementById('print');
+
+  const today = new Date();
+  const months = ['January','February','March','April','May','June','July','August','September','October','November','December'];
+  const ord = function(n) {
+    if (n >= 11 && n <= 13) return n + 'th';
+    var s = n % 10;
+    return n + (s === 1 ? 'st' : s === 2 ? 'nd' : s === 3 ? 'rd' : 'th');
+  };
+  const formatted = ord(today.getDate()) + ' day of ' + months[today.getMonth()] + ', ' + today.getFullYear();
+  dateDisplay.textContent = formatted;
+
+  nameField.addEventListener('input', function() {
+    var v = nameField.value.trim();
+    nameDisplay.textContent = v || '[a Michael]';
+  });
+
+  let utter = null;
+  speakBtn.addEventListener('click', function() {
+    if (!('speechSynthesis' in window)) {
+      alert('This device does not support speech synthesis.');
+      return;
+    }
+    var text = oathText.innerText;
+    utter = new SpeechSynthesisUtterance(text);
+    utter.rate = 0.92;
+    utter.pitch = 1.0;
+    utter.onend = function() { stopBtn.hidden = true; };
+    speechSynthesis.speak(utter);
+    stopBtn.hidden = false;
+  });
+  stopBtn.addEventListener('click', function() {
+    speechSynthesis.cancel();
+    stopBtn.hidden = true;
+  });
+
+  certifyBtn.addEventListener('click', function() {
+    var v = nameField.value.trim();
+    if (!v) {
+      alert('A name is required for the certificate.');
+      nameField.focus();
+      return;
+    }
+    certName.textContent = v;
+    certDate.textContent = formatted;
+    certSection.hidden = false;
+    certSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  });
+
+  printBtn.addEventListener('click', function() {
+    window.print();
+  });
+})();
+</script>
+
+<style>
+  .section { padding-block: var(--s-6); }
+  .oath {
+    font-family: var(--font-serif);
+    font-size: 1.15rem;
+    line-height: 1.7;
+    color: var(--ink-navy);
+    max-width: 48rem;
+    padding: var(--s-7);
+    background: color-mix(in oklab, var(--parchment) 96%, var(--brand-olive));
+    border-left: 3px solid var(--brand-orange);
+  }
+  .oath p { margin: 0 0 var(--s-4); }
+  .oath p:last-child { margin-bottom: 0; }
+  .oath__close {
+    margin-top: var(--s-5);
+    padding-top: var(--s-4);
+    border-top: 1px solid var(--rule);
+    font-style: italic;
+    color: var(--brand-olive);
+  }
+  .placeholder { color: var(--brand-orange); font-style: italic; }
+  .recital { display: flex; flex-direction: column; gap: var(--s-4); max-width: 36rem; }
+  .name-input { display: flex; flex-direction: column; gap: var(--s-2); }
+  .name-input span {
+    font-family: var(--font-sans);
+    font-size: 0.85rem;
+    color: var(--brand-olive);
+  }
+  .name-input input {
+    font-family: var(--font-serif);
+    font-size: 1rem;
+    padding: var(--s-3);
+    background: var(--parchment);
+    border: 1px solid var(--rule);
+    color: var(--ink-navy);
+  }
+  .actions { display: flex; flex-wrap: wrap; gap: var(--s-3); }
+  .btn {
+    background: var(--brand-orange);
+    color: var(--ink-navy);
+    border: none;
+    padding: var(--s-3) var(--s-5);
+    font-family: var(--font-sans);
+    font-size: 0.85rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    font-weight: 600;
+    cursor: pointer;
+  }
+  .btn--ghost { background: transparent; border: 1px solid var(--brand-orange); color: var(--brand-orange); }
+  .recital__note {
+    font-family: var(--font-serif);
+    font-style: italic;
+    font-size: 0.9rem;
+    color: var(--muted);
+    margin: 0;
+  }
+
+  .cert-wrap { max-width: 56rem; }
+  .cert {
+    background: var(--parchment);
+    border: 4px double var(--brand-olive);
+    padding: var(--s-9) var(--s-8);
+    text-align: center;
+    font-family: var(--font-serif);
+    color: var(--ink-navy);
+    box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+  }
+  .cert__seal {
+    width: 4rem;
+    height: 4rem;
+    background: var(--brand-olive);
+    color: var(--parchment);
+    font-size: 2.5rem;
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto var(--s-5);
+    border-radius: 50%;
+  }
+  .cert__institute {
+    font-size: 0.85rem;
+    letter-spacing: 0.24em;
+    text-transform: uppercase;
+    color: var(--brand-olive);
+    margin: 0 0 var(--s-3);
+    font-family: var(--font-sans);
+    font-weight: 600;
+  }
+  .cert__rule { color: var(--brand-orange); margin: 0 0 var(--s-5); letter-spacing: 0.6em; }
+  .cert__heading {
+    font-size: clamp(1.75rem, 3vw, 2.5rem);
+    font-style: italic;
+    font-weight: 600;
+    margin: 0 0 var(--s-6);
+    line-height: 1.2;
+  }
+  .cert__body { font-size: 1.05rem; margin: 0 0 var(--s-3); }
+  .cert__name {
+    font-size: clamp(2rem, 4vw, 3rem);
+    font-weight: 600;
+    color: var(--brand-orange);
+    margin: var(--s-4) 0;
+    line-height: 1.2;
+    letter-spacing: 0.02em;
+  }
+  .cert__feet {
+    display: flex;
+    justify-content: space-between;
+    margin-top: var(--s-8);
+    gap: var(--s-5);
+    flex-wrap: wrap;
+  }
+  .cert__signature, .cert__date { flex: 1; min-width: 12rem; }
+  .cert__sigline {
+    font-family: var(--font-serif);
+    font-style: italic;
+    font-size: 1.15rem;
+    color: var(--ink-navy);
+    border-bottom: 1px solid var(--ink-navy);
+    padding-bottom: var(--s-1);
+    margin: 0;
+  }
+  .cert__sigrole {
+    font-family: var(--font-sans);
+    font-size: 0.7rem;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--brand-olive);
+    margin: var(--s-2) 0 0;
+  }
+  .cert__actions { margin-top: var(--s-5); }
+
+  @media print {
+    header, footer, .masthead, nav, .recital, .section:not(#cert-section), #cert-section h2, #cert-section .eyebrow, .cert__actions { display: none !important; }
+    body, .cert { background: white !important; }
+    .cert { border-width: 4px; box-shadow: none; }
+    @page { margin: 1cm; }
+  }
+</style>

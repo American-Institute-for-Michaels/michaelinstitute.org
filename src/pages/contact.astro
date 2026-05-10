@@ -1,0 +1,180 @@
+---
+import Base from '../layouts/Base.astro';
+import Masthead from '../components/Masthead.astro';
+import SectionEyebrow from '../components/SectionEyebrow.astro';
+
+interface Department {
+  name: string;
+  description: string;
+  subject: string;
+  responder: string;
+}
+
+const departments: ReadonlyArray<Department> = [
+  {
+    name: 'General Office',
+    description: 'For correspondence not falling under any other department; for first contact; and for matters whose proper department is unclear. The General Office routes inquiries to the appropriate officer within ten business days.',
+    subject: 'General Inquiry',
+    responder: 'The Recording Secretary, by way of the General Office',
+  },
+  {
+    name: 'President\'s Office',
+    description: 'For matters requiring the personal attention of the President: questions of mark application not addressed by the published standards, formal invitations, and matters of institutional policy.',
+    subject: 'President\'s Office',
+    responder: 'The President or his deputy',
+  },
+  {
+    name: 'Recording Secretary',
+    description: 'For corrections to the standing register; nominations to the Standing Committee on Notability; questions about the correspondence files; and the addition or removal of one\'s name from the donor roll.',
+    subject: 'Recording Secretary',
+    responder: 'The Recording Secretary, in writing',
+  },
+  {
+    name: 'The Treasurer',
+    description: 'For matters of patronage exceeding the Founders\' Circle threshold; for arrangements relating to gifts of property, securities, or interest in real estate; and for inquiries regarding the Institute\'s charitable status.',
+    subject: 'The Treasurer',
+    responder: 'The Treasurer, by appointment',
+  },
+  {
+    name: 'Membership Inquiries',
+    description: 'For questions concerning eligibility, the chartering of new chapters, and the procedural particulars of the fellowship application.',
+    subject: 'Membership',
+    responder: 'A delegate of the Membership Committee',
+  },
+  {
+    name: 'Press',
+    description: 'For inquiries from working members of the press. The Institute does not maintain a dedicated press office; queries are directed to the General Office, which endeavors to respond within ten business days. Embargo requests will be honored where reasonable.',
+    subject: 'Press Inquiry',
+    responder: 'The Recording Secretary',
+  },
+  {
+    name: 'Mark Misuse',
+    description: 'For the reporting of unauthorized application of the Institute\'s mark. Members and chapters are reminded of their standing obligation, under Article IX, to report observed misuse to the President\'s office.',
+    subject: 'Mark Misuse',
+    responder: 'The President\'s deputy for trade matters',
+  },
+  {
+    name: 'Bequests',
+    description: 'For inquiries concerning bequests to the Institute. The Treasurer maintains a small library of model language and is pleased to consult on specific testamentary instruments.',
+    subject: 'Bequests',
+    responder: 'The Treasurer, in confidence',
+  },
+];
+---
+<Base title="Contact" description="Departmental directory of the American Institute for Michaels.">
+  <Masthead
+    eyebrow="Directory"
+    title="To reach the Institute."
+    lede="The Institute prefers to receive correspondence in writing. Each department below is reached via the same general line; the subject prefix permits the General Office to route the matter without delay. Acknowledgment is rendered within ten business days under all but the most exceptional circumstances."
+  />
+
+  <section class="container section">
+    <ul class="depts">
+      {departments.map((d) => (
+        <li class="dept">
+          <div class="dept__head">
+            <p class="dept__name">{d.name}</p>
+            <a class="dept__email" href={`mailto:hello@michaelinstitute.org?subject=${encodeURIComponent(d.subject)}`}>hello@michaelinstitute.org</a>
+          </div>
+          <p class="dept__desc">{d.description}</p>
+          <p class="dept__resp">Replies are issued by: <em>{d.responder}</em></p>
+        </li>
+      ))}
+    </ul>
+  </section>
+
+  <hr class="rule container" />
+
+  <section class="container section">
+    <div class="prose">
+      <SectionEyebrow index="I" label="By Post" />
+      <p>
+        The Institute maintains a post office box for matters of a more
+        formal character. Letters of bequest, signed instruments, and
+        correspondence the sender wishes to be archived in the
+        correspondence files should be addressed to:
+      </p>
+      <address class="post">
+        The American Institute for Michaels<br>
+        General Office<br>
+        Post Office Box 1972<br>
+        Boston, Massachusetts &mdash; 02114<br>
+        United States of America
+      </address>
+      <p>
+        We regret that the post office box is, owing to a longstanding
+        peculiarity of the postal service, not visited every day. Items of
+        urgency should be sent by other means.
+      </p>
+    </div>
+  </section>
+
+  <section class="container section">
+    <div class="prose">
+      <SectionEyebrow index="II" label="In Person" />
+      <p>
+        The Institute does not, as a matter of course, receive visitors at
+        its seat. Visiting members and credentialed researchers may arrange
+        access to the correspondence files by prior appointment with the
+        Recording Secretary. Casual drop-in is firmly discouraged.
+      </p>
+    </div>
+  </section>
+</Base>
+
+<style>
+  .section { padding-block: var(--s-6); }
+  .depts { list-style: none; padding: 0; margin: 0; }
+  .dept {
+    padding: var(--s-5) 0;
+    border-top: 1px solid var(--rule);
+  }
+  .dept:last-child { border-bottom: 1px solid var(--rule); }
+  .dept__head {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: baseline;
+    gap: var(--s-3);
+    margin-bottom: var(--s-3);
+  }
+  .dept__name {
+    font-family: var(--font-serif);
+    font-size: 1.4rem;
+    font-weight: 600;
+    color: var(--ink-navy);
+    margin: 0;
+  }
+  .dept__email {
+    font-family: ui-monospace, 'SF Mono', 'Menlo', monospace;
+    font-size: 0.85rem;
+    color: var(--brand-orange);
+    text-decoration: none;
+    border-bottom: 1px solid transparent;
+  }
+  .dept__email:hover { border-bottom-color: var(--brand-orange); }
+  .dept__desc {
+    font-family: var(--font-serif);
+    font-size: 1rem;
+    line-height: 1.6;
+    color: var(--ink-navy);
+    margin: 0 0 var(--s-3);
+  }
+  .dept__resp {
+    font-family: var(--font-sans);
+    font-size: 0.78rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--brand-olive);
+    margin: 0;
+  }
+  .post {
+    font-family: var(--font-serif);
+    font-style: normal;
+    line-height: 1.65;
+    padding: var(--s-5);
+    background: color-mix(in oklab, var(--parchment) 94%, var(--brand-olive));
+    border: 1px solid var(--rule);
+    margin-bottom: var(--s-5);
+  }
+</style>

@@ -1,0 +1,269 @@
+---
+import Base from '../layouts/Base.astro';
+import Masthead from '../components/Masthead.astro';
+import SectionEyebrow from '../components/SectionEyebrow.astro';
+---
+<Base title="Cease and Desist Generator" description="A small utility for the generation of properly mannered notices regarding unauthorized use of the Institute's mark.">
+  <Masthead
+    eyebrow="Mark Enforcement"
+    title="Cease and desist."
+    lede="A small utility for the generation of properly mannered notices in cases of unauthorized application of the Institute's mark. The notice produced below is offered for entertainment and instructional purposes; the issuance of formal cease-and-desist correspondence is the exclusive prerogative of the President's office."
+  />
+
+  <section class="container section">
+    <SectionEyebrow index="I" label="Particulars of the Infringement" />
+    <form id="cd-form" class="form">
+      <div class="row">
+        <label>
+          <span>Name of the offending party</span>
+          <input type="text" id="party" placeholder="The American Institute for Michelangelos, Inc." required />
+        </label>
+        <label>
+          <span>Postal address (or principal place of business)</span>
+          <input type="text" id="address" placeholder="123 Main Street, Anytown, USA" required />
+        </label>
+      </div>
+      <label>
+        <span>Nature of the infringement</span>
+        <select id="nature" required>
+          <option value="">— Select —</option>
+          <option>Application of the mark to a perishable consumable good</option>
+          <option>Reproduction of the mark in a typeface other than Source Serif 4</option>
+          <option>Animation, rotation, or distortion of the mark</option>
+          <option>Application of the mark to athletic or recreational apparel</option>
+          <option>Juxtaposition of the mark with the marks of another organization</option>
+          <option>Use of the mark accompanied by an exclamation point</option>
+          <option>Misappropriation of the institutional wordmark</option>
+          <option>Unauthorized claim of fellowship or honorary status</option>
+        </select>
+      </label>
+      <div class="row">
+        <label>
+          <span>Date upon which the infringement was first observed</span>
+          <input type="date" id="observed" required />
+        </label>
+        <label>
+          <span>Tone of the notice</span>
+          <select id="tone">
+            <option value="firm">Firm but courteous (recommended)</option>
+            <option value="grave">Grave and imposing</option>
+            <option value="patient">Patient and instructive</option>
+            <option value="final">Final and unambiguous</option>
+          </select>
+        </label>
+      </div>
+      <label>
+        <span>Specific instance (a brief description, in your own words)</span>
+        <textarea id="instance" rows="3" placeholder="The offending party has, on the website at..."></textarea>
+      </label>
+      <button type="submit" class="btn">Generate Notice</button>
+    </form>
+  </section>
+
+  <section class="container section" id="output-section" hidden>
+    <SectionEyebrow index="II" label="Generated Notice" />
+    <article class="letter" id="output">
+      <!-- generated -->
+    </article>
+    <div class="actions">
+      <button type="button" id="print" class="btn">Print</button>
+      <button type="button" id="copy" class="btn btn--ghost">Copy to Clipboard</button>
+    </div>
+    <p class="caveat">
+      The above is a draft for personal use. The Institute disclaims all
+      liability for any consequence of its transmission to a third party.
+      Formal cease-and-desist correspondence in the Institute's name may be
+      issued only by the President or the President's deputy.
+    </p>
+  </section>
+</Base>
+
+<script is:inline>
+(function() {
+  const form = document.getElementById('cd-form');
+  const out = document.getElementById('output');
+  const section = document.getElementById('output-section');
+  const printBtn = document.getElementById('print');
+  const copyBtn = document.getElementById('copy');
+  if (!form) return;
+
+  const months = ['January','February','March','April','May','June','July','August','September','October','November','December'];
+
+  function formatDate(d) {
+    return d.getDate() + ' ' + months[d.getMonth()] + ' ' + d.getFullYear();
+  }
+
+  function ord(n) {
+    if (n >= 11 && n <= 13) return n + 'th';
+    var s = n % 10;
+    return n + (s === 1 ? 'st' : s === 2 ? 'nd' : s === 3 ? 'rd' : 'th');
+  }
+
+  const tones = {
+    firm: {
+      opener: 'It has come to the attention of the Office of the President of the American Institute for Michaels',
+      closer: 'We are confident that this matter, having now been brought to your notice, will be resolved without recourse to further measures. We would prefer not to write again on the subject.',
+    },
+    grave: {
+      opener: 'It is with the gravity proper to the subject that the Office of the President of the American Institute for Michaels addresses you',
+      closer: 'You are advised, in the strongest terms permitted by the standing decorum of this office, that the matter is regarded as one of substance, and that further steps shall be taken in the absence of prompt remedy.',
+    },
+    patient: {
+      opener: 'It has come, by way of the routine vigilance which the Institute extends to the application of its mark, to the attention of this office',
+      closer: 'The Institute is, by inclination and by long practice, disposed to assume that infringements of this kind arise from misunderstanding rather than from intent. We extend to you the courtesy of that assumption, and ask that you take the present notice in the spirit in which it is offered.',
+    },
+    final: {
+      opener: 'You are hereby formally notified, by the Office of the President of the American Institute for Michaels',
+      closer: 'This is the final notice that shall be extended in this matter. Failure to remedy the infringement within thirty (30) calendar days of the date of this letter shall result in the matter being committed to such further measures as the Institute and its counsel deem appropriate.',
+    },
+  };
+
+  form.addEventListener('submit', function(e) {
+    e.preventDefault();
+    var party = document.getElementById('party').value.trim();
+    var address = document.getElementById('address').value.trim();
+    var nature = document.getElementById('nature').value;
+    var observedRaw = document.getElementById('observed').value;
+    var tone = document.getElementById('tone').value;
+    var instance = document.getElementById('instance').value.trim();
+    if (!party || !address || !nature || !observedRaw) return;
+
+    var observed = new Date(observedRaw);
+    var today = new Date();
+    var t = tones[tone];
+
+    var html = '';
+    html += '<p class="letterhead">The American Institute for Michaels</p>';
+    html += '<p class="letterhead-sub">Office of the President · Boston, Massachusetts</p>';
+    html += '<p class="date">' + formatDate(today) + '</p>';
+    html += '<p class="addressee"><strong>' + party + '</strong><br>' + address + '</p>';
+    html += '<p class="re"><strong>Re:</strong> Unauthorized application of the Institute\'s mark.</p>';
+    html += '<p>To the principals of <em>' + party + '</em>, &mdash;</p>';
+    html += '<p>' + t.opener + ' that you have, on or about the ' + ord(observed.getDate()) + ' day of ' + months[observed.getMonth()] + ', ' + observed.getFullYear() + ', engaged in conduct constituting <em>' + nature.toLowerCase() + '</em>';
+    if (instance) html += ' &mdash; specifically, that ' + instance.toLowerCase().replace(/\.$/, '') + '.';
+    else html += '.';
+    html += '</p>';
+    html += '<p>The Institute\'s mark is governed, in all its applications, by the standards published in our wordmark guide and is binding upon members, chapters, and third parties alike. The conduct described above falls plainly outside the bounds of permissible use, and is in violation of Article IX of our bylaws and of such trademark and unfair-competition provisions of applicable law as may inhere.</p>';
+    html += '<p>You are accordingly required, within thirty (30) calendar days of the date of this letter, to:</p>';
+    html += '<ol class="demands"><li>Cease and desist from all further application of the Institute\'s mark, in any form whatsoever;</li><li>Withdraw from public circulation any goods, services, or printed matter bearing the offending application;</li><li>Furnish to this office written confirmation that the foregoing has been duly carried out.</li></ol>';
+    html += '<p>' + t.closer + '</p>';
+    html += '<p>Yours, in the conduct of public business,</p>';
+    html += '<p class="sig">M. Doyle<br><span class="sigrole">President, The American Institute for Michaels</span></p>';
+    html += '<p class="cc"><strong>cc:</strong> The Recording Secretary; the Institute\'s counsel of record.</p>';
+
+    out.innerHTML = html;
+    section.hidden = false;
+    section.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  });
+
+  printBtn.addEventListener('click', function() { window.print(); });
+  copyBtn.addEventListener('click', function() {
+    var text = out.innerText;
+    navigator.clipboard.writeText(text).then(function() {
+      copyBtn.textContent = 'Copied.';
+      setTimeout(function() { copyBtn.textContent = 'Copy to Clipboard'; }, 2000);
+    });
+  });
+})();
+</script>
+
+<style>
+  .section { padding-block: var(--s-6); }
+  .form { display: flex; flex-direction: column; gap: var(--s-4); max-width: 50rem; }
+  .row { display: grid; grid-template-columns: 1fr 1fr; gap: var(--s-4); }
+  label { display: flex; flex-direction: column; gap: var(--s-2); font-family: var(--font-serif); }
+  label span { font-family: var(--font-sans); font-size: 0.85rem; color: var(--brand-olive); }
+  input, select, textarea {
+    font-family: var(--font-serif);
+    font-size: 1rem;
+    padding: var(--s-3);
+    background: var(--parchment);
+    border: 1px solid var(--rule);
+    color: var(--ink-navy);
+  }
+  textarea { resize: vertical; }
+  .btn {
+    background: var(--brand-orange);
+    color: var(--ink-navy);
+    border: none;
+    padding: var(--s-3) var(--s-5);
+    font-family: var(--font-sans);
+    font-size: 0.85rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    font-weight: 600;
+    cursor: pointer;
+    align-self: flex-start;
+  }
+  .btn--ghost { background: transparent; border: 1px solid var(--brand-orange); color: var(--brand-orange); }
+  .actions { display: flex; gap: var(--s-3); margin: var(--s-5) 0; }
+  .letter {
+    background: white;
+    border: 1px solid var(--rule);
+    padding: var(--s-9) var(--s-8);
+    font-family: var(--font-serif);
+    font-size: 1rem;
+    line-height: 1.7;
+    color: var(--ink-navy);
+    max-width: 56rem;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.04);
+  }
+  .letter :global(p) { margin: 0 0 var(--s-4); }
+  .letter :global(.letterhead) {
+    font-size: 1.25rem;
+    font-weight: 600;
+    text-align: center;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    margin-bottom: var(--s-1);
+  }
+  .letter :global(.letterhead-sub) {
+    font-family: var(--font-sans);
+    font-size: 0.78rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--brand-olive);
+    text-align: center;
+    border-bottom: 1px solid var(--ink-navy);
+    padding-bottom: var(--s-3);
+    margin-bottom: var(--s-6);
+  }
+  .letter :global(.date) { text-align: right; margin-bottom: var(--s-5); font-style: italic; }
+  .letter :global(.addressee) { margin-bottom: var(--s-5); }
+  .letter :global(.re) {
+    border-top: 1px solid var(--rule);
+    border-bottom: 1px solid var(--rule);
+    padding: var(--s-3) 0;
+    margin-bottom: var(--s-5);
+  }
+  .letter :global(.demands) { padding-left: var(--s-5); margin-bottom: var(--s-4); }
+  .letter :global(.demands li) { margin-bottom: var(--s-2); }
+  .letter :global(.sig) { margin-top: var(--s-6); font-style: italic; }
+  .letter :global(.sigrole) { font-family: var(--font-sans); font-size: 0.78rem; letter-spacing: 0.08em; text-transform: uppercase; color: var(--brand-olive); font-style: normal; }
+  .letter :global(.cc) {
+    font-family: var(--font-sans);
+    font-size: 0.78rem;
+    color: var(--muted);
+    border-top: 1px solid var(--rule);
+    padding-top: var(--s-3);
+    margin-top: var(--s-6);
+  }
+  .caveat {
+    font-family: var(--font-serif);
+    font-style: italic;
+    color: var(--muted);
+    margin: var(--s-4) 0 0;
+    font-size: 0.9rem;
+    max-width: 50rem;
+  }
+
+  @media (max-width: 40rem) {
+    .row { grid-template-columns: 1fr; }
+    .letter { padding: var(--s-6) var(--s-5); }
+  }
+  @media print {
+    header, footer, .masthead, nav, .form, #cd-form, .actions, .caveat, .section .eyebrow, .section h2 { display: none !important; }
+    .letter { border: none; box-shadow: none; max-width: 100%; }
+    @page { margin: 1.5cm; }
+  }
+</style>

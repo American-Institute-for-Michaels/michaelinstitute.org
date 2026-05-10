@@ -1,0 +1,180 @@
+---
+import Base from '../layouts/Base.astro';
+import Masthead from '../components/Masthead.astro';
+import SectionEyebrow from '../components/SectionEyebrow.astro';
+import { chapters } from '../content/chapters';
+
+interface Convening {
+  date: Date;
+  city: string;
+  country: string;
+  cadence: string;
+}
+
+// Generate the next 90 days of convenings from chapter cadences
+const today = new Date(2026, 4, 9); // 2026-05-09
+const horizon = new Date(today);
+horizon.setDate(horizon.getDate() + 90);
+
+const monthNames = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
+const dayNames = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
+
+function nthWeekday(year: number, month: number, n: number, weekday: number): Date | null {
+  if (n > 0) {
+    const first = new Date(year, month, 1);
+    const offset = (weekday - first.getDay() + 7) % 7;
+    const day = 1 + offset + (n - 1) * 7;
+    const d = new Date(year, month, day);
+    if (d.getMonth() !== month) return null;
+    return d;
+  } else {
+    const last = new Date(year, month + 1, 0);
+    const offset = (last.getDay() - weekday + 7) % 7;
+    return new Date(year, month, last.getDate() - offset);
+  }
+}
+
+function parseCadence(cadence: string): { ordinal: number; weekday: number } | null {
+  const ordinals: Record<string, number> = { First: 1, Second: 2, Third: 3, Fourth: 4, Last: -1 };
+  const m = cadence.match(/^(First|Second|Third|Fourth|Last)\s+(\w+)$/);
+  if (!m) return null;
+  const w = dayNames.indexOf(m[2]);
+  if (w < 0) return null;
+  return { ordinal: ordinals[m[1]], weekday: w };
+}
+
+const convenings: Convening[] = [];
+const startMonth = today.getMonth();
+const startYear = today.getFullYear();
+
+for (const c of chapters) {
+  const parsed = parseCadence(c.cadence);
+  if (!parsed) continue;
+  for (let m = 0; m < 4; m++) {
+    const month = (startMonth + m) % 12;
+    const year = startYear + Math.floor((startMonth + m) / 12);
+    const d = nthWeekday(year, month, parsed.ordinal, parsed.weekday);
+    if (d && d >= today && d <= horizon) {
+      convenings.push({ date: d, city: c.city, country: c.country, cadence: c.cadence });
+    }
+  }
+}
+
+convenings.sort((a, b) => a.date.getTime() - b.date.getTime());
+
+const groupedByMonth = convenings.reduce((acc, c) => {
+  const key = `${monthNames[c.date.getMonth()]} ${c.date.getFullYear()}`;
+  if (!acc[key]) acc[key] = [];
+  acc[key].push(c);
+  return acc;
+}, {} as Record<string, Convening[]>);
+---
+<Base title="Calendar of Convenings" description="Upcoming convenings of the Institute's chartered chapters, by date.">
+  <Masthead
+    eyebrow="Forthcoming"
+    title="Calendar of convenings."
+    lede="The Institute publishes, for the convenience of members and visiting Michaels, the forthcoming convenings of all chartered chapters at home and abroad. Convenings are listed in chronological order and are subject to local revision."
+  />
+
+  <section class="container section">
+    <div class="prose">
+      <SectionEyebrow index="I" label="On Attendance" />
+      <p>
+        Members in good standing are welcome at any convening of any
+        chapter. Where the Institute extends a standing invitation, no
+        prior correspondence is required, though notice to the chapter
+        coordinator is the courteous practice. Visitors who are not
+        members may attend at the chapter's discretion; the courteous
+        practice in such cases is to write the coordinator at least one
+        week in advance. The Institute does not, in general, require
+        formal registration.
+      </p>
+    </div>
+  </section>
+
+  {Object.entries(groupedByMonth).map(([month, list]) => (
+    <section class="container section">
+      <SectionEyebrow label={month} />
+      <ol class="convenings">
+        {list.map((c) => (
+          <li class="conv">
+            <div class="conv__date">
+              <p class="conv__day">{c.date.getDate()}</p>
+              <p class="conv__weekday">{dayNames[c.date.getDay()].slice(0, 3)}</p>
+            </div>
+            <div class="conv__body">
+              <p class="conv__city">{c.city}<span class="conv__country">, {c.country}</span></p>
+              <p class="conv__cadence">{c.cadence} of the month</p>
+            </div>
+          </li>
+        ))}
+      </ol>
+    </section>
+  ))}
+
+  <hr class="rule container" />
+
+  <section class="container section">
+    <div class="prose">
+      <SectionEyebrow label="On Subscription" />
+      <p>
+        The Institute does not, at present, publish an electronic calendar
+        feed. Members wishing to maintain a personal calendar of forthcoming
+        convenings are encouraged to consult this page at the start of each
+        fiscal quarter; the page is regenerated on the first business day of
+        every month. Inquiries about a chapter not listed here, or about
+        convenings beyond the present horizon, should be directed to the
+        chapter coordinator named on the <a href="/chapters">chapter
+        directory</a>.
+      </p>
+    </div>
+  </section>
+</Base>
+
+<style>
+  .section { padding-block: var(--s-5); }
+  .convenings { list-style: none; padding: 0; margin: 0; }
+  .conv {
+    display: grid;
+    grid-template-columns: 5rem 1fr;
+    gap: var(--s-5);
+    padding: var(--s-4) 0;
+    border-top: 1px solid var(--rule);
+    align-items: baseline;
+  }
+  .conv:last-child { border-bottom: 1px solid var(--rule); }
+  .conv__date { text-align: right; }
+  .conv__day {
+    font-family: var(--font-serif);
+    font-size: 2rem;
+    font-weight: 600;
+    color: var(--brand-orange);
+    margin: 0;
+    line-height: 1;
+    font-variant-numeric: tabular-nums;
+  }
+  .conv__weekday {
+    font-family: var(--font-sans);
+    font-size: 0.75rem;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--brand-olive);
+    margin: var(--s-1) 0 0;
+  }
+  .conv__city {
+    font-family: var(--font-serif);
+    font-size: 1.15rem;
+    font-weight: 600;
+    color: var(--ink-navy);
+    margin: 0 0 var(--s-1);
+  }
+  .conv__country { color: var(--muted); font-weight: 400; }
+  .conv__cadence {
+    font-family: var(--font-sans);
+    font-size: 0.78rem;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--brand-olive);
+    margin: 0;
+  }
+</style>

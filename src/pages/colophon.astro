@@ -1,0 +1,133 @@
+---
+import Base from '../layouts/Base.astro';
+import Masthead from '../components/Masthead.astro';
+import SectionEyebrow from '../components/SectionEyebrow.astro';
+---
+<Base title="Colophon" description="A technical and editorial colophon for the website of the American Institute for Michaels.">
+  <Masthead
+    eyebrow="Colophon"
+    title="On the making of this site."
+    lede="A modest colophon is a courtesy. The Institute is pleased to record below the typefaces, tools, and conventions employed in the construction and continued maintenance of this website."
+  />
+
+  <section class="container section">
+    <div class="prose">
+      <SectionEyebrow index="I" label="Typography" />
+      <p>
+        The principal text of the Institute is set in <strong>Source Serif 4</strong>,
+        designed by Frank Grießhammer for Adobe and released to the public
+        under the SIL Open Font License. Source Serif is a transitional serif
+        with restrained authority, well suited to the Institute's tone. The
+        family is used here in Regular and Semibold weights.
+      </p>
+      <p>
+        Subsidiary text — eyebrows, captions, navigation, the donor roll — is
+        set in <strong>Inter</strong>, designed by Rasmus Andersson and likewise
+        offered under the SIL OFL. Inter is used principally in Regular and
+        Semibold; small caps and tabular figures are employed where the
+        material warrants.
+      </p>
+      <p>
+        Both faces are self-hosted via the Fontsource project. No connection
+        to a third-party font CDN is established when this page is loaded.
+      </p>
+    </div>
+  </section>
+
+  <hr class="rule container" />
+
+  <section class="container section">
+    <div class="prose">
+      <SectionEyebrow index="II" label="Construction" />
+      <p>
+        The site is a static document, hand-built using
+        <a href="https://astro.build" rel="noopener">Astro</a> with strict
+        TypeScript and a plain CSS token system. There is no framework
+        beyond Astro itself; no client-side runtime is shipped except where a
+        small piece of behavior (the fellowship form, the state lookup,
+        forthcoming pages of comparable scope) plainly requires it.
+      </p>
+      <p>
+        Images are processed at build time via Astro's image pipeline. WebP
+        is the principal delivery format; a small number of decorative
+        photographs receive the Institute's standard editorial grayscale
+        treatment by way of CSS filter.
+      </p>
+      <p>
+        The whole is hosted on GitHub Pages and served through Cloudflare's
+        public DNS. Source code is available on request.
+      </p>
+    </div>
+  </section>
+
+  <section class="container section">
+    <div class="prose">
+      <SectionEyebrow index="III" label="Editorial Conventions" />
+      <p>
+        The Institute follows a small number of standing editorial
+        conventions, set out in full on the <a href="/style-guide">style guide
+        page</a>. Briefly: <em>The Institute</em> takes a singular verb;
+        numerals under one hundred are spelled out; the Oxford comma is used
+        without exception; em dashes are flanked by hairline spaces.
+      </p>
+      <p>
+        Citation style follows that of the <em>Quarterly Review of Civic
+        Onomastics</em>, a publication for which the Institute holds no
+        formal affiliation but whose conventions it has found congenial.
+      </p>
+    </div>
+  </section>
+
+  <section class="container section">
+    <div class="prose">
+      <SectionEyebrow index="IV" label="Accessibility" />
+      <p>
+        The site is built to meet, at minimum, WCAG 2.1 AA. All images carry
+        descriptive alternative text; navigation is keyboard-traversable; a
+        skip link is provided at the head of every page. The Institute
+        welcomes correspondence on accessibility matters, which may be
+        addressed to <a href="mailto:hello@michaelinstitute.org">the general
+        office</a> with the subject line "Accessibility."
+      </p>
+      <p>
+        Reduced-motion preferences are respected throughout. Color contrast
+        ratios were last audited in the third quarter of fiscal 2025.
+      </p>
+    </div>
+  </section>
+
+  <section class="container section">
+    <div class="prose">
+      <SectionEyebrow index="V" label="Privacy" />
+      <p>
+        The Institute does not employ analytics scripts, third-party
+        trackers, or advertising tags of any description. Page visits are
+        not logged at the application layer; we have no record of which
+        pages you have read.
+      </p>
+      <p>
+        Form submissions on the fellowship and contact pages produce a
+        client-side acknowledgment only; no data is transmitted to the
+        Institute's servers without your further action.
+      </p>
+    </div>
+  </section>
+
+  <section class="container section">
+    <div class="prose">
+      <SectionEyebrow index="VI" label="Acknowledgments" />
+      <p>
+        The Institute records its thanks to the open-source maintainers of
+        the tools above; to the photographers of the editorial bands, whose
+        images are licensed via the Unsplash Trust; and to the founding
+        members, whose patient correspondence over the past five fiscal
+        years has provided the material from which this site was assembled.
+      </p>
+    </div>
+  </section>
+</Base>
+
+<style>
+  .section { padding-block: var(--s-6); }
+  .prose strong { color: var(--brand-olive); font-weight: 600; }
+</style>
